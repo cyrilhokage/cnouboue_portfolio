@@ -1,0 +1,78 @@
+{% extends "blog/base.html" %} 
+
+{% block title %}
+
+  Cyrille NOUBOUE · Machine Learning Tutorials and Insights  
+
+{%endblock%} 
+
+{% block content %}
+
+        <div class="posts">
+  
+          {% for post in post_list %}
+              <article class="post">
+                <!-- Post title -->
+                <h1 class="post-title">
+                  <a href="{% url 'blog:detail' post.slug %}"> 
+                    {{ post.title }}
+                  </a>
+                </h1>
+                
+                <!-- Date of the post -->
+                <time datetime="2019-09-19T08:00:00-07:00" class="post-date">{{ post.Author }} | {{ post.created_on}} </time>
+                
+                <!-- Post image -->
+                
+                <!---
+                <img src="/assets/XLNetFineTuning/xlnet-fig-1.png"> --->
+                
+                
+                <!-- Show an excerpt from the article -->
+                <p id="introduction">{{post.content|slice:":200" }}</p>
+
+                <br></br>
+
+          {% endfor %}      
+                
+                <!-- Comment count -->
+                <a href="/2019/09/19/XLNet-fine-tuning/#disqus_thread">6 Comments</a>
+                
+              </article>
+          
+        </div>
+
+        <div class="pagination">
+          
+            <a class="pagination-item older" href="/page2">Older</a>
+          
+          
+            <div class="pagination-item newer">Newer</div>
+          
+        </div>
+
+
+        {% load static %}
+        <!-- bloc de l'image pour l'effet de srolling désynchronisé -->
+        <span class="rellax" data-rellax-speed="2" style="left: 600px;bottom: 25px;"><img src="{% static 'blog/img/kowalski.png' %}"></span>
+
+
+        
+        <script src="{% static 'blog/js/three.r92.min.js' %}"></script>
+        <script src="{% static 'blog/js/vanta.birds.min.js' %}"></script>
+
+        <script>
+        VANTA.BIRDS({
+          el: "#mainContent",
+          backgroundColor: 0xffffff,
+          color1: 0x181717,
+          color2: 0xcbf7,
+          birdSize: 0.90,
+           quantity: 4.00
+        })
+        </script>
+
+        <!-- Code for comment counts -->
+     <!--   <script id="dsq-count-scr" src="//mccormickml.disqus.com/count.js" async=""></script> -->
+
+{%endblock%}

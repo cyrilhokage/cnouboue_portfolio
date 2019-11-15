@@ -1,0 +1,175 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+
+    {% block title %}{% endblock %}
+    
+  </title>
+
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'css/styles_bis.css' %}" >
+      <!-- Booooooootstrap -->
+     <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
+     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png"> -->
+      <link rel="shortcut icon" href="{% static 'img/fav-icon.png' %}">
+
+  <!-- Adding support for MathJax 
+  <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script> -->
+
+        <style>
+
+              /* Style the navbar */
+              #navbar {
+                overflow: hidden;
+                background-color:#fff;
+                position: fixed;
+                top:0;
+                width: 100%;
+                z-index:999;
+                height: 55px;
+                line-height: 55px; /* centrage vertical */
+
+
+              }
+
+            #navbarContent {
+              max-width:38rem;
+              padding-left:1.5rem;
+              padding-right:1.5rem;
+              margin-left:auto;
+              margin-right:auto;
+              
+                /*margin-left: 20%; */
+            }
+
+
+              /* Page content */
+              .content {
+                padding: 16px;
+              }
+
+              /*max-width:38rem;padding-left:1.5rem;padding-right:1.5rem;margin-left:auto;margin-right:auto*/
+
+              /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+              .sticky {
+                position: fixed;
+                top: 0;
+                width: 100%;
+              }
+
+              /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+              .sticky + .content {
+                padding-top: 60px;
+              }              
+
+              span {
+                position: absolute;
+                z-index:-1;
+                box-sizing: border-box;
+              }
+        </style>
+
+
+</head>
+
+
+  <body id="mainContent" ><div id="MathJax_Message" style="display: none;"></div>
+
+    <header class="masthead">
+
+        {% block navbar %}
+
+           {% include 'blog/navbar.html' %}
+
+        {% endblock navbar %}
+
+      </header>
+
+  <div  class="container content">
+
+      <main id="main">
+
+        <section>
+
+          <span class="rellax" data-rellax-percentage="0.5" style="left: -200px"><img src= "{% static 'blog/img/losange.png' %}"></span>
+        
+            <!-- include the page type here 'projects', 'about', 'CV'-->
+            <!-- include 'projects.html' -->
+             {% block content %}
+            <!-- Content Goes here -->
+
+            {% endblock content %}
+
+<!--
+            <span class="rellax" data-rellax-speed="2" data-rellax-percentage="0.5" style="left: 300px"><img src="{% static 'blog/img/hexagone.png' %}"></span> -->
+          </section>
+
+      </main>
+
+      {% block footer %}
+
+          {% include 'blog/footer.html' %}
+
+      {% endblock footer %}
+
+  
+    </div>
+    <!--
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-76624103-1', 'auto');
+       ga('send', 'pageview');
+     </script> -->
+
+     <!-- javascript -->
+
+      <!-- Code pour l'animation lors du scrolling -->
+      <!--  <script src="{% static 'blog/js/scroll.js' %}" ></script> -->
+
+
+    <script type="text/javascript" src="{% static 'blog/js/rellax.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/rellax.min.js' %}"></script>
+
+<script>
+
+
+    // Accepts any class name
+  var rellax = new Rellax('.rellax');
+</script>
+
+
+
+<script>
+/*
+    // Code pour ajouter une animation pour le scrolling
+
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+
+    // Get the navbar
+    var navbar = document.getElementById("navbar");
+
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    } */
+
+</script>
+
+
+
+
+</body></html>
