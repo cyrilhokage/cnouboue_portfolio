@@ -7,6 +7,12 @@ STATUS = (
     (1,"Publish")
 )
 
+CONTEXT = (
+	(0, "Private"),
+	(1, "School"),
+	(2, "Pro")
+)
+
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -15,7 +21,11 @@ class Post(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    main_image = models.CharField(max_length=300)
+    main_image = models.ImageField(upload_to='images/', blank=True)
+    github_link = models.CharField(max_length=500, default="https://github.com/cyrilhokage")
+    context = models.IntegerField(choices=CONTEXT, default=0)
+    technos = models.CharField(max_length=500)
+    summary = models.CharField(max_length=500)
 
     class Meta:
         ordering = ['-created_on']

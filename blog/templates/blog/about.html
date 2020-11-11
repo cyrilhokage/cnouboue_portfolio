@@ -1,0 +1,47 @@
+{% extends "blog/base.html" %} 
+
+{% block title %}
+
+    {{ post.title }}  
+
+{%endblock%} 
+
+{% block content %}
+{% load static %}
+
+  <article class="page">
+          
+          <h2 class="page-title">About me</h2>
+                <p><img src="https://chrisjmccormick.files.wordpress.com/2012/12/chrisprofile_portrait_300px.jpg" alt="Profile picture"></p>
+
+              <p>I love the field of Machine Learning! Such a fascinating and impactful subject, and also one that’s hard to master.</p>
+
+              <p>I also happen to love the challenge of explaining difficult topics well. I’ve brought together my love of ML and my passion for making tutorials to form my online education business at <a href="https://www.chrismccormick.ai">ChrisMcCormick.AI</a>, which is now my full-time job.</p>
+
+              <p>Here are some of the places you can find me and my work:</p>
+
+              <ul>
+                <li>Written <a href="http://www.mccormickml.com/tutorials/">tutorials</a> on this blog.
+                  <ul>
+                    <li>Typically with (thoroughly!) commented example code on <a href="http://github.com/chrisjmccormick/">GitHub</a>.</li>
+                  </ul>
+                </li>
+                <li><a href="http://bit.ly/2X8tcXE">eBooks</a> and <a href="https://www.chrismccormick.ai/word2vec-the-course">Video Courses</a> at ChrisMcCormick.AI.</li>
+                <li><a href="https://www.quora.com/profile/Chris-McCormick-12">Answers on Quora</a></li>
+                <li>Insights &amp; answers on my <a href="https://www.youtube.com/channel/UCoRX98PLOsaN8PtekB9kWrw/">YouTube channel</a> (<em>Coming Soon!</em>).</li>
+              </ul>
+
+              <h2 id="education--experience">Education </h2>
+
+              <table>
+                <tbody><tr><td>2014</td><td>B.S. Electrical Engineering, Stanford University</td></tr>
+                <tr><td>2014 – 2019</td><td>Embedded Software Engineer, Texas Instruments</td></tr>
+                <tr><td>2016 - Present</td><td>Founder, ChrisMcCormick.AI</td></tr>
+                <tr><td>2019 - 2020</td><td>Applications &amp; Development Engineer, CogniMem</td></tr>
+              </tbody></table>
+
+      
+    </article>
+
+
+{%endblock%}

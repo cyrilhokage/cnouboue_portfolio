@@ -1,0 +1,63 @@
+
+Debut tour de table de présentation :
+
+Le projet va se concentrer sur le coté algorithmique
+	- On controle à la fois les voitures et les feux
+
+Postulat :
+	- Il sera nécessaire d'avoir toutes les positions des véhicules et des feux du cartier
+
+
+Agenda :
+	
+	- Récupérer les jalons (soutenances) de livraison des travaux
+		- Normalement 1 en février
+		- 1 intermédiaire
+		- 1 final
+
+
+An dernier :
+	- Etat de l'art
+	- Apprentissage par renforcement
+	- SUMO pour la simulation
+	- Un premier jet de l'algo intégré dans l'algo
+	- Données issues de TOM TOM.
+	- Récupérer les travaux de l'an dernier
+
+
+
+
+Tache 1 :
+
+	- Bien s'approprier la bibliographie
+	- Refaie tourner les simulations effectuées
+	- Etudier les récommpenses mises en places
+	- Réfléchier au problème de calcul (Voir avec le teralab telecom Paris) **** 
+		- Budget
+		- Teralab
+		- OVH
+	- Déterminer (chiffrer) la puissance de calcul en question 
+
+
+Tahce 2 : 
+	- Imaginer d'audres niveaux de récompense
+		- CO2 produit, Temps de rajet global, etc. ?
+
+Tache 3 :
+	- 6 Commencer l'implémentation
+
+
+Fin de la première partie du projet autour du 24/27 Janvier
+
+2 points d'étapes :
+	- RDV probablement la semaine d'avant le 24 janvier
+	- Avant les vacances de Noel ( On part sur le lundi 16/12 à partir de 15h )
+		- Objectif d'inci là : s'appropier et reproduire les travaux effectués l'an dernier
+
+
+
+Objectif infine:
+	- Fluidifier le traffic routier
+	- Diminuer la pollution t le gaspillage d'énergie engendré par les freinages intempestifs
+	- Etudier la faisabilité (réalisme) en fonction des contraintes de calcul et de gestion des pertubations
+

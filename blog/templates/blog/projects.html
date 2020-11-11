@@ -1,0 +1,67 @@
+{% extends "blog/base.html" %} 
+
+{% block title %}
+
+    {{ post.title }}  
+
+{%endblock%} 
+
+{% block content %}
+{% load static %}
+
+  <article class="page">
+          
+          <h1 class="page-title">Tutorials</h1>
+          <hr>
+
+        <h3 id="radial-basis-function-networks">Radial Basis Function Networks</h3>
+
+        <p><a href="http://mccormickml.com/assets/rbfn/architecture_simple_small.png"><img src="http://mccormickml.com/assets/rbfn/architecture_simple_small.png" alt="RBFN Architecture"></a></p>
+
+        <p>I’ve written a number of posts related to Radial Basis Function Networks. Together, they can be taken as a multi-part tutorial to RBFNs.</p>
+
+        <ul>
+          <li>Part 1 - <a href="http://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" title="RBFN basics and classification">RBFN Basics, RBFNs for Classification</a></li>
+          <li>Part 2 - <a href="http://mccormickml.com/2013/08/16/rbf-network-matlab-code/" title="Post on Matlab code for RBFN">RBFN Example Code in Matlab</a></li>
+          <li>Part 3 - <a href="http://mccormickml.com/2015/08/26/rbfn-tutorial-part-ii-function-approximation/" title="RBFNs for function approximation">RBFN for function approximation</a></li>
+          <li>Advanced Topics:
+            <ul>
+              <li><a href="http://mccormickml.com/2014/02/26/kernel-regression/" title="Gaussian Kernel Regression">Gaussian Kernel Regression</a></li>
+              <li><a href="http://mccormickml.com/2014/07/22/mahalanobis-distance/" title="Mahalanobis Distance">Mahalonobis Distance</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <hr>
+
+        <h3 id="histograms-of-oriented-gradients-hog">Histograms of Oriented Gradients (HOG)</h3>
+
+        <p>My tutorial and Matlab code on the HOG descriptor are easily one of the most popular items on my site.</p>
+
+        <ul>
+          <li><a href="http://mccormickml.com/2013/05/09/hog-person-detector-tutorial/" title="HOG Person Detector Tutorial">HOG Person Detector Tutorial</a></li>
+          <li><a href="http://mccormickml.com/2013/05/09/hog-descriptor-in-matlab/" title="HOG descriptor in Matlab">HOG Descriptor Matlab Code</a></li>
+          <li><a href="http://mccormickml.com/2013/11/07/opencv-hog-detector-result-clustering/" title="HOG Detector result clustering">HOG Result Clustering</a></li>
+        </ul>
+
+        <hr>
+
+        <h3 id="word2vec">Word2Vec</h3>
+
+        <p><a href="http://mccormickml.com/assets/word2vec/skip_gram_net_arch.png"><img src="http://mccormickml.com/assets/word2vec/skip_gram_net_arch.png" alt="Skip-gram model"></a></p>
+
+        <ul>
+          <li><a href="http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/">Word2Vec Tutorial - The Skip-Gram Model</a></li>
+          <li><a href="http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/">Word2Vec Tutorial Part 2 - Negative Sampling</a></li>
+          <li><a href="http://mccormickml.com/2018/06/15/applying-word2vec-to-recommenders-and-advertising/">Applying word2vec to Recommenders and Advertising</a></li>
+          <li><a href="https://github.com/chrisjmccormick/word2vec_commented">Commented word2vec C code</a></li>
+          <li><a href="http://mccormickml.com/2016/04/27/word2vec-resources/">Wor2Vec Resources</a></li>
+        </ul>
+
+        <hr>
+
+      
+    </article>
+
+
+{%endblock%}

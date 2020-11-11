@@ -7,76 +7,169 @@
 {%endblock%} 
 
 {% block content %}
+{% load static %}
 
-    <article class="post">
-          <h1 class="post-title">{{ post.title }}</h1>
-          <time datetime="2019-09-19T08:00:00-07:00" class="post-date">{{ post.updated_on }}</time>
-          <h2 id="introduction">Introduction</h2>
+  <div class="row">
 
-        <p>In this tutorial, I’ll show you how to finetune the pretrained XLNet model with the huggingface PyTorch library to quickly produce a classifier for text classification.</p>
-
-        <p>(This post follows the <a href="http://mccormickml.com/2019/07/22/BERT-fine-tuning/">previous post</a> on finetuning BERT very closely, but uses the updated interface of the huggingface library (pytorch-transformers) and customizes the input for use in XLNet.)</p>
-
-        <p>This post is presented in two forms–as a blog post <a href="http://mccormickml.com/2019/09/19/XLNet-fine-tuning/">here</a> and as a Colab notebook <a href="https://colab.research.google.com/drive/16gx06PVffJwS4pRhysCmc5qbPm26vsY8">here</a>. The content is identical in both, but:</p>
-
-        <ul>
-          <li>The blog post format may be easier to read, and includes a comments section for discussion.</li>
-          <li>The Colab Notebook will allow you to run the code and inspect it as you read through.</li>
-        </ul>
-
-        <h3 id="what-is-xlnet">What is XLNet?</h3>
-
-        <p>XLNet is a method of pretraining language representations developed by CMU and Google researchers in mid-2019. XLNet was created to address what the authors saw as the shortcomings of the autoencoding method of pretraining used by BERT and other popular language models. We won’t get into the details of XLNet in this post, but the authors favored a custom autoregressive method. This pretraining method resulted in models that outperformed BERT on a range of NLP tasks and resulted in a new state of the art model.</p>
-
-        <h2 id="install-and-import">Install and Import</h2>
-
-        <p>At the moment, the Hugging Face library seems to be the most widely accepted and powerful pytorch interface for working with transfer learning models. In addition to supporting a variety of different pre-trained language models (and future models to come - just a few short months after the publication of BERT and XLNet, both have been outperformed by new models!), the library also includes pre-built modifications of different models suited to your specific task. For example, in this tutorial we will use XLNetForSequenceClassification, but the library also includes model modifications designed for token classification, question answering, next sentence prediciton, etc. Using these pre-built classes simplifies the process of modifying transfer learning models for your purposes.</p>
+      <article class="post">
+              <h1 class="post-title">{{ post.title }}</h1>
+              <time datetime="2019-09-19T08:00:00-07:00" class="post-date">{{ post.updated_on }}</time>
 
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using TensorFlow backend.
-        </code></pre></div></div>
-
-        <p>In order for torch to use the GPU, we need to identify and specify the GPU as the device. Later, in our training loop, we will load data onto the device.</p>
-
-        <h2 id="load-dataset">Load Dataset</h2>
-
-        <p>We’ll use The Corpus of Linguistic Acceptability (CoLA) dataset for single sentence classification. It’s a set of sentences labeled as grammatically correct or incorrect. The data is as follows:</p>
+             <a href="#" class="fa fa-github"></a>
 
 
-        <h2 id="conclusion">Conclusion</h2>
+             <!-- <img src="{% static 'blog/img/balls.webp' %}"> -->
+             <img src="{{ post.main_image.url }}" alt="{{ post.title }}" width="750" height="450">
 
-        <p>This post shows how to quickly and efficiently train an XLNet model with the huggingface pytorch interface.</p>
-      
-      
-    </article>
+        
+              <h2 id="introduction">Introduction</h2>
 
+            <p>In this tutorial, I’ll show you how to finetune the pretrained XLNet model with the huggingface PyTorch library to quickly produce a classifier for text classification.</p>
+
+            <p>(This post follows the <a href="http://mccormickml.com/2019/07/22/BERT-fine-tuning/">previous post</a> on finetuning BERT very closely, but uses the updated interface of the huggingface library (pytorch-transformers) and customizes the input for use in XLNet.)</p>
+
+            <p>This post is presented in two forms–as a blog post <a href="http://mccormickml.com/2019/09/19/XLNet-fine-tuning/">here</a> and as a Colab notebook <a href="https://colab.research.google.com/drive/16gx06PVffJwS4pRhysCmc5qbPm26vsY8">here</a>. The content is identical in both, but:</p>
+
+            <ul>
+              <li>The blog post format may be easier to read, and includes a comments section for discussion.</li>
+              <li>The Colab Notebook will allow you to run the code and inspect it as you read through.</li>
+            </ul>
+
+            <h3 id="what-is-xlnet">What is XLNet?</h3>
+
+            <p>XLNet is a method of pretraining language representations developed by CMU and Google researchers in mid-2019. XLNet was created to address what the authors saw as the shortcomings of the autoencoding method of pretraining used by BERT and other popular language models. We won’t get into the details of XLNet in this post, but the authors favored a custom autoregressive method. This pretraining method resulted in models that outperformed BERT on a range of NLP tasks and resulted in a new state of the art model.</p>
+
+            <h2 id="install-and-import">Install and Import</h2>
+
+            <p>At the moment, the Hugging Face library seems to be the most widely accepted and powerful pytorch interface for working with transfer learning models. In addition to supporting a variety of different pre-trained language models (and future models to come - just a few short months after the publication of BERT and XLNet, both have been outperformed by new models!), the library also includes pre-built modifications of different models suited to your specific task. For example, in this tutorial we will use XLNetForSequenceClassification, but the library also includes model modifications designed for token classification, question answering, next sentence prediciton, etc. Using these pre-built classes simplifies the process of modifying transfer learning models for your purposes.</p>
+
+
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using TensorFlow backend.
+            </code></pre></div></div>
+
+            <p>In order for torch to use the GPU, we need to identify and specify the GPU as the device. Later, in our training loop, we will load data onto the device.</p>
+
+            <h2 id="load-dataset">Load Dataset</h2>
+
+            <p>We’ll use The Corpus of Linguistic Acceptability (CoLA) dataset for single sentence classification. It’s a set of sentences labeled as grammatically correct or incorrect. The data is as follows:</p>
+
+
+            <h2 id="conclusion">Conclusion</h2>
+
+            <p>This post shows how to quickly and efficiently train an XLNet model with the huggingface pytorch interface.</p>
+          
+          
+        </article>
+    </div>
 
     <aside class="related">
-      <h3>Related posts</h3>
-      <ul class="related-posts">
-        
-          <li>
-            <a href="/2019/07/22/BERT-fine-tuning/">
-              BERT Fine-Tuning Tutorial with PyTorch
-              <small><time datetime="2019-07-22T08:00:00-07:00">22 Jul 2019</time></small>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/14/BERT-word-embeddings-tutorial/">
-              BERT Word Embeddings Tutorial
-              <small><time datetime="2019-05-14T08:00:00-07:00">14 May 2019</time></small>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2019/03/12/the-inner-workings-of-word2vec/">
-              The Inner Workings of word2vec
-              <small><time datetime="2019-03-12T13:00:00-07:00">12 Mar 2019</time></small>
-            </a>
-          </li>
-        
-      </ul>
+
+        <div class="row">
+            <h3>Related posts</h3>
+        </div>
+        <div class="row">
+            <ul class="related-posts">
+              
+                {% for recomended in recomended_posts %}
+
+                  <li>
+                    <a href="{% url 'blog:detail' recomended.slug %}">
+                      {{ recomended.title }}
+                      <small><time datetime="{{ recomended.created_on }}" > {{ recomended.created_on }} </time></small>
+                    </a>
+                  </li>
+
+                {% endfor %}  
+              
+            </ul>
+
+            <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,900" rel="stylesheet">
+
+            <div class="container">
+                  
+
+                    {% for recomended in recomended_posts %} 
+
+                        <a href="{% url 'blog:detail' recomended.slug %}" style="text-decoration: none;">
+
+                            <div class="row">
+                              <div class="card card-1" style="background-image:url(https://ionicframework.com/img/getting-started/components-card.png);">
+                                <h3>{{ recomended.title }}</h3>
+                                <p>
+                                <small><time datetime="{{ recomended.created_on }}" > {{ recomended.created_on }} </time></small></p>
+                              </div>
+                            </div>
+                          </a>
+
+                    {% endfor %} 
+               
+            </div> 
+
+            <style type="text/css">
+              .card{
+                  border-radius: 4px;
+                  background: #fff;
+                  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+                    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+                /*padding-top: 1px;*/
+                padding: 0px 40px 0px 15px;
+                margin-bottom: 15px;
+                cursor: pointer;
+                width:100%;
+                height: 105px; 
+              }
+
+              .card:hover{
+                   transform: scale(1.05);
+                box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+              }
+
+              .card h3{
+                font-weight: 600;
+              }
+
+              .card img{
+                position: absolute;
+                top: 20px;
+                right: 15px;
+                max-height: 120px;
+              }
+
+              .card-1{
+                    background-repeat: no-repeat;
+                  background-position: right;
+                  margin-right:auto;
+                  /*background-size: 80px;*/
+              }
+
+              .card-2{
+                 background-image: url(https://ionicframework.com/img/getting-started/components-card.png);
+                    background-repeat: no-repeat;
+                  background-position: right;
+                  background-size: 80px;
+              }
+
+              .card-3{
+                 background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
+                    background-repeat: no-repeat;
+                  background-position: right;
+                  background-size: 80px;
+              }
+
+              @media(max-width: 500px){
+                .card{
+                  /*margin: 20px;*/
+                }
+              }
+            </style>
+
+
+
+
+
+        </div>
+
     </aside>
 
 {%endblock%}

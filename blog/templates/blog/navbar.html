@@ -7,15 +7,16 @@
       <div id="navbarContent">
       
       
-            <a href="{% url 'blog:home' %}" title="Home">Cyrille NOUBOUE</a>
+            <a href="{% url 'main_home' %}"  title="Home">Cyrille NOUBOUE</a>
 
             <!--- Display the About, Archive, etc. pages in the header --->
+
+                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:home' %}">About</a></small>
+
+                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:projects' %}">Blog</a></small>
             
-                &nbsp;&nbsp;&nbsp;<small><a href="/about/">A propos</a></small>
+                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:about' %}">Contact</a></small>
             
-                &nbsp;&nbsp;&nbsp;<small><a href="/projets/">Projets</a></small>
-            
-                &nbsp;&nbsp;&nbsp;<small><a href="/cv/">CV</a></small>
         </div>
 
       </div>

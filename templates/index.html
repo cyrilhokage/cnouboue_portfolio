@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Cyrille NOUBOUE - Portfolio </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel='stylesheet' href='https://use.typekit.net/waw8uxn.css'>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	{% load static %}
+	<link rel="stylesheet"  href="{% static 'css/home_style.css' %}" >
+
+	<link rel="shortcut icon" href="{% static 'img/fav-icon.png' %}">
+
+	
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<header class="header">
+
+	<div class="header__logo">
+		<a href="{% url 'main_home' %}" style="color:#601600;" >
+			Cyrille Nouboué
+		</a>
+	</div>
+	
+	<nav class="header__nav">
+		<ul>
+			<li>About</li>
+			<li>Portfolio</li>
+			<li><a href="{% url 'blog:home' %}">Blog</a></li>
+			<li>Contact</li>
+			<li>
+				<div class="header__burger">
+					<svg xmlns="http://www.w3.org/2000/svg" width="75.75" height="50.469" viewBox="0 0 75.75 50.469">
+						<path fill="#fff" data-name="Rectangle 7 copy 2" class="cls-1" d="M5615.26,681.145h75.73v7.213h-75.73v-7.213Zm0,21.638h75.73V710h-75.73v-7.212Zm0,21.638h75.73v7.212h-75.73v-7.212Z" transform="translate(-5615.25 -681.156)" />
+					</svg>
+				</div>
+			</li>
+		</ul>
+
+	</nav>
+</header>
+
+<main>
+	<div class="slider">
+		<div class="slider__side">
+			
+			
+		<!-- BLOCK C.V -->
+			<div class="slider__slide">
+				<div class="slider__slide__content">
+
+					<!--
+					<div class="slider__slide__more">View More</div>
+					<div class="slider__slide__more">View More</div> -->
+					<div class="slider__slide__scene">
+						<span>C</span><span>.</span><span>V</span>
+					</div>
+				</div>
+
+				<!--
+				<img class="slider__slide__img" src="{% static 'img/undraw_Mind_map_re_nlb6.png' %}">
+				<img class="slider__slide__img" src="https://i.pinimg.com/564x/34/62/44/34624449492bec0240394fde65d3569d.jpg">  
+			<img class="slider__slide__img" src="https://image.freepik.com/vecteurs-libre/astronaute-dessine-fusee-planetes_25030-38616.jpg">
+			<img class="slider__slide__img" src="https://image.freepik.com/free-vector/illustration-astronaut-doodle_185029-43.jpg">-->
+
+				<a href="#">
+					<img class="slider__slide__img" src="{% static 'img/20.jpg' %}"> 
+				</a>
+				 
+
+
+				
+				<!--
+				<img class="slider__slide__img" src="https://images.squarespace-cdn.com/content/v1/55e20901e4b04dab6ca7f0db/1569367820673-D81JZRBQISM7SKGX1JZU/ke17ZwdGBToddI8pDm48kGDhYzKEs-g3IW1vEZk4IP57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0lqfkVpRp1g_2L-WsTQRP4KxYMVT_2jf6Ixn4lDglP4s9BJebir6FMbnuZFo76Jo4Q/IMG_1398.JPG?format=2500w"> -->
+				
+				<div class="slider__slide__number">
+					<!--
+					<span>6</span>
+					<span>7</span> -->
+				</div>
+			</div>
+		
+
+			<!-- BLOCK ABOUT ME -->
+
+		
+			<div class="slider__slide active">
+				<div class="slider__slide__content">
+
+					<!--
+					<div class="slider__slide__more">View More</div>
+					<div class="slider__slide__more">View More</div> -->
+					<div class="slider__slide__scene">
+						<span>A</span><span>b</span><span>o</span><span>u</span><span>t</span>
+					</div>
+				</div>
+
+				<a href="#">
+					<img class="slider__slide__img" src="{% static 'img/astronaut_pop.jpg' %}" >
+				</a>
+
+				<!--
+
+				<img class="slider__slide__img" src="https://png.pngtree.com/png-clipart/20200401/original/pngtree-astronaut-illustration-pop-spoof-illustration-elements-png-image_5329812.jpg"> -->
+
+
+				
+
+				<!--
+				<img class="slider__slide__img" src="https://images.squarespace-cdn.com/content/v1/55e20901e4b04dab6ca7f0db/1563309352183-NQPAC2JL7ROEGLDFYGBT/ke17ZwdGBToddI8pDm48kK60W-ob1oA2Fm-j4E_9NQB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kD6Ec8Uq9YczfrzwR7e2Mh5VMMOxnTbph8FXiclivDQnof69TlCeE0rAhj6HUpXkw/D5A08949-0A59-469B-9097-CF9FE07F4BD4.JPG?format=750w"> -->
+				
+				<div class="slider__slide__number">
+					<span>M</span>
+					<span>e</span>
+				</div>
+			</div>
+
+		
+			
+			
+		</div>
+
+		<div class="slider__side">
+
+
+			<!-- BLOCK CONTACT ME -->
+		
+			<div class="slider__slide">
+				<div class="slider__slide__content">
+					<!--
+					<div class="slider__slide__more">View More</div>
+					<div class="slider__slide__more">View More</div> -->
+					<div class="slider__slide__scene">
+						<span>C</span><span>o</span><span>n</span><span>t</span><span>a</span><span>c</span><span>t</span>
+					</div>
+				</div>
+				
+				<!--
+				<img class="slider__slide__img" src="https://images.squarespace-cdn.com/content/v1/55e20901e4b04dab6ca7f0db/1563309355280-LQE5JCH9MYYQB5EWG3ON/ke17ZwdGBToddI8pDm48kK60W-ob1oA2Fm-j4E_9NQB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kD6Ec8Uq9YczfrzwR7e2Mh5VMMOxnTbph8FXiclivDQnof69TlCeE0rAhj6HUpXkw/DA2DDECD-F46B-4518-9B54-9DB186486344+2.JPG?format=2500w"> -->
+
+				<a href="#">
+					<img class="slider__slide__img" src="{% static 'img/astronaut_musician.jpg' %}"> 
+				</a>s
+
+
+				<div class="slider__slide__number">
+					<span>M</span>
+					<span>e</span> 
+				</div>
+			</div>
+	
+
+			<!-- BLOCK WORKS -->
+
+		
+			<div class="slider__slide active">
+				<div class="slider__slide__content">
+					<!--
+					<div class="slider__slide__more">View More</div>
+					<div class="slider__slide__more">View More</div> -->
+					<div class="slider__slide__scene">
+						<span>W</span><span>o</span><span>r</span><span>k</span><span>s</span>
+					</div>
+				</div>
+				
+				<a href="#">
+				 	<img class="slider__slide__img" src="{% static 'img/13.jpg' %}">
+				 </a>
+
+				<!--
+				<img class="slider__slide__img" src="https://images.squarespace-cdn.com/content/v1/55e20901e4b04dab6ca7f0db/1569367726056-Q2G2BDYHESNX3WEML8EV/ke17ZwdGBToddI8pDm48kCf3-plT4th5YDY7kKLGSZN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0h8vX1l9k24HMAg-S2AFienIXE1YmmWqgE2PN2vVFAwNPldIHIfeNh3oAGoMooVv2g/ACS_0312.JPG?format=2500w"> -->
+				
+				<div class="slider__slide__number">
+					<!--
+					<span>P</span>
+					<span>R</span> -->
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div class="controls">
+		<span class="controls__icon js-down"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+	 viewBox="0 0 23.6 13.5" style="enable-background:new 0 0 23.6 13.5;" xml:space="preserve">
+<polygon fill="#fff" class="st0" points="23.6,11.8 11.8,0 10.1,1.7 10.1,1.7 0,11.8 1.7,13.5 11.8,3.4 21.9,13.5 "/>
+</svg></span>
+		<span class="controls__icon js-up"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+	 viewBox="0 0 23.6 13.5" style="enable-background:new 0 0 23.6 13.5;" xml:space="preserve">
+<polygon fill="#fff" class="st0" points="23.6,11.8 11.8,0 10.1,1.7 10.1,1.7 0,11.8 1.7,13.5 11.8,3.4 21.9,13.5 "/>
+</svg></span>
+	</div>
+	
+	<div class="modal">
+		<div class="modal__content">
+			<div>
+				<h2>What is this?</h2>
+				<p>This pen is a desktop-only concept piece for Tiffany Lusteg.<p>
+				<p>It was designed by <a href="https://twitter.com/tomandthatsit">@TomAndThatsIt</a> and coded by <a href="https://twitter.com/jakewhiteleydev">@jakewhiteleydev</a>.</p>
+
+				<p>If you like the images, please checkout <a href="http://tiffanylusteg.com/" target="_blank" rel="noopener">Tiffany's website</a> to see more of her <u>awesome</u> work.</p>
+				
+				<p>If you like the pen, why not have a look at <a href="https://www.craftedbygc.com/">craftedbygc.com</a> to see what else we do.
+			</div>
+			
+			<p><small>All assets in this pen are 100% copyright their respective owners. We just really like them so made this - hope you don't mind!</small></p>
+		</div>
+	</div>
+	
+	<button type="button" class="modal-trigger js-trigger">info</button>
+</main>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@unseenco/e@1.7.0/dist/e.js'></script>
+
+<script  src="{% static 'js/home_script.js' %}" ></script>
+
+</body>
+</html>
