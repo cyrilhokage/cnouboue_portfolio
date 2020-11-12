@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
+import dj_database_url
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,10 +24,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
+#SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
+SECRET_KEY = os.environ.get('SECRET_KEY', '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf') # development key for the moment
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if os.environ.get('ENV') == 'PRODUCTION':
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -44,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -52,7 +59,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if os.environ.get('ENV') == 'PRODUCTION':
+    # ...
+    # Simplified static file serving.
+    # https://warehouse.python.org/project/whitenoise/
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 ROOT_URLCONF = 'cnouboue_portfolio.urls'
+
+ALLOWED_HOSTS = ['cyrillenouboue.herokuapp.com']
 
 
 TEMPLATES = [
@@ -83,6 +98,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# ...
+if os.environ.get('ENV') == 'PRODUCTION':
+    # ...
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -124,9 +145,22 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
+if os.environ.get('ENV') == 'PRODUCTION':
+
+    # Static files settings
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+    # Extra places for collectstatic to find static files.
+    STATICFILES_DIRS = (
+        os.path.join(PROJECT_ROOT, 'static'),
+    )
+
 #Configure the media base dir and medias urls
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
