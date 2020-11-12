@@ -29,8 +29,9 @@ TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
-    DEBUG = False
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    DEBUG = True
+    #SECRET_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 else:
     DEBUG = True
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
