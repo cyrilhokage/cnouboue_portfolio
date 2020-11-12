@@ -149,6 +149,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 if os.environ.get('ENV') == 'PRODUCTION':
 
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+    #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
     # Static files settings
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -156,7 +161,7 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
     # Extra places for collectstatic to find static files.
     STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
+       os.path.join(PROJECT_ROOT, 'static'),
     )
 
 #Configure the media base dir and medias urls
