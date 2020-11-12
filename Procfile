@@ -1,0 +1,1 @@
+web: gunicorn cnouboue_portfolio.wsgi
