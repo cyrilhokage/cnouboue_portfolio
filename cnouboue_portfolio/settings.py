@@ -35,7 +35,7 @@ else:
     DEBUG = True
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cyrillenouboue.herokuapp.com']
 
 
 # Application definition
@@ -69,7 +69,6 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
 ROOT_URLCONF = 'cnouboue_portfolio.urls'
 
-ALLOWED_HOSTS = ['cyrillenouboue.herokuapp.com']
 
 
 TEMPLATES = [
