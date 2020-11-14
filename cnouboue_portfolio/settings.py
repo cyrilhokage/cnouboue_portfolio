@@ -36,7 +36,7 @@ else:
     DEBUG = True
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 
-ALLOWED_HOSTS = ['cyrillenouboue.herokuapp.com']
+ALLOWED_HOSTS = ['167.71.0.147']
 
 
 # Application definition
