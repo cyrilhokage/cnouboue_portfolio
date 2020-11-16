@@ -1,6 +1,6 @@
 # cnouboue_portfolio
 
-This is the source code for my personal portfolio website. It was developped with python django framework, and with docker to facilitate deployment. 
+This is the source code for my personal portfolio website. It was developped with python django framework. 
 
 ## Quickstart 
 ```
