@@ -1,26 +1,26 @@
 @font-face {
-  font-family: 'Nunito';
+  font-family: 'Montserrat', sans-serif;
   /*src: url("https://assets.codepen.io/3453673/CosiTimes-Roman.woff") format("woff");*/
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Nunito', sans-serif ;
+  font-family: 'Montserrat', sans-serif;
   /*src: url("https://assets.codepen.io/3453673/CosiTimes-Light.woff") format("woff");*/
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Montserrat', sans-serif;
  /* src: url("https://assets.codepen.io/3453673/MatterSQTRIAL-Light.woff") format("woff");*/
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   text-rendering: optimizeLegibility;
 }
@@ -40,16 +40,19 @@ body * {
   /*text-transform: uppercase; */
 }
 .header__logo {
-  font-weight: 650;
-  font-size: 1.8rem;
+  font-weight: 600;
+  font-size: 1.5rem;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-  background: #fff;
-  border-radius: 5%
+  /*background: #fff;*/
+  /* border-radius: 5%; */
+  position : relative;
+  left : 400px
 }
 .header__nav {
   list-style: none;
   margin: 0;
-  font-family: 'Nunito', sans-serif;
+  /* font-family: 'Nunito', sans-serif; */
+  font-family :'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 1.2rem;
   color:#601600;
@@ -276,7 +279,7 @@ body * {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   padding: 2rem;
-  font-family: 'Nunito';
+  font-family: 'Montserrat', sans-serif;
   line-height: 1.5;
   display: -webkit-box;
   display: flex;
@@ -287,7 +290,7 @@ body * {
           justify-content: space-between;
 }
 .modal__content h2 {
-  font-family: 'Nunito';
+  font-family: 'Montserrat', sans-serif;
 }
 .modal__content a {
   color: #000;
@@ -307,12 +310,127 @@ body * {
   border-radius: none;
 }
 
-.header__logo:hover, .header__nav:hover{
-  transform: scale(1.10);
-}
-
 
 a {
   color:inherit;
   text-decoration: none;
 }
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+ /* margin: 20px auto; */
+  margin-top: 15px;
+  width: 250px;
+  height: 60px; /**/
+  padding: 15px; 
+  background: white; 
+  border-radius: 20px;
+/*  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: lighter;
+  letter-spacing: 2px; */
+  transition: 1s box-shadow;
+}
+
+.header__logo:hover {
+  box-shadow: 0 5px 35px 0px rgba(0,0,0,.1);
+}
+
+.header__logo:hover::before, .header__logo:hover::after {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 250px;
+  height: 60px;
+  background: #FDA8CF;
+  border-radius: 20px;
+  z-index: -1;
+  animation: 1s clockwise infinite;
+}
+
+.header__logo:hover:after {
+  background: #F3CE5E;
+  animation: 2s counterclockwise infinite;
+}
+
+@keyframes clockwise {
+  0% {
+    top: -5px;
+    left: 0;
+  }
+  12% {
+    top: -2px;
+    left: 2px;
+  }
+  25% {
+    top: 0;
+    left: 5px;    
+  }
+  37% {
+    top: 2px;
+    left: 2px;
+  }
+  50% {
+    top: 5px;
+    left: 0;    
+  }
+  62% {
+    top: 2px;
+    left: -2px;
+  }
+  75% {
+    top: 0;
+    left: -5px;
+  }
+  87% {
+    top: -2px;
+    left: -2px;
+  }
+  100% {
+    top: -5px;
+    left: 0;    
+  }
+}
+
+@keyframes counterclockwise {
+  0% {
+    top: -5px;
+    right: 0;
+  }
+  12% {
+    top: -2px;
+    right: 2px;
+  }
+  25% {
+    top: 0;
+    right: 5px;    
+  }
+  37% {
+    top: 2px;
+    right: 2px;
+  }
+  50% {
+    top: 5px;
+    right: 0;    
+  }
+  62% {
+    top: 2px;
+    right: -2px;
+  }
+  75% {
+    top: 0;
+    right: -5px;
+  }
+  87% {
+    top: -2px;
+    right: -2px;
+  }
+  100% {
+    top: -5px;
+    right: 0;    
+  }
+}
+

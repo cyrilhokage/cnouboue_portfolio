@@ -26,10 +26,11 @@
 
 	<div class="header__logo">
 		<a href="{% url 'main_home' %}" style="color:#601600;" >
-			Cyrille Nouboué
+			Cyrille NOUBOUE
 		</a>
 	</div>
 	
+	<!--  
 	<nav class="header__nav">
 		<ul>
 			<li><a href="{% url 'blog:about' %}"></a>About</li>
@@ -45,7 +46,7 @@
 			</li>
 		</ul>
 
-	</nav>
+	</nav> -->
 </header>
 
 <main>
@@ -137,7 +138,7 @@
 					</div>
 				</div>
 				
-				<a href="#">
+				<a href="{% url 'blog:home' %}">
 				 	<img class="slider__slide__img" src="{% static 'img/13.jpg' %}">
 				 </a>
 				
