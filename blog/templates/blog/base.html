@@ -13,6 +13,7 @@
       {% load static %}
       <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
       <link rel="stylesheet" type="text/css" href="{% static 'css/styles_bis.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style_particles.css' %}" >
       <!-- Booooooootstrap -->
      <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
      <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png"> -->
@@ -91,11 +92,11 @@
 
         </header>
 
-<div id="mainContent">
-  <div  class="container content">
-
-      <main id="main">
-
+        <div id="particles-js"></div>
+<div id="mainContent" >
+  <div  class="container content" >
+   
+      <main id="main" >
         <section>
 
               <!--
@@ -108,7 +109,7 @@
 
                  {% endblock content %}
 
-    <!--
+                <!--
                 <span class="rellax" data-rellax-speed="2" data-rellax-percentage="0.5" style="left: 300px"><img src="{% static 'blog/img/hexagone.png' %}"></span> -->
 
           </section>
@@ -122,9 +123,9 @@
 
           {% endblock footer %}
   
-    </div>
-
   </div>
+
+</div>
 
     <!--
      <script>
@@ -144,12 +145,13 @@
 
     <script type="text/javascript" src="{% static 'blog/js/rellax.js' %}"></script>
     <script type="text/javascript" src="{% static 'blog/js/rellax.min.js' %}"></script>
+    
 
 <script>
 
 
     // Accepts any class name
-  var rellax = new Rellax('.rellax');
+  //var rellax = new Rellax('.rellax');
 </script>
 
 

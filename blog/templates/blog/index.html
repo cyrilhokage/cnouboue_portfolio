@@ -3,6 +3,9 @@
 {% block title %}
 
   Cyrille NOUBOUE · Machine Learning Tutorials and Insights  
+  {% load static %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="{% static 'blog/css/style_particles.css' %}" >
 
 {%endblock%} 
 
@@ -41,7 +44,7 @@
 
             <div class="pagination">
               
-                <a class="pagination-item older" href="/page2">Older</a>
+                <a class="pagination-item older" href="#">Older</a>
               
               
                 <div class="pagination-item newer">Newer</div>
@@ -54,8 +57,6 @@
         <!-- bloc de l'image pour l'effet de srolling désynchronisé 
         <span class="rellax" data-rellax-speed="2" style="left: 600px;bottom: 25px;"><img src="{% static 'blog/img/kowalski.png' %}"></span>
         -->
-
-
         
         
 
@@ -66,7 +67,8 @@
 
 
 {% block additional_js %}
-            <!-- Particular JS scripts Goes here -->
+
+            <!-- Particular JS scripts Goes here 
   <script src="{% static 'blog/js/three.r92.min.js' %}"></script>
         <script src="{% static 'blog/js/vanta.birds.min.js' %}"></script>
 
@@ -81,7 +83,7 @@
           birdSize: 0.40,
            quantity: 3.00
         })
-        </script>
+        </script> -->
 
   <style type="text/css">
     .post article{
