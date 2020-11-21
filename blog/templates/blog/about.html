@@ -2,47 +2,40 @@
 
 {% block title %}
 
-    {{ post.title }}  
-
-    {% load static %}
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="{% static 'blog/css/style_particles.css' %}" >
-<style type="text/css">
-  #mainContent:{
-    background-color: white !important;
-  }
-</style>
-
+    {{ post.title }}  A propos
 
 {%endblock%} 
 
 {% block content %}
-
-  <!-- partial:index.partial.html <div id="particles-js"></div>-->
+  {% load static %}
+  <!-- partial:index.partial.html <div id="particles-js"></div>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="{% static 'blog/css/style_particles.css' %}" >   -->
   
   
 
-  <article class="page" style="background-color:white;">
+  <article class="page">
           
           <h2 class="page-title">About me</h2>
-                <p><img src="{% static 'img/profile.jpg' %}" alt="Profile picture"></p>
+                <p><img class="profile_img" src="{% static 'img/profile.jpg' %}" alt="Profile picture"></p>
+              <div class="main_text">
+                    <p>I love the field of Machine Learning! Such a fascinating and impactful subject, and also one that’s hard to master.</p>
+                    </br>
+                    <p>I also happen to love the challenge of explaining difficult topics well. I’ve brought together my love of ML and my passion for making tutorials to form my online job.</p>
+                    </br></br>
+                    <p>Here are some of the places you can find me and my work:</p>
 
-              <p>I love the field of Machine Learning! Such a fascinating and impactful subject, and also one that’s hard to master.</p>
-
-              <p>I also happen to love the challenge of explaining difficult topics well. I’ve brought together my love of ML and my passion for making tutorials to form my online education business at <a href="https://www.chrismccormick.ai">ChrisMcCormick.AI</a>, which is now my full-time job.</p>
-
-              <p>Here are some of the places you can find me and my work:</p>
-
-              <ul>
-                <li>Written <a href="http://www.mccormickml.com/tutorials/">tutorials</a> on this blog.
-                  <ul>
-                    <li>Typically with (thoroughly!) commented example code on <a href="http://github.com/chrisjmccormick/">GitHub</a>.</li>
-                  </ul>
-                </li>
-                <li><a href="http://bit.ly/2X8tcXE">eBooks</a> and <a href="https://www.chrismccormick.ai/word2vec-the-course">Video Courses</a> at ChrisMcCormick.AI.</li>
-                <li><a href="https://www.quora.com/profile/Chris-McCormick-12">Answers on Quora</a></li>
-                <li>Insights &amp; answers on my <a href="https://www.youtube.com/channel/UCoRX98PLOsaN8PtekB9kWrw/">YouTube channel</a> (<em>Coming Soon!</em>).</li>
-              </ul>
+                    <ul>
+                      <li>Written <a href="http://www.mccormickml.com/tutorials/">tutorials</a> on this blog.
+                        <ul>
+                          <li>Typically with (thoroughly!) commented example code on <a href="http://github.com/chrisjmccormick/">GitHub</a>.</li>
+                        </ul>
+                      </li>
+                      <li><a href="http://bit.ly/2X8tcXE">eBooks</a> and <a href="https://www.chrismccormick.ai/word2vec-the-course">Video Courses</a> at ChrisMcCormick.AI.</li>
+                      <li><a href="https://www.quora.com/profile/Chris-McCormick-12">Answers on Quora</a></li>
+                      <li>Insights &amp; answers on my <a href="https://www.youtube.com/channel/UCoRX98PLOsaN8PtekB9kWrw/">YouTube channel</a> (<em>Coming Soon!</em>).</li>
+                    </ul>
+              </div>
 
               <h2 id="education--experience">Education </h2>
 
@@ -68,5 +61,29 @@
 
 <!--<script type="text/javascript"  src="{% static 'blog/js/script_particles.js' %}"></script> -->
 <script type="text/javascript"  src="{% static 'blog/js/script_particles.js' %}"></script>
+<style type="text/css">
+
+.page{
+  background-color:white;
+  padding-right:20px;
+  border-radius: 10px;
+}
+
+
+.profile_img {
+
+  max-width: 50%;
+  height: auto;
+  padding-right: 15px;
+float: left;
+}
+
+.main_text {
+  padding-top: 90px;
+  padding-left: 10px;
+display: inline-flexbox;
+} 
+
+</style>
 
 {% endblock %}

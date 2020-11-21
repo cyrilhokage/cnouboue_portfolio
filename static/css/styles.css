@@ -292,7 +292,9 @@ font-size:75%;
 font-weight:400; 
 opacity:.5} 
 .page,.post{ 
-margin-bottom:4em} 
+margin-bottom:4em;
+text-align: justify;
+text-justify: inter-word;} 
 .page li+li,.post li+li{ 
 margin-top:.25rem} 
 .page-title,.post-title,.post-title a{ 
@@ -358,6 +360,8 @@ margin-bottom:1rem;
 padding:1rem; 
 color:#717171; 
 background-color:#f9f9f9} 
+
+
 
 
 
