@@ -15,6 +15,7 @@
         <div class="posts">
   
           {% for post in post_list %}
+              {% if post.status == 1 %}
                     <article class="post">
                       <!-- Post title -->
                       <h3 class="post-title">
@@ -36,6 +37,7 @@
                       <a href="/2019/09/19/XLNet-fine-tuning/#disqus_thread">6 Comments</a>
                       
                     </article>
+              {% endif %} 
 
           {% endfor %}  
           
