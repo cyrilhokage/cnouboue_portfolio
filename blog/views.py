@@ -31,7 +31,7 @@ def home(request):
 
 
 def index(request):
-	post_list =  Post.objects.order_by('-created_on')[:5]
+	post_list =  Post.objects.order_by('-created_on')
 	context = {'post_list':post_list}
 	return render(request, 'blog/index.html', context)
 
