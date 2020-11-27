@@ -1,0 +1,140 @@
+{% extends "blog/base.html" %} 
+
+{% block title %}
+
+  Cyrille NOUBOUE · Machine Learning Tutorials and Insights  
+  {% load static %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+{%endblock%} 
+
+{% block content %}
+
+
+
+<h1>Cyrille NOUBOUE</h1>
+<strong>Ingénieur data science / DevOps</strong> <br>
+Email: cyrillenouboue@gmail.com
+LinkedIn: www.linkedin.com/in/cyrille-nouboué Mobile: +33(0) 6 47 11 99 71
+Github: github.com/cyrilhokage
+ <br>
+<h4>Formation</h4>
+<hr />
+• <strong> Telecom Paris</strong>                                      <i>Palaiseau, France</i> <br> 
+Master spécialisé big data pour la gestion des données Septembre 2019 - June 2020
+Cours: sciences de données, structures et bases de données, calcul distribué, intelligence artificielle, machine learning , deep learning
+<br> 
+• <strong> ESIGELEC </strong>                                   <i>Rouen, France</i> <br> 
+Ecole d’ing´enieurs g´en´eraliste, dominante big data pour la transfromation num´erique Septembre 2014 - f´evrier 2019
+Cours: Classes pr´eparatoires int´egr´ees, fomation d’ing´enieur g´en´eraliste, d´ev´eloppement informatique et notions de big data
+Competences ´
+• Langages de programmation: Python, R, Scala, Java, C, C(Sharp) SQL, Bash/Linux, PHP, JavaScript
+• Frameworks: Scikit Learn, TensorFlow, Pytorch, Hadoop, Spark, Django, .NET
+• Outils et technologies: Git, Docker, Jupyter, AWS, GCP, MySQL
+• Langues: Fran¸cais (maternel), Anglais(Fluent), Mandarin(Notions)
+Experiences
+•
+Criteo R&D - Stage Site Reliability Engineer Paris, France
+Projet d’observabilit´e LAN Aout 2020 - Janvier 2020
+◦ Mission: Travail sur la conception, la mise en œuvre et le d´eploiement d’un outil de surveillance r´eseau, bas´e sur
+l’analyse d’´echantillons sflows pour simuler et visualiser le trafic r´eseau interne entre les serveurs. Environemment :
+Sflow, Apache Kafka, Druid, Apache Superset, DevOps, CI/CD, Chef
+•
+EDF Lab R&D - Stage ing´enieur Etude de langage naturel (NLP) Palaiseau, France
+Etude et calcul de similarit´e entre des textes Mai 2019 - Sep 2019
+◦ Mission: Etat de l’art sur les m´ethodes d’analyse de langage naturel sur des textes pour le calcul de similarit´e entre des
+documents textuels. Environemment : Natural language processing, Python, Word2Vec, BERT.
+•
+Brasseries du Cameroun Douala, Cameroun
+Stagiaire assistant architecte de donn´ees Juin 2018 - Aout 2018
+◦ Mission: Charg´e de la migration, du traitement et de l’analyse de donn´ees entre des serveurs, dans le cadre de
+l’actualisation du parc informatique de l’entreprise. Environemment : SAP B.O 4.1
+•
+PHOTOPRESTA - Station F Paris, France
+Stagiaire business developer Juillet 2017 - Aout 2017
+◦ Mission: Gestion de la base de donn´ees interne des missions des photographes, actualisation de l’´etat des missions sur
+une carte num´erique, et d´eveloppement et gestion de mon propre portefeuille clients B2C et B2B.
+•
+GraphX.co - Agence de design web Paris, France
+D´eveloppeur web freelance Juillet 2017 - Maintenant
+◦ Mission: D´eveloppement de sites web. Environemment : Php, HTML, JavaScript, CSS, WordPress, UX design.
+Projets
+• Optimisation du traffic routier par un agent autonome — Projet fil rouge (Reinforcement learning, Calcul
+distribu´e): (En cours) Utilisation de l’apprentissage par renforcement pour permettre `a un agent autonome de g´erer le traffic
+routier dans un quartier.Tech: Apprentissage par renforcement, Python, Docker, Linux, Flow, SUMO (Novembre 2019)
+• Outil de g´eo-marketing pour commer¸cants de proximit´e — Projet ing´enieur ESIGELEC & Cr´edit Agricole
+Normandie Seine (Application web, Data science): Conception d’une application web pour aider les commer¸cants `a
+mieux g´erer leur commerce, en ayant une meilleure vision des profils clients et des horaires d’affluence Tech: Python, PHP,
+JavaScript, Git. (Novembre 2018 - F´evrier 2019)
+• Algorithme de recommandation de musiques — Projet personel : R´ealisation d’un algorithme d’´etude et de
+recommandation de musiques `a partir des goˆuts musicaux d’un utilisateur. Tech: Python, Spotify API (D´ecembre 2019)
+• Analyse des campagnes KickStarter : R´ealisation d’un script pour l’analyse des chances de succ`es d’une campagne
+KickStarter `a partir de donn´ees des campagnes pr´ec´edentes. Tech: Spark, Scala, Sbt (Janvier 2019)
+Hobbies & Associatif
+•
+Secr´etaire g´en´eral de la junior entreprise ESIGELEC Rouen, France
+Gestion administrative des adh´erents et des missions de la junior entreprise. Mai 2017 - Mai 2018
+•
+Bureau des ´el`eves de l’ESIGELEC Rouen, France
+Organisations d’´ev`enements et gestion des autres associations de l’´ecole. Avril 2017 - Avril 2018
+•
+Professeur de drones pour col´egiens Rouen, France
+Apprentissage des notions de base de pilotage de drones `a des col´egiens 2017 - 2018
+          
+
+
+        {% load static %}
+        <!-- bloc de l'image pour l'effet de srolling désynchronisé 
+        <span class="rellax" data-rellax-speed="2" style="left: 600px;bottom: 25px;"><img src="{% static 'blog/img/kowalski.png' %}"></span>
+        -->
+        
+        
+
+        <!-- Code for comment counts -->
+     <!--   <script id="dsq-count-scr" src="//mccormickml.disqus.com/count.js" async=""></script> -->
+
+{% endblock %}
+
+
+{% block additional_js %}
+
+            <!-- Particular JS scripts Goes here  -->
+  <script src="{% static 'js/script_shapes.js' %}"></script>
+    <!--    <script src="{% static 'blog/js/vanta.birds.min.js' %}"></script>
+
+        <script>
+        VANTA.BIRDS({
+          el: "#mainContent",
+          backgroundColor: 0xffffff,
+          /*color1: 0x181717,
+          color2: 0xcbf7,*/
+          color1: 0x0,
+          color2: 0x9060A8,
+          birdSize: 0.40,
+           quantity: 3.00
+        })
+        </script> -->
+
+  <style type="text/css">
+    .post article{
+          border-radius: 4px;
+          background: #fff;
+          box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+            transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+        padding: 14px 80px 18px 36px;
+        cursor: pointer;
+      }
+
+      .post:hover{
+        border-radius: 8px;
+        padding: 12px 12px 12px 12px;
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+      }
+
+
+  </style>
+
+
+
+{% endblock %}

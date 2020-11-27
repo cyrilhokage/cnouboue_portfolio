@@ -53,3 +53,9 @@ def projects(request):
     #recomended_posts = Post.objects.order_by('-created_on')[:3]
     context = {}
     return render(request, 'blog/projects.html', context)
+
+def resume(request):
+    #post = Post.objects.get(slug=slug)
+    #recomended_posts = Post.objects.order_by('-created_on')[:3]
+    context = {}
+    return render(request, 'blog/resume.html', context)

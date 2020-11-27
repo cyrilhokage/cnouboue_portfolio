@@ -1,9 +1,12 @@
-{% extends "admin/base.html" %} 
-  
-{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %} 
-  
-{% block branding %} 
-<h1 id="site-name" style="font-family: cursive;" ><a href="{% url 'admin:index' %}">Video Rental Administration</a></h1> 
-{% endblock %} 
-  
-{% block nav-global %}{% endblock %}
+{% extends 'admin/change_list.html' %}
+
+{% block object-tools %}
+    <div>
+        <form action="update/" method="POST">
+            {% csrf_token %}
+                <button type="submit">Update posts</button>
+        </form>
+    </div>
+    <br />
+    {{ block.super }}
+{% endblock %}

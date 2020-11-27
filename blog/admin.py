@@ -37,7 +37,7 @@ class PostAdmin(admin.ModelAdmin):
         return my_urls + urls
 
     def update_projects(self, request):
-        update_posts_from_github("cyrilhokage")
+        update_posts_from_github(request=request, username="cyrilhokage")
         self.message_user(request, "Projects successfully updated")
         return HttpResponseRedirect("../")
   

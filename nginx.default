@@ -1,6 +1,6 @@
 server { 
         
-    listen 80; server_name 167.71.0.147; 
+    listen 80; server_name 192.168.1.13; 
     root /home/cyril/Documents/portfolio_docker/cnouboue_portfolio/;
         
     location / {

@@ -9,5 +9,6 @@ urlpatterns = [
     path('post/<slug:slug>/', views.post, name='detail'),
     path('about/', views.about, name='about'),
     path('projects/', views.projects, name='projects'),
+    path('resume/', views.resume, name='resume'),
     #path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
 ]

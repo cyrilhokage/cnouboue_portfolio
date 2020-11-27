@@ -28,7 +28,7 @@
                       <time datetime="2019-09-19T08:00:00-07:00" class="post-date">{{ post.Author }} | {{ post.created_on}} </time>
                       
                       <!-- Post image -->
-                      <img src="{{ post.main_image.url }}" alt="post.tilte" width="500" height="320">
+                      <img src="{{ post.main_image.url }}" alt="post.tilte" width="100%" height="auto">
                       
                       <!-- Show an excerpt from the article -->
                       <p id="introduction">{{post.content|slice:":200" }}</p> 
