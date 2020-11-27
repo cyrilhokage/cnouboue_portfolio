@@ -17,21 +17,22 @@
           {% for post in post_list %}
               {% if post.status == 1 %}
                     <article class="post">
-                      <!-- Post title -->
-                      <h3 class="post-title">
-                        <a href="{% url 'blog:detail' post.slug %}"> 
-                          {{ post.title }}
-                        </a>
-                      </h3>
+                      <a href="{% url 'blog:detail' post.slug %}"> 
+                        <!-- Post title -->
+                        <h3 class="post-title">
+                            {{ post.title }}
+                        </h3>
                       
                       <!-- Date of the post -->
                       <time datetime="2019-09-19T08:00:00-07:00" class="post-date">{{ post.Author }} | {{ post.created_on}} </time>
                       
                       <!-- Post image -->
                       <img src="{{ post.main_image.url }}" alt="post.tilte" width="100%" height="auto">
-                      
+                    
+                    </a>
                       <!-- Show an excerpt from the article -->
                       <p id="introduction">{{post.content|slice:":200" }}</p> 
+                    
                       
                       <!-- Comment count -->
                       <a href="/2019/09/19/XLNet-fine-tuning/#disqus_thread">6 Comments</a>
