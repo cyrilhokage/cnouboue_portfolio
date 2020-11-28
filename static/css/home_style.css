@@ -46,7 +46,7 @@ body * {
   /*background: #fff;*/
   /* border-radius: 5%; */
   position : relative;
-  left : 400px
+  left : 20%
 }
 .header__nav {
   list-style: none;
@@ -318,7 +318,7 @@ a {
 
 .header__logo {
   display: flex;
-  align-items: center;
+ /* align-items: center; */
   justify-content: center;
   /* position: relative; */
  /* margin: 20px auto; */
