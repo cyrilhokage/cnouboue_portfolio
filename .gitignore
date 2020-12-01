@@ -5,3 +5,6 @@ venv/
 cnouboue_portfolio/__pycache__
 blog/__pycache__/
 blog/migrations/__pycache__/
+
+*.crt
+*.key
