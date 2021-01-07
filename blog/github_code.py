@@ -16,15 +16,20 @@ def update_posts_from_github(request, username):
 
     for repo in user.get_repos(username):
 
-        print(repo.name)
-        post, created = Post.objects.update_or_create(
-            title=repo.name,
-            slug = slugify(repo.name),
-            author=request.user,
-            updated_on=repo.pushed_at,
-            created_on=repo.created_at,
-            github_link=repo.svn_url,
-            technos=repo.language if repo.language is not None else "TECHNOS TO FILL",
-            summary=repo.description if repo.description is not None else "SUMMARY TO FILL",
-        )
+        # print(repo.name)
+        try:
+            post = Post.objects.get(title=repo.name)
+            post.updated_on=repo.pushed_at
+            post.github_link=repo.svn_url
+        except Post.DoesNotExist : 
+            post, created = Post.objects.update_or_create(
+                title=repo.name,
+                slug = slugify(repo.name),
+                author=request.user,
+                updated_on=repo.pushed_at,
+                created_on=repo.created_at,
+                github_link=repo.svn_url,
+                technos=repo.language if repo.language is not None else "TECHNOS TO FILL",
+                summary=repo.description if repo.description is not None else "SUMMARY TO FILL",
+            )
         post.save()

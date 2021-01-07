@@ -36,7 +36,9 @@ else:
     DEBUG = True
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 
-ALLOWED_HOSTS = ['167.71.0.147']
+ALLOWED_HOSTS = ['192.168.1.13',
+                'cyrillenouboue.space',
+                '127.0.0.1']
 
 
 # Application definition
@@ -170,4 +172,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

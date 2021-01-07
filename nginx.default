@@ -1,29 +1,42 @@
-upstream web {
-    ip_hash;
-    server web:443;
-}
+# nginx.default
 
-# Redirect all HTTP requests to HTTPS
-server {
-    listen 80;
-    server_name 192.168.1.13;
-    return 301 https://$server_name$request_uri;
-}
+server { 
+    listen 80; 
+    server_name cyrillenouboue.space 94.238.7.106;                             
+    access_log off; 
+    return 301 https://$server_name$request_uri; 
+ } 
 
 server {
-    # Pass request to the web container
-    location / {
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_redirect off;
-        proxy_pass http://127.0.0.1:8000;
-    }
+    server_name cyrillenouboue.space 94.238.7.106; 
     listen 443 ssl;
-    server_name 192.168.1.13;
-# SSL properties
-# (http://nginx.org/en/docs/http/configuring_https_servers.html)
-    ssl_certificate /opt/app/cnouboue_portfolio/cyrillenouboue.space.crt;
-    ssl_certificate_key /opt/app/cnouboue_portfolio/cyrillenouboue.space.key;
-    root /home/cyril/Documents/portfolio_docker/cnouboue_portfolio/;
-    add_header Strict-Transport-Security "max-age=31536000" always;
+    ssl_certificate /opt/app/cnouboue_portfolio/ssl/cyrillenouboue.space.crt;
+    ssl_certificate_key /opt/app/cnouboue_portfolio/ssl/cyrillenouboue.space.key;
+
+    #Max upload size
+    client_max_body_size 75M;   # adjust to taste
+
+    # Django media
+    location /media/ {
+        autoindex on;
+        alias /opt/app/cnouboue_portfolio/media/;      # your Django project's media files
+    }
+
+    location /static/ {
+        autoindex on;
+        alias /opt/app/cnouboue_portfolio/staticfiles/;     # your Django project's static files
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8010;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $server_name;
+        add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"';
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Front-End-Https on;
+        proxy_redirect off; 
+    }
+    
 }
