@@ -10,8 +10,8 @@ server {
 server {
     server_name cyrillenouboue.space 94.238.7.106; 
     listen 443 ssl;
-    ssl_certificate /opt/app/cnouboue_portfolio/ssl/cyrillenouboue.space.crt;
-    ssl_certificate_key /opt/app/cnouboue_portfolio/ssl/cyrillenouboue.space.key;
+    ssl_certificate /opt/app/cnouboue_portfolio/ssl/fullchain.pem;
+    ssl_certificate_key /opt/app/cnouboue_portfolio/ssl/privkey.pem;
 
     #Max upload size
     client_max_body_size 75M;   # adjust to taste

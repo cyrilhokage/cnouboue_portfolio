@@ -23,6 +23,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
     path('', views.home, name='main_home'),
+    path('.well-known/pki-validation/godaddy.html', views.ssl),
 ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

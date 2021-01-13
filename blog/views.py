@@ -10,7 +10,6 @@ from .models import Post
 """
 class PostList(generic.ListView):
 
-
 	latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
@@ -29,6 +28,8 @@ class PostDetail(generic.DetailView):
 def home(request):
     return render(request, 'index.html')
 
+def ssl(request):
+    return render(request, 'godaddy.html')
 
 def index(request):
 	post_list =  Post.objects.order_by('-created_on')
