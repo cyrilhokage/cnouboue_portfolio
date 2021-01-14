@@ -23,7 +23,7 @@ def update_posts_from_github(request, username):
             post.github_link=repo.svn_url
         except Post.DoesNotExist : 
             post, created = Post.objects.update_or_create(
-                title=repo.name,
+                title=repo.name.replace("_", " ").replace("-", " ").title(),
                 slug = slugify(repo.name),
                 author=request.user,
                 updated_on=repo.pushed_at,

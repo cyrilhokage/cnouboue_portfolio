@@ -38,7 +38,7 @@ def index(request):
 
 def post(request, slug):
     post = Post.objects.get(slug=slug)
-    recomended_posts = Post.objects.order_by('-created_on')[:3]
+    recomended_posts = Post.objects.filter(status=1).order_by('-created_on')[:3]
     context = {'post':post, 'recomended_posts':recomended_posts}
     return render(request, 'blog/article_detail.html', context)
 
