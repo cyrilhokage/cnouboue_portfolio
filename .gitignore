@@ -10,3 +10,5 @@ blog/migrations/__pycache__/
 
 *.crt
 *.key
+
+.test
