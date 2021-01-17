@@ -15,14 +15,14 @@
       <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
       <link rel="stylesheet" type="text/css" href="{% static 'css/styles_bis.css' %}" >
       <link rel="stylesheet" type="text/css" href="{% static 'css/style_particles.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'css/notebook.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'css/colorful.css' %}" >
+      
   
       <!-- Booooooootstrap -->
      <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
      <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png"> -->
       <link rel="shortcut icon" href="{% static 'img/fav-icon.png' %}">
-
-  <!-- Adding support for MathJax 
-  <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id=""></script> -->
 
         <style type="text/css">
 
@@ -44,36 +44,7 @@
               padding-right:1.5rem;
               margin-left:auto;
               margin-right:auto;
-        
-                /*margin-left: 20%; */
             }
-
-
-              /* Page content */
-              .content {
-                padding: 2px;
-              }
-
-              /*max-width:38rem;padding-left:1.5rem;padding-right:1.5rem;margin-left:auto;margin-right:auto*/
-
-              /* The sticky class is added to the navbar with JS when it reaches its scroll position */
-              .sticky {
-                position: fixed;
-                top: 0;
-                width: 100%;
-              }
-
-              /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-              .sticky + .content {
-                padding-top: 60px;
-              }              
-
-              span {
-                position: absolute;
-                z-index:-1;
-                box-sizing: border-box;
-              }
-
 
         </style>
 
@@ -155,7 +126,7 @@
 <script>
 
 
-    // Accepts any class name
+   // Accepts any class name
   //var rellax = new Rellax('.rellax');
 </script>
 
@@ -191,6 +162,20 @@
       }
     } */
 
+</script>
+
+<!-- mathjax -->
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
 </script>
 
 

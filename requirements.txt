@@ -19,3 +19,4 @@ whitenoise==5.2.0
 wrapt==1.12.1
 pygithub
 python-slugify
+requests
