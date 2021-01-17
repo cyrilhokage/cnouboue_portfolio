@@ -63,7 +63,7 @@
 					</div>
 				</div>
 
-				<a href="{% static 'blog/pdf/CV_Cyrille_NOUBOUE.pdf' %}">
+				<a href="{% url 'blog:resume' %}">
 					<img class="slider__slide__img" src="{% static 'img/20.jpg' %}"> 
 				</a>
 				
@@ -113,7 +113,7 @@
 					</div>
 				</div>
 
-				<a href="#">
+				<a href="{% url 'blog:resume' %}">
 					<img class="slider__slide__img" src="{% static 'img/astronaut_musician.jpg' %}"> 
 				</a>s
 
