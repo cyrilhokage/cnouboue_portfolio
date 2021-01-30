@@ -28,8 +28,8 @@ TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 #SECRET_KEY = os.environ.get('SECRET_KEY', '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf') # development key for the moment
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('ENV') == 'PRODUCTION':
-    DEBUG = True
+if os.environ.get('environement') == 'PRODUCTION':
+    DEBUG = False
     #SECRET_KEY = os.environ.get('SECRET_KEY')
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 else:
@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if os.environ.get('ENV') == 'PRODUCTION':
+if os.environ.get('environement') == 'PRODUCTION':
     # ...
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
