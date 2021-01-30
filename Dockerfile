@@ -10,7 +10,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 # The enviroment variable ensures that the python output is set straight
 # to the terminal with out buffering it first
 ENV PYTHONUNBUFFERED 1
-ENV enviroment='PRODUCTION''
+ENV enviroment='PRODUCTION'
 
 # copy source and install dependencies
 RUN mkdir -p /opt/app/cnouboue_portfolio
