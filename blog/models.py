@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.sitemaps import ping_google
 
 # Create your models here.
 STATUS = (
@@ -33,3 +34,13 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    # Overwrite save() method to send new sitemap to google when a post is updated
+    def save(self, force_insert=False, force_update=False):
+        super().save(force_insert, force_update)
+        try:
+            ping_google()
+        except Exception:
+            # Bare 'except' because we could get a variety
+            # of HTTP-related exceptions.
+            pass
