@@ -5,11 +5,11 @@ from datetime import datetime
 
 class Static_Sitemap(Sitemap):
 
-    priority = 0.5
-    changefreq = 'daily'
+    priority = 0.6
+    changefreq = 'weekly'
 
     def items(self):
-        return ['main_home', 'blog']
+        return ['main_home']
 
     def location(self, item):
         return reverse(item)

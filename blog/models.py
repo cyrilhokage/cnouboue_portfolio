@@ -35,6 +35,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return "/blog/" + self.slug
+
     # Overwrite save() method to send new sitemap to google when a post is updated
     def save(self, force_insert=False, force_update=False):
         super().save(force_insert, force_update)
