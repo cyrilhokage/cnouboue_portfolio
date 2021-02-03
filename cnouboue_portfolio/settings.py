@@ -33,7 +33,7 @@ if os.environ.get('environement') == 'PRODUCTION':
     #SECRET_KEY = os.environ.get('SECRET_KEY')
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 else:
-    DEBUG = True
+    DEBUG = False
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 
 ALLOWED_HOSTS = ['192.168.1.13',
