@@ -38,7 +38,8 @@ else:
 
 ALLOWED_HOSTS = ['127.0.0.1',
                  '.cyrillenouboue.space',
-                 '192.168.1.13']
+                 '192.168.1.13',
+                 "*"]
 
 CSRF_COOKIE_SECURE = True
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'blog',
+    'notebook',
 ]
 
 MIDDLEWARE = [
