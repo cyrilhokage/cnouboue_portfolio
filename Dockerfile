@@ -2,7 +2,7 @@
 FROM python:3.7-buster
 
 # install nginx
-RUN apt-get update && apt-get install nginx vim -y --no-install-recommends
+RUN apt-get update && apt-get install nginx vim systemd -y --no-install-recommends
 COPY nginx.default /etc/nginx/sites-available/default
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
@@ -10,7 +10,8 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 # The enviroment variable ensures that the python output is set straight
 # to the terminal with out buffering it first
 ENV PYTHONUNBUFFERED 1
-ENV enviroment='PRODUCTION'
+ARG enviroment_var=PRODUCTION
+ENV enviroment=$enviroment_var
 
 # copy source and install dependencies
 RUN mkdir -p /opt/app/cnouboue_portfolio

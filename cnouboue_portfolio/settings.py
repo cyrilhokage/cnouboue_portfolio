@@ -29,18 +29,18 @@ TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('environement') == 'PRODUCTION':
-    DEBUG = False
+    DEBUG =  False
     #SECRET_KEY = os.environ.get('SECRET_KEY')
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 else:
     DEBUG = False
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
 
-ALLOWED_HOSTS = ['192.168.1.13',
-                'cyrillenouboue.space',
-                '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1']
 
+CSRF_COOKIE_SECURE = True
 
+SESSION_COOKIE_SECURE = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -105,11 +105,12 @@ DATABASES = {
 }
 
 # ...
+"""
 if os.environ.get('ENV') == 'PRODUCTION':
     # ...
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -169,6 +170,9 @@ if os.environ.get('ENV') == 'PRODUCTION':
 #Configure the media base dir and medias urls
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+COLLECTSTATIC = 1
+
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
