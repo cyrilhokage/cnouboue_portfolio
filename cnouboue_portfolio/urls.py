@@ -36,6 +36,7 @@ sitemaps = {
 
 urlpatterns = [
     path('blog/', include('blog.urls'), name='blog'),
+    path('notebook/', include('notebook.urls')),
     path('admin/', admin.site.urls),
     path('', views.home, name='main_home'),
     # the sitemap
