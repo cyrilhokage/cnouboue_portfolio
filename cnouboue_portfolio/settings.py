@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'blog',
     'notebook',
+    'bootstrap4',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +77,6 @@ if os.environ.get('environement') == 'PRODUCTION':
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'cnouboue_portfolio.urls'
-
 
 
 TEMPLATES = [
@@ -181,3 +182,23 @@ COLLECTSTATIC = 1
 django_heroku.settings(locals())
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+"""
+LOGIN_REDIRECT_URL = 'notebook:index'
+LOGIN_URL = 'notebook:login'
+LOGOUT_URL = 'notebook:logout'
+"""
+
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+
+LOGIN_REDIRECT_URL = 'notebook:index'
+
+CRISPY_TEMPLATE_PACK =  'bootstrap4'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'noubouec@gmail.com'
+EMAIL_HOST_PASSWORD = 'Angylle1'
+EMAIL_PORT = 587

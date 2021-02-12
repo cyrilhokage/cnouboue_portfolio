@@ -1,0 +1,101 @@
+<!doctype  html>
+<html  lang="en">
+<head>
+
+  {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'notebook/css/style.css' %}">
+
+<script type="text/javascript" src="{% static 'notebook/js/jquery.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'notebook/js/bootstrap.bundle.min.js' %}"></script> 
+
+{% load crispy_forms_tags %}
+
+
+
+<link  rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"  crossorigin="anonymous">
+
+<link rel="icon" type="image/ico" href="{% static 'notebook/img/logo.png' %}" />
+<title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+	  <div class="container">
+	    <a class="navbar-brand" href="#">
+	          <img src="{% static 'notebook/img/logo.png' %}" alt="Logo" width="30" height="30">
+	        </a>
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+	    <div class="collapse navbar-collapse" id="navbarResponsive">
+	      <ul class="navbar-nav ml-auto">
+
+	      	{% if user.is_authenticated %}  						<!-- For Home button -->
+	        <li class="nav-item active">
+	          <a class="nav-link" href="{% url 'notebook:user_view' user.id %}">Home
+	                <span class="sr-only">(current)</span>
+	              </a>
+	        </li>
+	        {% endif %}
+
+	        {% if not user.is_authenticated %}					<!-- For Log In -->
+	        <li class="nav-item">
+	          <a class="nav-link" href="{% url 'notebook:login' %}">Log in</a>
+	        </li>
+	        {% endif %}
+
+	        {% if not user.is_authenticated %}					<!-- For Sing up -->
+	        <li class="nav-item">
+	          <a class="nav-link" href="{% url 'notebook:signup' %}">Sign in</a>
+	        </li>
+	        {% endif %}
+	        
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Services</a>
+	        </li>
+	        {% block nav_list %} 									<!-- For DropLists -->
+	        {% endblock %}
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Contact</a>
+	        </li>
+	        {% if user.is_authenticated %} 							<!-- For Logout button -->
+	        <li class="nav-item">
+	          <a class="nav-link" href="{% url 'notebook:logout' %}">Logout</a>
+	        </li>
+	        {% endif %}
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
+
+
+	<!-- Content -->
+	<div class="col-12" style="height:50px;"></div>
+    <div  class="row justify-content-center">
+ 
+      		{% block content %}
+      		{% endblock %}
+  		
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="col-12" style="height:50px;"></div>
+	  
+	  <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+	  	<div  class="row justify-content-center">
+	  	<div class="col-12">
+	    	<div class="container text-center">
+	      		<small>Copyright &copy; Harmony</small>
+	    	</div>
+	    </div>
+		</div>
+	  </footer>
+	 
+
+
+
+</body>
+</html>

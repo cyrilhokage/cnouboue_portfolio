@@ -1,0 +1,49 @@
+{% extends  'notebook/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+
+{% if not user.is_authenticated %}
+		
+		  <div class="container h-100">
+		    <div class="d-flex h-100 text-center align-items-center">
+		      <div class="w-100 text-grey">
+		        
+		        <h4 class="card-title">Sign up</h4>
+
+					<form method="post">
+					{% csrf_token %}
+					<input type="hidden" name="next" value="{{ next }}">
+
+					{{ form|crispy }}
+
+					<button type="submit" class="btn btn-primary btn-block">Sign up</button>
+					</form>
+					</br>
+
+					<div class="d-flex h-100 text-center ">Vous avez déjà un compte?  <u> <a href="{% url 'notebook:login' %}">Connectez-vous !</a></u></div>
+
+
+		      </div>
+		    </div>
+          </div>
+          
+          {% else %}
+
+          <div class="container h-100">
+                  <div class="d-flex h-100 text-center align-items-center">
+                    <div class="w-100 text-grey">
+                      
+                      <h4 class="card-title">You have already an account</h4>
+                     </div>
+                 </div>
+          </div>
+      
+      
+      {% endif %}
+      
+      
+              
+      {% endblock %}

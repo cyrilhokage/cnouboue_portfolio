@@ -1,0 +1,88 @@
+{% extends  'notebook/base.html' %}
+
+{% block title %} User index {% endblock %}
+
+{% block nav_list %}
+    
+
+    {% if user.is_authenticated %}                          <!-- For Playlist button -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Playlists
+            </a>
+            <!-- dropdown-menu  -->
+            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+                {% for watch in watched_list %}
+                    <a class="dropdown-item" href="{% url 'notebook:watch' watch.id %}"> {{ watch.program.name }} </a>    
+                {% endfor %}
+            </div>
+
+        </li>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+
+
+    {% if user.is_authenticated %}
+
+        <header>
+          <div class="overlay"></div>
+          <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
+          </video>
+          <div class="container h-100">
+            <div class="d-flex h-100 text-center align-items-center">
+              <div class="w-100 text-white">
+                <h1 class="display-3">WELCOME {{ user.username }} !</h1>
+                <p class="lead mb-0"> Enjoy your world </p>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="col-12" style="height:50px;"></div>
+
+        <!-- 'Add-watch' button -->
+        <a href="{% url 'notebook:watch_add' %}" class="btn btn-primary btn-primary"> Add Watch <span class="glyphicon glyphicon-align-justify"></span></a>
+        
+        <div class="col-12" style="height:50px;"></div>
+
+        <!-- Page Content -->
+        <div class="container">
+          <div class="row">
+
+
+        {% if watched_list %}
+            
+
+            {% for watch in watched_list %}
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-0 shadow">
+                        <img src="https://source.unsplash.com/random/500x350" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                              <h5 class="card-title mb-0">
+                                <a href="{% url 'notebook:watch' watch.id %}">{{ watch.program.name }}</a>
+                              </h5>
+                            <div class="card-text text-black-50">{{ watch.user }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        {% else %}
+            <p>No playlist  available.</p>
+        {% endif %}
+
+         </div>
+        </div>
+
+
+    {% else %}
+        <p> Vous n'etes pas autorisés sur cette page </p>
+    {% endif %}
+	
+
+{% endblock %}

@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: cyrilhokage@yahoo.fr
+Date: Tue, 09 Feb 2021 03:23:36 -0000
+Message-ID: <161284101645.30661.5465949310407136517@raspberrypi>
+
+Someone asked for password reset for email cyrilhokage@yahoo.fr.Follow the Link below
+http://127.0.0.1:8000{% url "notebook:password_reset_confirm"
+uidb64=uid token=token %}
+-------------------------------------------------------------------------------
