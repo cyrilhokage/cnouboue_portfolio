@@ -32,9 +32,13 @@ if os.environ.get('environement') == 'PRODUCTION':
     DEBUG =  True
     #SECRET_KEY = os.environ.get('SECRET_KEY')
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
+    SESSION_COOKIE_SECURE = True
+
 else:
     DEBUG = True
     SECRET_KEY = '9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf'
+    SESSION_COOKIE_SECURE = False
+
 
 ALLOWED_HOSTS = ['127.0.0.1',
                  '.cyrillenouboue.space',
@@ -43,7 +47,6 @@ ALLOWED_HOSTS = ['127.0.0.1',
 
 CSRF_COOKIE_SECURE = True
 
-SESSION_COOKIE_SECURE = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'blog',
     'notebook',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -182,3 +186,8 @@ COLLECTSTATIC = 1
 django_heroku.settings(locals())
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+CRISPY_TEMPLATE_PACK='bootstrap4'
+LOGIN_REDIRECT_URL='notebook:profile'
+LOGIN_URL='notebook:login' 
+
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'

@@ -1,0 +1,7 @@
+{%extends 'notebook/base.html'%}
+{%block content%}
+    <img src="{{user.profile.pic.url}}">
+    <h2>{{user.username}}</h2>
+    <p>{{user.email}}</p>
+    <p>{{user.profile.bio}}</p>
+{%endblock%}

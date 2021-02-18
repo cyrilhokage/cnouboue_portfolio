@@ -1,0 +1,37 @@
+
+
+{% block navbar %} 
+
+<h3 class="masthead-title">
+    <div id="navbar">
+      <div id="navbarContent">
+      
+      
+            <a href="{% url 'main_home' %}"  title="Home">Cyrille NOUBOUE</a>
+
+            <!--- Display the About, Archive, etc. pages in the header --->
+
+                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:about' %}">A propos</a></small>
+
+                    
+                {% load static %}
+
+                {% if user.is_authenticated %}
+                    &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:logout' %}">Log out</a></small>
+                {% else %}
+                    &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:login' %}">Log In</a></small>
+                    &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:register' %}">Register</a></small>
+                {% endif %}
+            
+        </div>
+
+      </div>
+  </h3>
+        <!---- I could use this to include the tag line, but it looks cluttered...
+        <h3 class="masthead-title">
+             <small>Machine Learning Tutorials and Insights</small>
+        </h3>
+        ----->
+
+
+{% endblock navbar %}

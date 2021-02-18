@@ -1,0 +1,189 @@
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+
+    {% block title %}{% endblock %}
+    
+  </title>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'css/styles_bis.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style_particles.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'css/notebook.css' %}" >
+      <link rel="stylesheet" type="text/css" href="{% static 'css/colorful.css' %}" >
+      
+  
+      <!-- Booooooootstrap -->
+     <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
+     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png"> -->
+      <link rel="shortcut icon" href="{% static 'img/fav-icon.png' %}">
+
+        <style type="text/css">
+
+              /* Style the navbar */ 
+              #navbar {
+                overflow: hidden;
+                background-color:#fff;
+                position: fixed;
+                top:0;
+                width: 100%;
+                z-index:4;
+                height: 55px;
+                line-height: 55px; /* centrage vertical */
+              }
+
+            #navbarContent {
+              max-width:38rem;
+              padding-left:1.5rem;
+              padding-right:1.5rem;
+              margin-left:auto;
+              margin-right:auto;
+            }
+
+        </style>
+
+
+</head>
+
+
+  <body>
+    
+    <div id="MathJax_Message" style="display: none;"></div>
+
+
+      <header class="masthead">
+
+          {% block navbar %}
+
+             {% include 'notebook/navbar.html' %}
+
+          {% endblock navbar %}
+
+        </header>
+
+        <div id="particles-js"></div> <!-- Background for About page -->
+
+<div id="mainContent" >
+  <div  class="container content" >
+   
+      <main id="main" >
+        <section>
+            {%if messages%}
+                {%for message in messages%}
+                    {{message}}
+                {%endfor%}
+            {%endif%}
+
+              <!--
+              <span class="rellax" data-rellax-percentage="0.5" style="left: -200px"><img src= "{% static 'blog/img/losange.png' %}"></span> -->
+            
+                <!-- include the page type here 'projects', 'about', 'CV'-->
+                <!-- include 'projects.html' -->
+                 {% block content %}
+                <!-- Content Goes here -->
+
+                 {% endblock content %}
+
+                <!--
+                <span class="rellax" data-rellax-speed="2" data-rellax-percentage="0.5" style="left: 300px"><img src="{% static 'blog/img/hexagone.png' %}"></span> -->
+
+          </section>
+
+
+      </main>
+
+          {% block footer %}
+
+              {% include 'notebook/footer.html' %}
+
+          {% endblock footer %}
+  
+  </div>
+
+</div>
+
+    <!--
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-76624103-1', 'auto');
+       ga('send', 'pageview');
+     </script> -->
+
+     <!-- javascript -->
+
+      <!-- Code pour l'animation lors du scrolling -->
+      <!--  <script src="{% static 'blog/js/scroll.js' %}" ></script> -->
+
+
+    <script type="text/javascript" src="{% static 'blog/js/rellax.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/rellax.min.js' %}"></script>
+    
+
+<script>
+
+
+   // Accepts any class name
+  //var rellax = new Rellax('.rellax');
+</script>
+
+
+{% block additional_js %}
+            <!-- Particular JS scripts Goes here -->
+
+{% endblock additional_js %}
+
+
+
+
+
+<script>
+/*
+    // Code pour ajouter une animation pour le scrolling
+
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+
+    // Get the navbar
+    var navbar = document.getElementById("navbar");
+
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    } */
+
+</script>
+
+<!-- mathjax -->
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+
+
+
+
+</body></html>
