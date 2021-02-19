@@ -35,13 +35,15 @@ sitemaps = {
 
 
 urlpatterns = [
+    path('', views.home, name='main_home'),
+    path('', include('django.contrib.auth.urls')), # Authentication urls
+    path('admin/', admin.site.urls), # Admin urls
     path('blog/', include('blog.urls'), name='blog'),
     path('notebook/', include('notebook.urls')),
-    path('admin/', admin.site.urls),
-    path('', views.home, name='main_home'),
     # the sitemap
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap')
+         name='django.contrib.sitemaps.views.sitemap'),
+         
 ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
