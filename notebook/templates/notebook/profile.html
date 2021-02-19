@@ -7,11 +7,14 @@
     <p>{{user.email}}</p>
     <p>{{user.profile.bio}}</p>
     <br>
+
+    {% if user.is_authenticated %}
     <h2> Update form : </h2>
     <form method='POST' enctype="multipart/form-data">
         {%csrf_token%}
         {{u_form|crispy}}
         {{p_form|crispy}}
-        <button type='submit'>Update</button>
+        <button type='submit' class="btn btn-primary btn-block" >Update</button>
     </form>
+    {% endif %}
 {%endblock%}
