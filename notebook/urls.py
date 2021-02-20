@@ -2,12 +2,13 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
+
 app_name = 'notebook'
 
 urlpatterns = [
 
     # App index page
-    path('', views.index, name='index'),
+    path('', views.HomeView.as_view(), name='index'),
 
     ### Authentication urls
 
@@ -22,7 +23,10 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name="registration/logout.html"), name='logout'),
     
     #Profile
-    path('profile/', views.profile, name='profile'), # actual user profile page
+    path('profile/', views.profileUserView, name='profile-user'),
+    path("profiles/", views.profileListView, name="profile-list"),
+    path('profiles/<int:pk>/<str:slug>', views.profileDetailsView, name='profile'), # actual user profile page
+    path('profiles/edit/<int:pk>', views.profileUpdateView, name='profile-edit'), # edit user page
     #path('profile/<str:uidb64>/', views.profile, name='profile'),  #User profile page
     
     # Password reset urls
@@ -37,5 +41,11 @@ urlpatterns = [
     path('password-reset-complete/',
 auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
      name='password_reset_complete'),
+
+    ### CRUD urls for programs
+    path("programs/", views.programListView, name="program-list"),
+    path("programs/<str:slug>/<int:pk>", views.ProgramDetailView.as_view(), name="program-detail"),
+    path("programs/create/new", views.ProgramCreateView.as_view(), name='program-create'),
+    path("programs/<int:pk>/edit", views.ProgramUpdateView, name='program-edit'),
 
 ]

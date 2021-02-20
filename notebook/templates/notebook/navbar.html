@@ -1,6 +1,7 @@
 
 
 {% block navbar %} 
+{% load static %}
 
 <h3 class="masthead-title">
     <div id="navbar">
@@ -10,19 +11,19 @@
             <a href="{% url 'notebook:index' %}"  title="Home">Notebook APP</a>
 
             <!--- Display the About, Archive, etc. pages in the header --->
-
-                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:about' %}">A propos</a></small>
-
-                    
-                {% load static %}
+            &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:program-list' %}"> Programs </a></small>
+            &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:profile-list' %}"> Profiles </a></small>
 
                 {% if user.is_authenticated %}
+                    &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:profile-user' %}">My profile</a></small>
                     &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:logout' %}">Log out</a></small>
+                   
                 {% else %}
                     &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:login' %}">Log In</a></small>
                     &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:register' %}">Register</a></small>
+                   
                 {% endif %}
-            
+        
         </div>
 
       </div>

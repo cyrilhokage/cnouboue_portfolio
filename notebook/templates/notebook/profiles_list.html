@@ -1,0 +1,112 @@
+{% extends "notebook/base.html" %} 
+
+{% block title %}
+
+  Notebook App · List profiles 
+
+{%endblock%} 
+
+{% block content %}
+
+
+
+        <div class="posts">
+  
+          {% for profile in listProfiles %}
+
+                    <article class="post">
+                      <a href="{% url 'notebook:profile' profile.user.pk  profile.slug %}"> 
+                        <!-- Post title -->
+                        <h3 class="post-title">
+                            {{ profile.user.username }}
+                        </h3>
+                      
+                      <!-- Date of the post 
+                      <time datetime="2019-09-19T08:00:00-07:00" class="post-date">{{ program.source }} | {{ program.release_date}} </time> -->
+                      
+                      <!-- Post image -->
+                      <img src="{{ profile.pic.url }}" alt="profile.user.username" >
+                    
+                    </a>
+                      <!-- Show an excerpt from the article -->
+                      <p id="introduction">{{profile.bio|slice:":200" }}</p> 
+                    
+                      
+                      <!-- Comment count 
+                      <a href="/2019/09/19/XLNet-fine-tuning/#disqus_thread">6 Comments</a>
+                      -->
+                      
+                    </article>
+
+          {% endfor %}  
+          
+        </div>
+
+        
+
+            <div class="pagination">
+              
+                <a class="pagination-item older" href="#">Older</a>
+              
+              
+                <div class="pagination-item newer">Newer</div>
+              
+            </div>
+          
+
+
+        {% load static %}
+        <!-- bloc de l'image pour l'effet de srolling désynchronisé 
+        <span class="rellax" data-rellax-speed="2" style="left: 600px;bottom: 25px;"><img src="{% static 'blog/img/kowalski.png' %}"></span>
+        -->
+        
+        
+
+        <!-- Code for comment counts -->
+     <!--   <script id="dsq-count-scr" src="//mccormickml.disqus.com/count.js" async=""></script> -->
+
+{% endblock %}
+
+
+{% block additional_js %}
+
+            <!-- Particular JS scripts Goes here  -->
+  <script src="{% static 'js/script_shapes.js' %}"></script>
+    <!--    <script src="{% static 'blog/js/vanta.birds.min.js' %}"></script>
+
+        <script>
+        VANTA.BIRDS({
+          el: "#mainContent",
+          backgroundColor: 0xffffff,
+          /*color1: 0x181717,
+          color2: 0xcbf7,*/
+          color1: 0x0,
+          color2: 0x9060A8,
+          birdSize: 0.40,
+           quantity: 3.00
+        })
+        </script> -->
+
+  <style type="text/css">
+    .post article{
+          border-radius: 4px;
+          background: #fff;
+          box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+            transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+        padding: 14px 80px 18px 36px;
+        cursor: pointer;
+      }
+
+      .post:hover{
+        border-radius: 8px;
+        padding: 12px 12px 12px 12px;
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+      }
+
+
+  </style>
+
+
+
+{% endblock %}
