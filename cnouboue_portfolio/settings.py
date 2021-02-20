@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.contrib.humanize',
     'blog',
     'crispy_forms',
 ]
@@ -187,7 +188,7 @@ django_heroku.settings(locals())
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 CRISPY_TEMPLATE_PACK='bootstrap4'
-LOGIN_REDIRECT_URL='notebook:profile'
+LOGIN_REDIRECT_URL='notebook:profile-user'
 LOGIN_URL='notebook:login' 
 
 # SESSION_ENGINE = 'django.contrib.sessions.backends.db'

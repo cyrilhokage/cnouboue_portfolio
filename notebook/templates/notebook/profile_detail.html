@@ -1,0 +1,17 @@
+{%extends 'notebook/base.html'%}
+{% load crispy_forms_tags %}
+
+{%block content%}
+    <img src="{{profile_user.profile.pic.url}}">
+    <h2>{{profile_user.username}}</h2>
+    <p>{{profile_user.email}}</p>
+    <p>{{profile_user.profile.bio}}</p>
+    <br>
+
+    {% if user.is_authenticated %}
+        <p> To edit YOUR profile : </p>
+        <a class="btn btn-outline-primary" href="{% url 'notebook:profile-edit' user.id %}" role="button"> Edit </a> <br>
+    {% endif %}
+
+
+{%endblock%}

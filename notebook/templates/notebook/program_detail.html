@@ -1,0 +1,16 @@
+{%extends 'notebook/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block content %}
+<img src="{{program.poster.url}}"> <br>
+<a class="btn btn-outline-primary" href="{% url 'notebook:program-edit' program.id %}" role="button"> Edit </a> <br>
+<div>
+    <h3>{{program.name}}</h3>
+    <p>{{program.tags}}</p>
+    <div class="date">Released {{program.release_date | naturaltime}}</div>
+    <div class="tags">
+        <div class="tag">Source : {{program.source}}</div>
+    </div>
+</div>
+{% endblock %}
