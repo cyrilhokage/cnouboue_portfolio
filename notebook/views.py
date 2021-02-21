@@ -48,8 +48,17 @@ def profileListView(request):
 
 def profileDetailsView(request, pk, slug):
     template = 'notebook/profile_detail.html'
+
     profile_user = get_object_or_404(User, id=pk)
-    context = {'profile_user': profile_user}
+    watchlist = ViewProgram.objects.filter(profile=profile_user.profile, status=0)
+    in_progress = ViewProgram.objects.filter(profile=profile_user.profile, status=1)
+    completed = ViewProgram.objects.filter(profile=profile_user.profile, status=2)
+
+    context = {'profile_user': profile_user,
+                'watchlist':watchlist,
+                'in_progress':in_progress,
+                'completed':completed}
+                
     return render(request, template, context)
 
 @login_required

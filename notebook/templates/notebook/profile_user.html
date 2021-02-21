@@ -10,7 +10,8 @@
 
     {% if user.is_authenticated %}
         <p> To edit YOUR profile : </p>
-        <a class="btn btn-outline-primary" href="{% url 'notebook:profile-edit' user.pk %}" role="button"> Edit </a> <br>
+        <a class="btn btn-outline-primary" href="{% url 'notebook:profile-edit' user.pk %}" role="button"> Edit </a>
+        <a class="btn btn-outline-primary" href="{% url 'notebook:viewprogram-create' %}" role="button"> Add view </a> <br>
     {% endif %}
     <br> 
 
