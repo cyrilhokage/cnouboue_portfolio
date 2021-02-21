@@ -3,10 +3,14 @@
 {% load humanize %}
 
 {% block content %}
+<h3>{{program.name}}</h3>
 <img src="{{program.poster.url}}"> <br>
-<a class="btn btn-outline-primary" href="{% url 'notebook:program-edit' program.id %}" role="button"> Edit </a> <br>
+
+{% if user.is_authenticated %}
+    <a class="btn btn-outline-primary" href="{% url 'notebook:program-edit' program.id %}" role="button"> Edit </a> <br>
+{% endif %}
 <div>
-    <h3>{{program.name}}</h3>
+    
     <p>{{program.tags}}</p>
     <p>{{program.synopsis}}</p>
 
