@@ -19,6 +19,8 @@
     {{form|crispy}}
     <button type='submit' class="btn btn-primary btn-block" >Update</button>
 </form>
+<a class="btn btn-danger" href="{% url 'notebook:program-delete' program.id %}" role="button"> Delete </a> <br>
+
 </br>
 
 {% endblock %}

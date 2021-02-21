@@ -47,5 +47,12 @@ auth_views.PasswordResetCompleteView.as_view(template_name='registration/passwor
     path("programs/<str:slug>/<int:pk>", views.ProgramDetailView.as_view(), name="program-detail"),
     path("programs/create/new", views.ProgramCreateView.as_view(), name='program-create'),
     path("programs/<int:pk>/edit", views.ProgramUpdateView, name='program-edit'),
+    path("programs/delete/<int:pk>/", views.programDeleteView.as_view(), name='program-delete'),
+
+    ### CRUD urls for views
+    path("view/<int:pk>", views.ViewProgramDetailView.as_view(), name="viewprogram-detail"),
+    path("view/create/new",views.ViewProgramCreateView.as_view(),name='create'),
+    path("view/edit/<int:pk>",views.ViewProgramUpdateView.as_view(),name='viewprogram-edit'),
+    path("view/delete/<int:pk>/", views.ViewProgramDeleteView.as_view(), name='viewprogram-delete'),
 
 ]

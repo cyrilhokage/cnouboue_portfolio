@@ -19,9 +19,9 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 
 # CRUD views
-from .models import Program, Profile
+from .models import Program, Profile, ViewProgram
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 # Create your views here.
@@ -143,11 +143,13 @@ def activate(request, uidb64, token):
 
 
 
-########## CRUD views for programs              #############################
+##########        CRUD views for programs      #######################
+
 class ProgramDetailView(DetailView):
     model = Program  
     template_name='notebook/program_detail.html'
     context_object_name = 'program'
+
 
 class ProgramCreateView(LoginRequiredMixin, CreateView):
     model = Program
@@ -181,10 +183,49 @@ def ProgramUpdateView(request, pk):
     context = {'form': form, 'program': program}
 
     return render(request, template, context) 
-        
+    
 
-def edit_program(request):
-    return HttpResponse('<h1>Update your post..</h1>')
+class programDeleteView(LoginRequiredMixin, DeleteView):
+    model = Program
+    success_url = '/notebook/programs/'
+    def get_test_func(self):
+        model=self.get_object()
+        return True
 
-def delete_program(request):
-    return HttpResponse('<h1>Delete a post..</h1>')
+
+
+###### View programs CRUD #######
+
+class ViewProgramDetailView(DetailView):
+    model = ViewProgram
+    template_name='notebook/view_program_detail.html'
+    context_object_name = 'view'
+
+class ViewProgramCreateView(LoginRequiredMixin, CreateView):
+    model = ViewProgram
+    fields=['program', 'status', 'date', 'chapter', 'comment']
+
+    def form_valid(self, form):
+        form.instance.profile=self.request.user.profile
+        return super().form_valid(form)
+
+class ViewProgramUpdateView(LoginRequiredMixin, UserPassesTestMixin,UpdateView):
+    model = ViewProgram
+    fields=['program', 'status', 'date', 'chapter', 'comment']
+
+    def form_valid(self, form):
+        form.instance.profile=self.request.user.profile
+        return super().form_valid(form)
+    
+    def test_func(self):
+        view=self.get_object()
+        return self.request.user==view.profile.user
+
+
+class ViewProgramDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Program
+    success_url = '/notebook/programs/'
+    def get_test_func(self):
+        view=self.get_object()
+        return self.request.user==view.profile.user
+

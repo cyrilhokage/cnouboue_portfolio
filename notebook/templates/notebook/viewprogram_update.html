@@ -1,0 +1,26 @@
+{%extends 'notebook/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block content %}
+<img src="{{view.program.poster.url}}"> <br>
+<div>
+    <h3>{{view.program.name}}</h3>
+    <p>{{view.program.tags}}</p>
+    <div class="date">Released {{view.date | naturaltime}}</div>
+    <div class="tags">
+        <div class="tag">Source : {{view.program.source}}</div>
+    </div>
+</div>
+<br>
+<h2>Edit view :</h2> <br>
+<form method='POST'>
+    {%csrf_token%}
+    {{form|crispy}}
+    <button type='submit' class="btn btn-primary btn-block" >Update</button>
+</form>
+<a class="btn btn-danger" href="{% url 'notebook:viewprogram-delete' view.id %}" role="button"> Delete </a> <br>
+
+</br>
+
+{% endblock %}

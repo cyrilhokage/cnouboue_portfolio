@@ -16,11 +16,12 @@ STATUS = (
 
 #Program formats type
 FORMATS = (
-    (0,"Film"),
+    (0,"Movie"),
     (1,"Serie"),
     (2,"Documentary"),
     (3,"Comic book"),
     (4,"Book"),
+    (5,"Game"),
 )
 
 class Profile(models.Model):
@@ -76,7 +77,7 @@ class Program(models.Model):
             img.save(self.poster.path)
 
 
-class View_program(models.Model):
+class ViewProgram(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile')
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='program')
     date = models.DateTimeField()
@@ -86,3 +87,6 @@ class View_program(models.Model):
     
     def __str__(self):
         return self.program.__str__
+
+    def get_absolute_url(self):
+        return reverse('notebook:viewprogram-detail', kwargs={'pk':self.pk})
