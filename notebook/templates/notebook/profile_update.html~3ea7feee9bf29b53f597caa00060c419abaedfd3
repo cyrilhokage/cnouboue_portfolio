@@ -1,0 +1,20 @@
+{%extends 'notebook/base.html'%}
+{% load crispy_forms_tags %}
+
+{%block content%}
+    <img src="{{user.profile.pic.url}}">
+    <h2>{{user.username}}</h2>
+    <p>{{user.email}}</p>
+    <p>{{user.profile.bio}}</p>
+    <br>
+
+    {% if user.is_authenticated %}
+    <h2> Update form : </h2>
+    <form method='POST' enctype="multipart/form-data">
+        {%csrf_token%}
+        {{u_form|crispy}}
+        {{p_form|crispy}}
+        <button type='submit' class="btn btn-primary btn-block" >Update</button>
+    </form>
+    {% endif %}
+{%endblock%}

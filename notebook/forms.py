@@ -37,9 +37,11 @@ class ProgramUpdateForm(forms.ModelForm):
         fields = ['name', 'format', 'tags', 'synopsis', 'source', 'release_date', 'available_date', 'poster']
 
 
+
 class ProgramCreationForm(UserCreationForm):
     
     class Meta:
         model=Program
         # fields=['name', 'format', 'tags', 'source', 'release_date', 'available_date', 'poster']
         fields=['name', 'format', 'synopsis']
+

@@ -36,6 +36,7 @@ class HomeView(ListView):
     ordering = ['-release_date']
 
 
+
 #######            Profile Views    ###################
 
 def profileListView(request):
@@ -68,6 +69,7 @@ def profileUpdateView(request, pk):
             p_form.save()
             # messages.success(request,'Your Profile has been updated!')
             return redirect('notebook:profile', request.user.id, request.user.profile.slug)
+
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)
         u_form = UserUpdateForm(instance=request.user)
