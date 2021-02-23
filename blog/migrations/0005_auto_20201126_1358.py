@@ -6,23 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0004_auto_20191116_1409'),
+        ("blog", "0004_auto_20191116_1409"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='slug',
+            model_name="post",
+            name="slug",
             field=models.SlugField(max_length=200),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='status',
-            field=models.IntegerField(choices=[(0, 'Draft'), (1, 'Published')], default=0),
+            model_name="post",
+            name="status",
+            field=models.IntegerField(
+                choices=[(0, "Draft"), (1, "Published")], default=0
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='title',
+            model_name="post",
+            name="title",
             field=models.CharField(max_length=200),
         ),
     ]

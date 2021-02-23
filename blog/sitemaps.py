@@ -4,22 +4,23 @@ from blog.models import Post
 from datetime import datetime
 from blog.urls import urlpatterns as blogUrls
 
+
 class Static_Sitemap(Sitemap):
 
     priority = 0.6
-    changefreq = 'weekly'
+    changefreq = "weekly"
 
     def items(self):
-        urlList = ['main_home']
+        urlList = ["main_home"]
 
         for url in blogUrls:
-            if(url.name != 'detail'):
-                urlList.append('blog:' + url.name)
+            if url.name != "detail":
+                urlList.append("blog:" + url.name)
         return urlList
 
     def location(self, item):
         return reverse(item)
-    
+
     def lastmod(self, item):
 
         try:

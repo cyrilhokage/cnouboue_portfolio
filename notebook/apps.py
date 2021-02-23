@@ -2,6 +2,7 @@ from django.apps import AppConfig
 
 
 class NotebookConfig(AppConfig):
-    name = 'notebook'
+    name = "notebook"
+
     def ready(self):
-        import notebook.signals  #noqa
+        import notebook.signals  # noqa

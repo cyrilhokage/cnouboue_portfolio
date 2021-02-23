@@ -20,221 +20,243 @@ from django.core.mail import EmailMessage
 
 # CRUD views
 from .models import Program, Profile, ViewProgram
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    UpdateView,
+    DeleteView,
+    DetailView,
+)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 # Create your views here.
 
+
 def index(request):
-    return render(request, 'notebook/index.html')
+    return render(request, "notebook/index.html")
+
 
 class HomeView(ListView):
     model = Program
-    context_object_name = 'programs'
-    template_name = 'notebook/index.html'
-    ordering = ['-release_date']
-
+    context_object_name = "programs"
+    template_name = "notebook/index.html"
+    ordering = ["-release_date"]
 
 
 #######            Profile Views    ###################
 
+
 def profileListView(request):
     listProfiles = Profile.objects.all()
-    context = {'listProfiles':listProfiles}
-    template = 'notebook/profiles_list.html'
+    context = {"listProfiles": listProfiles}
+    template = "notebook/profiles_list.html"
     return render(request, template, context)
 
 
 def profileDetailsView(request, pk, slug):
-    template = 'notebook/profile_detail.html'
+    template = "notebook/profile_detail.html"
 
     profile_user = get_object_or_404(User, id=pk)
     watchlist = ViewProgram.objects.filter(profile=profile_user.profile, status=0)
     in_progress = ViewProgram.objects.filter(profile=profile_user.profile, status=1)
     completed = ViewProgram.objects.filter(profile=profile_user.profile, status=2)
 
-    context = {'profile_user': profile_user,
-                'watchlist':watchlist,
-                'in_progress':in_progress,
-                'completed':completed}
-                
+    context = {
+        "profile_user": profile_user,
+        "watchlist": watchlist,
+        "in_progress": in_progress,
+        "completed": completed,
+    }
+
     return render(request, template, context)
+
 
 @login_required
 def profileUserView(request):
-    template = 'notebook/profile_user.html'
+    template = "notebook/profile_user.html"
     return render(request, template)
 
 
 @login_required
 def profileUpdateView(request, pk):
 
-    if request.method == 'POST':
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+    if request.method == "POST":
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile
+        )
         u_form = UserUpdateForm(request.POST or None, instance=request.user)
         if p_form.is_valid() and u_form.is_valid():
             u_form.save()
             p_form.save()
             # messages.success(request,'Your Profile has been updated!')
-            return redirect('notebook:profile', request.user.id, request.user.profile.slug)
+            return redirect(
+                "notebook:profile", request.user.id, request.user.profile.slug
+            )
 
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)
         u_form = UserUpdateForm(instance=request.user)
 
-    context={'p_form': p_form, 'u_form': u_form}
-    return render(request, 'notebook/profile_update.html', context)
+    context = {"p_form": p_form, "u_form": u_form}
+    return render(request, "notebook/profile_update.html", context)
 
 
 # Register and Activate account views
 def register(request):
-    
+
     template = "registration/register.html"
     activation_mail_template = "registration/activation_mail_temp.html"
-    
-    if request.method == 'POST': #if the form has been submitted
-        form = UserRegistrationForm(request.POST) #form bound with post data
+
+    if request.method == "POST":  # if the form has been submitted
+        form = UserRegistrationForm(request.POST)  # form bound with post data
 
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            
+
             # username = form.cleaned_data.get('username')
             # messages.success(request, "Please confirm your email address to validate {{username}}'s account")
 
             current_site = get_current_site(request)
-            to_email = form.cleaned_data.get('email')
+            to_email = form.cleaned_data.get("email")
             mail_subject = "Activate your Notebook account."
-            message = render_to_string( activation_mail_template, {
-                'user': user,
-                'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':account_activation_token.make_token(user),
-            })
-
-            email = EmailMessage(
-                        mail_subject, message, to=[to_email]
+            message = render_to_string(
+                activation_mail_template,
+                {
+                    "user": user,
+                    "domain": current_site.domain,
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": account_activation_token.make_token(user),
+                },
             )
+
+            email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
 
             # username = form.cleaned_data.get('username')
             # messages.success(request, "Please confirm your email address to validate {{username}}'s account")
 
             # return redirect('notebook:profile')
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return HttpResponse(
+                "Please confirm your email address to complete the registration"
+            )
 
     else:
         form = UserRegistrationForm()
-    return render(request, template, {'form': form})
+    return render(request, template, {"form": form})
 
 
 # Activation view
 def activate(request, uidb64, token):
-    
+
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-        
+
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
         login(request, user)
-        
-        return redirect('notebook:profile', user.pk)
-		
+
+        return redirect("notebook:profile", user.pk)
+
     else:
         # messages.error(request, "Oh oh ! Activation link is invalid :( ! ")
-        return HttpResponse('Activation link is invalid!')
-
+        return HttpResponse("Activation link is invalid!")
 
 
 ##########        CRUD views for programs      #######################
 
+
 class ProgramDetailView(DetailView):
-    model = Program  
-    template_name='notebook/program_detail.html'
-    context_object_name = 'program'
+    model = Program
+    template_name = "notebook/program_detail.html"
+    context_object_name = "program"
 
 
 class ProgramCreateView(LoginRequiredMixin, CreateView):
     model = Program
-    fields=['name', 'format', 'synopsis']
+    fields = ["name", "format", "synopsis"]
     # fields = ['name', 'format', 'tags', 'source', 'release_date', 'available_date', 'poster']
 
 
 def programListView(request):
     listPrograms = Program.objects.all()
-    context = {'listPrograms':listPrograms}
-    template = 'notebook/programs_list.html'
+    context = {"listPrograms": listPrograms}
+    template = "notebook/programs_list.html"
     return render(request, template, context)
+
 
 @login_required
 def ProgramUpdateView(request, pk):
 
     program = get_object_or_404(Program, id=pk)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ProgramUpdateForm(request.POST or None, request.FILES, instance=program)
 
         if form.is_valid():
             form.save()
             # messages.success(request,'The program has been updated!')
-            return redirect('notebook:program-detail', program.slug, program.pk)
-    
+            return redirect("notebook:program-detail", program.slug, program.pk)
+
     else:
         form = ProgramUpdateForm(instance=program)
 
     template = "notebook/program_update.html"
-    context = {'form': form, 'program': program}
+    context = {"form": form, "program": program}
 
-    return render(request, template, context) 
-    
+    return render(request, template, context)
+
 
 class programDeleteView(LoginRequiredMixin, DeleteView):
     model = Program
-    success_url = '/notebook/programs/'
-    def get_test_func(self):
-        model=self.get_object()
-        return True
+    success_url = "/notebook/programs/"
 
+    def get_test_func(self):
+        model = self.get_object()
+        return True
 
 
 ###### View programs CRUD #######
 
+
 class ViewProgramDetailView(DetailView):
     model = ViewProgram
-    template_name='notebook/view_program_detail.html'
-    context_object_name = 'view'
+    template_name = "notebook/view_program_detail.html"
+    context_object_name = "view"
+
 
 class ViewProgramCreateView(LoginRequiredMixin, CreateView):
     model = ViewProgram
-    fields=['program', 'status', 'date', 'chapter', 'comment']
+    fields = ["program", "status", "date", "chapter", "comment"]
 
     def form_valid(self, form):
-        form.instance.profile=self.request.user.profile
+        form.instance.profile = self.request.user.profile
         return super().form_valid(form)
 
-class ViewProgramUpdateView(LoginRequiredMixin, UserPassesTestMixin,UpdateView):
+
+class ViewProgramUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ViewProgram
-    fields=['program', 'status', 'date', 'chapter', 'comment']
+    fields = ["program", "status", "date", "chapter", "comment"]
 
     def form_valid(self, form):
-        form.instance.profile=self.request.user.profile
+        form.instance.profile = self.request.user.profile
         return super().form_valid(form)
-    
+
     def test_func(self):
-        view=self.get_object()
-        return self.request.user==view.profile.user
+        view = self.get_object()
+        return self.request.user == view.profile.user
 
 
 class ViewProgramDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Program
-    success_url = '/notebook/programs/'
-    def get_test_func(self):
-        view=self.get_object()
-        return self.request.user==view.profile.user
+    success_url = "/notebook/programs/"
 
+    def get_test_func(self):
+        view = self.get_object()
+        return self.request.user == view.profile.user

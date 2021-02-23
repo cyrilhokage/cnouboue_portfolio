@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('notebook', '0004_program_synopsis'),
+        ("notebook", "0004_program_synopsis"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='slug',
-            field=models.SlugField(default='default-slug', max_length=70),
+            model_name="profile",
+            name="slug",
+            field=models.SlugField(default="default-slug", max_length=70),
         ),
         migrations.AddField(
-            model_name='program',
-            name='slug',
-            field=models.SlugField(default='default-slug', max_length=70),
+            model_name="program",
+            name="slug",
+            field=models.SlugField(default="default-slug", max_length=70),
         ),
     ]

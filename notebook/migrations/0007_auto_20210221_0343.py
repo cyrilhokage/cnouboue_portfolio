@@ -6,17 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('notebook', '0006_auto_20210220_2259'),
+        ("notebook", "0006_auto_20210220_2259"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='View_program',
-            new_name='ViewProgram',
+            old_name="View_program",
+            new_name="ViewProgram",
         ),
         migrations.AlterField(
-            model_name='program',
-            name='format',
-            field=models.IntegerField(choices=[(0, 'Movie'), (1, 'Serie'), (2, 'Documentary'), (3, 'Comic book'), (4, 'Book'), (5, 'Game')], default=0),
+            model_name="program",
+            name="format",
+            field=models.IntegerField(
+                choices=[
+                    (0, "Movie"),
+                    (1, "Serie"),
+                    (2, "Documentary"),
+                    (3, "Comic book"),
+                    (4, "Book"),
+                    (5, "Game"),
+                ],
+                default=0,
+            ),
         ),
     ]

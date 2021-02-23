@@ -1,1 +1,1 @@
-default_app_config = 'notebook.apps.NotebookConfig'
+default_app_config = "notebook.apps.NotebookConfig"

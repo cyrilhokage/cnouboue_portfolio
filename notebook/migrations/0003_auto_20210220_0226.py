@@ -6,33 +6,37 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('notebook', '0002_auto_20210220_0142'),
+        ("notebook", "0002_auto_20210220_0142"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='program',
-            name='available_date',
+            model_name="program",
+            name="available_date",
             field=models.DateTimeField(null=True),
         ),
         migrations.AlterField(
-            model_name='program',
-            name='poster',
-            field=models.ImageField(default='program_posters/poster_default.png', null=True, upload_to='program_posters'),
+            model_name="program",
+            name="poster",
+            field=models.ImageField(
+                default="program_posters/poster_default.png",
+                null=True,
+                upload_to="program_posters",
+            ),
         ),
         migrations.AlterField(
-            model_name='program',
-            name='release_date',
+            model_name="program",
+            name="release_date",
             field=models.DateTimeField(null=True),
         ),
         migrations.AlterField(
-            model_name='program',
-            name='source',
+            model_name="program",
+            name="source",
             field=models.CharField(max_length=30, null=True),
         ),
         migrations.AlterField(
-            model_name='program',
-            name='tags',
+            model_name="program",
+            name="tags",
             field=models.CharField(max_length=90, null=True),
         ),
     ]

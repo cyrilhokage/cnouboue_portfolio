@@ -3,7 +3,6 @@ from blog.models import Post
 
 
 class PostTestCase(TestCase):
-    
     def testPost(self):
 
         post = Post(title="My Title", technos="Blurb", summary="Post Body")
