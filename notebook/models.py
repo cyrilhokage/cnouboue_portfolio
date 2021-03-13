@@ -52,14 +52,20 @@ class Profile(models.Model):
 
 
 class Program(models.Model):
-    name = models.CharField(max_length=60)
+    tmdb_id = models.IntegerField(blank=True, null=True, unique=True)
+    name = models.CharField(max_length=70)
+    original_name = models.CharField(max_length=70, null=True)
     slug = models.SlugField(max_length=70, default="default-slug-program")
     format = models.IntegerField(choices=FORMATS, default=0)
     tags = models.CharField(max_length=90, null=True)
     source = models.CharField(max_length=30, null=True)
     synopsis = models.TextField(null=True)
+    homepage_link = models.CharField(max_length=200, null=True)
     release_date = models.DateTimeField(null=True)
+    last_air_date = models.DateTimeField(null=True)
     available_date = models.DateTimeField(null=True)
+    origin_country = models.CharField(max_length=350, null=True)
+    poster_path = models.CharField(max_length=90, null=True)
     poster = models.ImageField(
         default="program_posters/poster_default.png",
         upload_to="program_posters",

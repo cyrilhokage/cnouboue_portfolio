@@ -1,7 +1,94 @@
 {%extends 'notebook/base.html'%}
-{%block content%}
-    
-Bonjour, ceci est la page d'index !!
-{%endblock%}
+
+
+{% block content %}
+
+<br/>
+<form action="{% url 'notebook:search' %}" method="GET" value="{{request.GET.q}}">
+Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search posts"/>
+<input type="submit" name="submit" value="Search"/>
+</form>
+
+    {% if submitbutton == 'Search' and request.GET.q != '' %}
+
+        {% if results %}
+            <h1>Results for <b>{{ request.GET.q }}</b></h1>
+            <br/><br/>
+
+            <div class="posts">
+
+            {% for result in results %}
+
+                {% if result.overview != '' and result.poster_path is not None %}
+
+                    <article class="post">
+                      <a href="#"> 
+                        <!-- Result title -->
+                        <h3 class="post-title">
+                          {% if result.media_type == 'tv' %}
+                                {{ result.name }} | {{ result.media_type }}
+                          {% elif result.media_type == 'movie' %}
+                                {{ result.title }} | {{ result.media_type }}
+                          {% endif %}
+                        </h3>
+                     
+                      <!-- Result image -->
+                      <img src="{{ 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2'|add:result.poster_path }}" width="100" height="150">
+                    
+                    </a>
+                      <!-- Show an excerpt from the Result -->
+                      <p id="synopsis">{{ result.overview }}</p> 
+
+                      {% if user.is_authenticated %}
+                        <a class="btn btn-outline-primary" href="{% url 'notebook:program-new' result.media_type result.id  %}" role="button"> Add program </a> <br>
+                        <br>
+                      {% endif %}
+                    
+                      
+                    </article>
+
+                {% endif %}
+
+            {% endfor %}
+        </div>
+
+
+            {% else %}
+            No search results for this query
+          
+        
+
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
+
+
+{% block additional_js %}
+
+  <style type="text/css">
+    .post article{
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+        padding: 14px 80px 18px 36px;
+        cursor: pointer;
+        display:grid;
+      }
+
+      .post:hover{
+        border-radius: 8px;
+        padding: 12px 12px 12px 12px;
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+      }
+
+
+  </style>
+
+
+
+{% endblock %}
 
 

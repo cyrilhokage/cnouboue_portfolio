@@ -29,6 +29,11 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+# For search
+import requests
+import json
+from .notebookfunctions import getProgramData
+
 
 # Create your views here.
 
@@ -116,9 +121,6 @@ def register(request):
             user.is_active = False
             user.save()
 
-            # username = form.cleaned_data.get('username')
-            # messages.success(request, "Please confirm your email address to validate {{username}}'s account")
-
             current_site = get_current_site(request)
             to_email = form.cleaned_data.get("email")
             mail_subject = "Activate your Notebook account."
@@ -134,9 +136,6 @@ def register(request):
 
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
-
-            # username = form.cleaned_data.get('username')
-            # messages.success(request, "Please confirm your email address to validate {{username}}'s account")
 
             # return redirect('notebook:profile')
             return HttpResponse(
@@ -182,6 +181,19 @@ class ProgramCreateView(LoginRequiredMixin, CreateView):
     model = Program
     fields = ["name", "format", "synopsis"]
     # fields = ['name', 'format', 'tags', 'source', 'release_date', 'available_date', 'poster']
+
+
+def ProgramNew(request, media_type, tmdb_id):
+
+    program = getProgramData(tmdb_id=tmdb_id, media_type=media_type)
+
+    if(program is not False):
+        new_program = Program(**program)
+        new_program.save()
+        return redirect("notebook:program-detail", new_program.slug, new_program.pk)
+    else:
+        return redirect("notebook:index")
+
 
 
 def programListView(request):
@@ -260,3 +272,43 @@ class ViewProgramDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
     def get_test_func(self):
         view = self.get_object()
         return self.request.user == view.profile.user
+
+
+### Search program View
+
+def ViewSearch(request):
+    template = "notebook/index.html"
+
+    if request.method == 'GET':
+        query= request.GET.get('q')
+
+        submitbutton= request.GET.get('submit')
+
+        if query is not None:
+            # lookups= Q(title__icontains=query) | Q(content__icontains=query)
+            params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d",
+                             include_adult="false",
+                             language="fr-FR",
+                             query=query)
+            
+            try :
+                req = requests.get("https://api.themoviedb.org/3/search/multi", params)
+                if(req.status_code == 200):
+                    results = json.loads(req.content)
+                else :
+                    results = dict(results=[])
+
+            except KeyError :
+                pass
+
+
+            context={'results': results['results'],
+                     'submitbutton': submitbutton}
+
+            return render(request, template, context)
+
+        else:
+            return render(request, template)
+
+    else:
+        return render(request, template)
