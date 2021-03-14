@@ -40,7 +40,8 @@ class Profile(models.Model):
         ordering = ["slug"]
 
     def __str__(self):
-        return f"{self.user.username}'s Profile "
+        return str(f"{self.user.username}'s Profile ")
+
 
     def get_absolute_url(self):
         return reverse("notebook:profile", kwargs={"pk": self.pk, "slug": self.slug})
@@ -73,7 +74,7 @@ class Provider(models.Model):
         ordering = ["provider_name"]
 
     def __str__(self):
-        return f"{self.provider_name}"
+        return str(f"{self.provider_name}")
 
     def get_absolute_url(self):
         return reverse("notebook:provider", kwargs={"pk": self.pk})
@@ -127,7 +128,7 @@ class Program(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def get_absolute_url(self):
         return reverse(
