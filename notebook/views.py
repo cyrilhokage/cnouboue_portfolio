@@ -32,7 +32,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # For search
 import requests
 import json
-from .notebookfunctions import getProgramData
+from .notebookfunctions import getProgramData, getProviders
 
 
 # Create your views here.
@@ -185,15 +185,22 @@ class ProgramCreateView(LoginRequiredMixin, CreateView):
 
 def ProgramNew(request, media_type, tmdb_id):
 
+    list_providers, link = getProviders(tmdb_id=tmdb_id, media_type=media_type)
     program = getProgramData(tmdb_id=tmdb_id, media_type=media_type)
 
-    if(program is not False):
+    if program is not False:
+        program["watch_link"] = link
         new_program = Program(**program)
         new_program.save()
+
+        if list_providers is not False:
+            for provider in list_providers:
+                new_program.providers.add(provider)
+
         return redirect("notebook:program-detail", new_program.slug, new_program.pk)
+
     else:
         return redirect("notebook:index")
-
 
 
 def programListView(request):
@@ -276,34 +283,35 @@ class ViewProgramDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
 
 ### Search program View
 
+
 def ViewSearch(request):
     template = "notebook/index.html"
 
-    if request.method == 'GET':
-        query= request.GET.get('q')
+    if request.method == "GET":
+        query = request.GET.get("q")
 
-        submitbutton= request.GET.get('submit')
+        submitbutton = request.GET.get("submit")
 
         if query is not None:
             # lookups= Q(title__icontains=query) | Q(content__icontains=query)
-            params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d",
-                             include_adult="false",
-                             language="fr-FR",
-                             query=query)
-            
-            try :
+            params = dict(
+                api_key="69cce8dbf435199baf4ab9dfcb63616d",
+                include_adult="false",
+                language="fr-FR",
+                query=query,
+            )
+
+            try:
                 req = requests.get("https://api.themoviedb.org/3/search/multi", params)
-                if(req.status_code == 200):
+                if req.status_code == 200:
                     results = json.loads(req.content)
-                else :
+                else:
                     results = dict(results=[])
 
-            except KeyError :
+            except KeyError:
                 pass
 
-
-            context={'results': results['results'],
-                     'submitbutton': submitbutton}
+            context = {"results": results["results"], "submitbutton": submitbutton}
 
             return render(request, template, context)
 

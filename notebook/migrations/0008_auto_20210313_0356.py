@@ -6,43 +6,43 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('notebook', '0007_auto_20210221_0343'),
+        ("notebook", "0007_auto_20210221_0343"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='program',
-            name='homepage_link',
+            model_name="program",
+            name="homepage_link",
             field=models.CharField(max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='program',
-            name='last_air_date',
+            model_name="program",
+            name="last_air_date",
             field=models.DateTimeField(null=True),
         ),
         migrations.AddField(
-            model_name='program',
-            name='origin_country',
+            model_name="program",
+            name="origin_country",
             field=models.CharField(max_length=350, null=True),
         ),
         migrations.AddField(
-            model_name='program',
-            name='original_name',
+            model_name="program",
+            name="original_name",
             field=models.CharField(max_length=70, null=True),
         ),
         migrations.AddField(
-            model_name='program',
-            name='poster_path',
+            model_name="program",
+            name="poster_path",
             field=models.CharField(max_length=90, null=True),
         ),
         migrations.AddField(
-            model_name='program',
-            name='tmdb_id',
+            model_name="program",
+            name="tmdb_id",
             field=models.IntegerField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='program',
-            name='name',
+            model_name="program",
+            name="name",
             field=models.CharField(max_length=70),
         ),
     ]

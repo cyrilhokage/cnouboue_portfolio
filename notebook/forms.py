@@ -58,6 +58,7 @@ class ProgramCreationForm(UserCreationForm):
         # fields=['name', 'format', 'tags', 'source', 'release_date', 'available_date', 'poster']
         fields = ["name", "format", "synopsis"]
 
+
 class SearchForm(forms.Form):
     class Meta:
         fields = ["search"]

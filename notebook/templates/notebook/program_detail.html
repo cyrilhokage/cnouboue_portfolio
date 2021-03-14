@@ -4,23 +4,68 @@
 
 {% block content %}
 <h3>{{program.name}}</h3>
-{% if program.poster.url != "/media/program_posters/poster_default.png" %}
-    <img src="{{program.poster.url}}" style="max-width:200px;width:100%" alt="program.name"> <br>
-{% else %}
-    <img src="{{ 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2'|add:program.poster_path }}" style="max-width:200px;width:100%" alt="program.name" > <br>
-{% endif %}
+    {% if program.poster.url != "/media/program_posters/poster_default.png" %}
+        <img src="{{program.poster.url}}" style="max-width:200px;width:100%" alt="program.name"> <br>
+    {% else %}
+        <img src="{{ 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2'|add:program.poster_path }}" style="max-width:200px;width:100%" alt="{{program.name}}" > <br>
+    {% endif %}
 
-{% if user.is_authenticated %}
-    <a class="btn btn-outline-primary" href="{% url 'notebook:program-edit' program.id %}" role="button"> Edit </a> <br>
-{% endif %}
-<div>
-    
-    <p>{{program.tags}}</p>
-    <p>{{program.synopsis}}</p>
-
-    <div class="date">Released {{program.release_date | naturaltime}}</div>
-    <div class="tags">
-        <div class="tag">Source : {{program.source}}</div>
+    <div class="list_providers">
+        <p> Disponible sur :</p>
+        {% for provider in program.providers.all %}
+            <div class="provider">
+                <a href="{{ program.watch_link }}" target="_blank">
+                    <img src="{{ provider.logo_path.url }}" alt="{{ provider.name }}" width="45" height="45" > <br>
+                </a>
+            </div>
+        {% endfor %}
     </div>
-</div><br>
+    
+
+    {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary" href="{% url 'notebook:program-edit' program.id %}" role="button"> Edit </a> <br>
+    {% endif %}
+
+    <div>
+        
+        <p>{{program.tags}}</p>
+        <p>{{program.synopsis}}</p>
+
+        <div class="date">Released {{program.release_date | naturaltime}}</div>
+        <div class="tags">
+            <div class="tag">Source : {{program.source}}</div>
+        </div>
+    </div><br>
+{% endblock %}
+
+{% block additional_js %}
+
+  <style type="text/css">
+    .post article{
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+        padding: 14px 80px 18px 36px;
+        cursor: pointer;
+        display:grid;
+      }
+
+      .post:hover{
+        border-radius: 8px;
+        padding: 12px 12px 12px 12px;
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+      }
+
+      .provider{
+        display: inline-block;
+        padding: 8px 8px 8px 8px;
+      }
+
+
+  </style>
+
+
+
 {% endblock %}

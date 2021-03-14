@@ -75,7 +75,9 @@ urlpatterns = [
         "programs/create/new", views.ProgramCreateView.as_view(), name="program-create"
     ),
     path(
-        "programs/new/<str:media_type>/<int:tmdb_id>", views.ProgramNew, name="program-new"
+        "programs/new/<str:media_type>/<int:tmdb_id>",
+        views.ProgramNew,
+        name="program-new",
     ),
     path("programs/<int:pk>/edit", views.ProgramUpdateView, name="program-edit"),
     path(
