@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm, ProgramUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, ProgramUpdateForm, UserRegistrationForm
+from django import forms
 
 # Authentication & validation imports
 from django.contrib.auth import login, authenticate
@@ -251,8 +251,14 @@ class ViewProgramDetailView(DetailView):
 
 
 class ViewProgramCreateView(LoginRequiredMixin, CreateView):
+
     model = ViewProgram
     fields = ["program", "status", "date", "chapter", "comment"]
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['date'].widget = forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'})
+        return form
 
     def form_valid(self, form):
         form.instance.profile = self.request.user.profile
@@ -262,6 +268,10 @@ class ViewProgramCreateView(LoginRequiredMixin, CreateView):
 class ViewProgramUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ViewProgram
     fields = ["program", "status", "date", "chapter", "comment"]
+    widgets = {
+        'date': forms.widgets.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+        "comment" : forms.Textarea(attrs={'rows':3}),
+    }
 
     def form_valid(self, form):
         form.instance.profile = self.request.user.profile
