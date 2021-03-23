@@ -10,7 +10,6 @@ blog/migrations/__pycache__/
 notebook/__pycache__/
 notebook/migrations/__pycache__/
 
-db.sqlite3
 
 *.crt
 *.key
