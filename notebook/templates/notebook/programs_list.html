@@ -9,7 +9,7 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-  <a class="btn btn-outline-primary" href="{% url 'notebook:program-create' %}" role="button"> Add program </a> <br>
+  <a class="btn btn-outline-primary" href="{% url 'notebook:index' %}" role="button"> Add program </a> <br>
   <br>
 {% endif %}
 
@@ -49,16 +49,29 @@
           
         </div>
 
-        
-
             <div class="pagination">
-              
-                <a class="pagination-item older" href="#">Older</a>
-              
-              
-                <div class="pagination-item newer">Newer</div>
-              
-            </div>
+          
+                  {% if listPrograms.has_previous %}
+                      <!-- <a class="pagination-item older" href="?page=1">first</a> -->
+                      <a class="pagination-item newer" href="?page={{ listPrograms.previous_page_number }}"> previous </a>
+                  {% else %}
+                      <a class="pagination-item newer" href="#"> previous </a>
+                  {% endif %}
+          
+                  {% if listPrograms.has_next %}
+                      <a class="pagination-item older" href="?page={{ listPrograms.next_page_number }}">next</a>
+                      <!-- <a class="pagination-item newer" href="?page={{ listPrograms.paginator.num_pages }}">last &raquo;</a> -->
+                  {% else %}
+                      <a class="pagination-item older" href="#">next</a>
+                  {% endif %}
+
+          </div>
+
+          <span class="current">
+            Page {{ listPrograms.number }} of {{ listPrograms.paginator.num_pages }}.
+          </span>
+          <br/>
+        <br/>
           
 
 

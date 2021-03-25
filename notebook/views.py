@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm, ProgramUpdateForm, UserRegistrationForm
 from django import forms
+from django.core.paginator import Paginator
 
 # Authentication & validation imports
 from django.contrib.auth import login, authenticate
@@ -216,7 +217,12 @@ def ProgramNew(request, media_type, tmdb_id):
 
 
 def programListView(request):
-    listPrograms = Program.objects.all()
+    programs = Program.objects.all()
+
+    paginator = Paginator(programs, 5) # Show 25 contacts per page
+    page = request.GET.get('page')
+    listPrograms = paginator.get_page(page)
+
     context = {"listPrograms": listPrograms}
     template = "notebook/programs_list.html"
     return render(request, template, context)
