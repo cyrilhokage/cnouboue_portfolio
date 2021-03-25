@@ -14,5 +14,32 @@
         <a class="btn btn-outline-primary" href="{% url 'notebook:viewprogram-create' %}" role="button"> Add view </a> <br>
     {% endif %}
     <br> 
+    
+    <hr><h3>Watchlist : </h3>
+    <ul>
+        {% for view in watchlist %}
+        <li>
+            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr><h3>In progress : </h3>
+    <ul>
+        {% for view in in_progress %}
+        <li>
+            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr><h3> Completed : </h3>
+    <ul>
+        {% for view in completed %}
+        <li>
+            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
 
 {%endblock%}

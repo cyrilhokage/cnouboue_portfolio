@@ -80,7 +80,19 @@ def profileDetailsView(request, pk, slug):
 @login_required
 def profileUserView(request):
     template = "notebook/profile_user.html"
-    return render(request, template)
+
+    watchlist = ViewProgram.objects.filter(profile=request.user.profile, status=0)
+    in_progress = ViewProgram.objects.filter(profile=request.user.profile, status=1)
+    completed = ViewProgram.objects.filter(profile=request.user.profile, status=2)
+
+    context = {
+        "watchlist": watchlist,
+        "in_progress": in_progress,
+        "completed": completed,
+    }
+
+    return render(request, template, context)
+
 
 
 @login_required
