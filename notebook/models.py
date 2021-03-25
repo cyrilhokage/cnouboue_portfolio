@@ -6,6 +6,8 @@ from django.urls import reverse
 from PIL import Image
 from slugify import slugify
 import urllib
+import datetime
+from django.urls import reverse
 
 
 # Create your models here.

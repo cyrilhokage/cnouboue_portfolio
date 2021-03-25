@@ -221,11 +221,19 @@ def programListView(request):
 
     paginator = Paginator(programs, 5) # Show 25 contacts per page
     page = request.GET.get('page')
-    listPrograms = paginator.get_page(page)
+
+    try:
+        listPrograms = paginator.get_page(page)
+    except PageNotAnInteger:
+        listPrograms = paginator.get_page(1)
+    except EmptyPage:
+        listPrograms = paginator.get_page(paginator.num_pages)
 
     context = {"listPrograms": listPrograms}
     template = "notebook/programs_list.html"
+    
     return render(request, template, context)
+
 
 
 @login_required

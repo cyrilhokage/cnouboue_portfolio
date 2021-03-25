@@ -2,11 +2,30 @@
 {% load crispy_forms_tags %}
 {% load humanize %}
 
+{% block title %}
+
+  Notebook App · View details 
+
+{%endblock%} 
+
 {% block content %}
 <a  href="{% url 'notebook:program-detail' view.program.slug view.program.pk %}">
     <h3>{{view.program.name}}</h3>
     <img src="{{view.program.poster.url}}">
 </a>
+
+<div class="list_providers">
+    <p> Disponible sur :</p>
+    {% for provider in view.program.providers.all %}
+        <div class="provider">
+            <a href="{{ view.program.watch_link }}" target="_blank">
+                <img src="{{ provider.logo_path.url }}" alt="{{ provider.name }}" width="45" height="45" >
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+
 {% if user == view.profile.user %}
     <br>
     <a class="btn btn-outline-primary" href="{% url 'notebook:viewprogram-edit' view.pk %}" role="button"> Edit view</a> <br>
@@ -25,4 +44,20 @@
     <div class="date">Vu il y a {{view.date | naturaltime}}</div>
     
 </div><br>
+{% endblock %}
+
+{% block additional_js %}
+
+  <style type="text/css">
+
+      .provider{
+        display: inline-block;
+        padding: 2px 2px 2px 2px;
+      }
+
+
+  </style>
+
+
+
 {% endblock %}

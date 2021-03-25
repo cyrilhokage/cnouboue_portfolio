@@ -49,6 +49,28 @@
           
         </div>
 
+        <!-- PAGINATION -->
+
+        <ul class="pagination">
+          {% if listPrograms.has_previous %}
+            <li class="pagination-item" ><a href="?page={{ listPrograms.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="pagination-item"><span>&laquo;</span></li>
+          {% endif %}
+          {% for i in listPrograms.paginator.page_range %}
+            {% if listPrograms.number == i %}
+              <li class="pagination-item"><span><strong>{{ i }}</strong> <span class="sr-only">(current)</span></span></li>
+            {% else %}
+              <li class="pagination-item" ><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if listPrograms.has_next %}
+            <li class="pagination-item" ><a href="?page={{ listPrograms.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="pagination-item"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+
             <div class="pagination">
           
                   {% if listPrograms.has_previous %}
@@ -66,13 +88,6 @@
                   {% endif %}
 
           </div>
-
-          <span class="current">
-            Page {{ listPrograms.number }} of {{ listPrograms.paginator.num_pages }}.
-          </span>
-          <br/>
-        <br/>
-          
 
 
         {% load static %}
