@@ -65,39 +65,99 @@ def profileListView(request):
     return render(request, template, context)
 
 
-def profileDetailsView(request, pk, slug):
-    template = "notebook/profile_detail.html"
+class profileDetailsView(ListView):
+    model = ViewProgram
+    template_name = "notebook/profile_detail.html"
+    
+    # template_name = 'notebook/calendar.html'
+    #success_url = reverse_lazy("notebook:calendar")
 
-    profile_user = get_object_or_404(User, id=pk)
-    watchlist = ViewProgram.objects.filter(profile=profile_user.profile, status=0)
-    in_progress = ViewProgram.objects.filter(profile=profile_user.profile, status=1)
-    completed = ViewProgram.objects.filter(profile=profile_user.profile, status=2)
+    def get_date(self, req_day):
+        if req_day:
+            year, month = (int(x) for x in req_day.split('-'))
+            return date(year, month, day=1)
+        return datetime.today()
 
-    context = {
-        "profile_user": profile_user,
-        "watchlist": watchlist,
-        "in_progress": in_progress,
-        "completed": completed,
-    }
+    def prev_month(self, d):
+        first = d.replace(day=1)
+        prev_month = first - timedelta(days=1)
+        month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+        return month
 
-    return render(request, template, context)
+    def next_month(self, d):
+        days_in_month = calendar.monthrange(d.year, d.month)[1]
+        last = d.replace(day=days_in_month)
+        next_month = last + timedelta(days=1)
+        month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+        return month
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        d = self.get_date(self.request.GET.get('month', None))
+        cal = Calendar(d.year, d.month)
+        html_cal = cal.formatmonth(withyear=True)
+        context['calendar'] = mark_safe(html_cal)
+        context['prev_month'] = self.prev_month(d)
+        context['next_month'] = self.next_month(d)
+
+        profile_user = get_object_or_404(User, id=self.kwargs['pk'])
+        context['profile_user'] = profile_user
+
+        context['watchlist'] = ViewProgram.objects.filter(profile=profile_user.profile, status=0)
+        context['in_progress'] = ViewProgram.objects.filter(profile=profile_user.profile, status=1)
+        context['completed'] = ViewProgram.objects.filter(profile=profile_user.profile, status=2)
+
+        return context
+    # return render(request, template, context)
 
 
-@login_required
-def profileUserView(request):
-    template = "notebook/profile_user.html"
+#@login_required
+#def profileUserView(request):
+class profileUserView(LoginRequiredMixin, ListView):
 
-    watchlist = ViewProgram.objects.filter(profile=request.user.profile, status=0)
-    in_progress = ViewProgram.objects.filter(profile=request.user.profile, status=1)
-    completed = ViewProgram.objects.filter(profile=request.user.profile, status=2)
+    model = ViewProgram
+    template_name = "notebook/profile_user.html"
 
-    context = {
-        "watchlist": watchlist,
-        "in_progress": in_progress,
-        "completed": completed,
-    }
+    
+    # template_name = 'notebook/calendar.html'
+    #success_url = reverse_lazy("notebook:calendar")
 
-    return render(request, template, context)
+    def get_date(self, req_day):
+        if req_day:
+            year, month = (int(x) for x in req_day.split('-'))
+            return date(year, month, day=1)
+        return datetime.today()
+
+    def prev_month(self, d):
+        first = d.replace(day=1)
+        prev_month = first - timedelta(days=1)
+        month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+        return month
+
+    def next_month(self, d):
+        days_in_month = calendar.monthrange(d.year, d.month)[1]
+        last = d.replace(day=days_in_month)
+        next_month = last + timedelta(days=1)
+        month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+        return month
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        d = self.get_date(self.request.GET.get('month', None))
+        cal = Calendar(d.year, d.month)
+        html_cal = cal.formatmonth(withyear=True)
+        context['calendar'] = mark_safe(html_cal)
+        context['prev_month'] = self.prev_month(d)
+        context['next_month'] = self.next_month(d)
+
+        context['watchlist'] = ViewProgram.objects.filter(profile=self.request.user.profile, status=0)
+        context['in_progress'] = ViewProgram.objects.filter(profile=self.request.user.profile, status=1)
+        context['completed'] = ViewProgram.objects.filter(profile=self.request.user.profile, status=2)
+
+        return context
+
+
+    #return render(request, template, context)
 
 class CalendarView(ListView):
     model = ViewProgram
@@ -321,6 +381,7 @@ class ViewProgramCreateView(LoginRequiredMixin, CreateView):
     model = ViewProgram
     fields = ["program", "status", "date", "chapter", "comment"]
 
+
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
         form.fields['date'].widget = forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'})
@@ -334,10 +395,11 @@ class ViewProgramCreateView(LoginRequiredMixin, CreateView):
 class ViewProgramUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ViewProgram
     fields = ["program", "status", "date", "chapter", "comment"]
-    widgets = {
-        'date': forms.widgets.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
-        "comment" : forms.Textarea(attrs={'rows':3}),
-    }
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['date'].widget = forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'})
+        return form
 
     def form_valid(self, form):
         form.instance.profile = self.request.user.profile
@@ -355,7 +417,6 @@ class ViewProgramDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
     def get_test_func(self):
         view = self.get_object()
         return self.request.user == view.profile.user
-
 
 ### Search program View
 

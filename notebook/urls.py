@@ -1,5 +1,4 @@
 from django.urls import path
-from django.conf.urls import url
 from . import views
 from django.contrib.auth import views as auth_views
 
@@ -26,10 +25,10 @@ urlpatterns = [
         name="logout",
     ),
     # Profile
-    path("profile/", views.profileUserView, name="profile-user"),
+    path("profile/", views.profileUserView.as_view(), name="profile-user"),
     path("profiles/", views.profileListView, name="profile-list"),
     path(
-        "profiles/<int:pk>/<str:slug>", views.profileDetailsView, name="profile"
+        "profiles/<int:pk>/<str:slug>", views.profileDetailsView.as_view(), name="profile"
     ),  # actual user profile page
     path(
         "profiles/edit/<int:pk>", views.profileUpdateView, name="profile-edit"
@@ -116,6 +115,14 @@ urlpatterns = [
     ### Calendar Url
     path(
         "calendar/",
-        views.CalendarView.as_view(),
+        views.profileUserView.as_view(),
+        # views.CalendarView.as_view(),
         name='calendar'),
+
+    path(
+        "calendar/public/<int:pk>/<str:slug>",
+        views.profileDetailsView.as_view(),
+        # views.CalendarView.as_view(),
+        name='calendar-public'),
+
 ]

@@ -170,4 +170,4 @@ class ViewProgram(models.Model):
     @property
     def get_html_url(self):
         url = reverse('notebook:viewprogram-edit', kwargs={"pk": self.pk})
-        return f'<p>{self.program.name}</p><a href="{url}">edit</a>'
+        return f"<a href='{url}'>{self.program.name}</a>"
