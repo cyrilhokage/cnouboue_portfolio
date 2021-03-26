@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm, ProgramUpdateForm, UserRegistrationForm
 from django import forms
 from django.core.paginator import Paginator
+import calendar
 
 # Authentication & validation imports
 from django.contrib.auth import login, authenticate
@@ -18,6 +19,8 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.urls import reverse_lazy
+from django.utils.safestring import mark_safe
 
 # CRUD views
 from .models import Program, Profile, ViewProgram
@@ -29,10 +32,12 @@ from django.views.generic import (
     DetailView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .utils import Calendar
 
 # For search
 import requests
 import json
+from datetime import datetime, timedelta, date
 from .notebookfunctions import getProgramData, getProviders
 
 
@@ -93,6 +98,41 @@ def profileUserView(request):
     }
 
     return render(request, template, context)
+
+class CalendarView(ListView):
+    model = ViewProgram
+    template_name = 'notebook/calendar.html'
+    #success_url = reverse_lazy("notebook:calendar")
+
+    def get_date(self, req_day):
+        if req_day:
+            year, month = (int(x) for x in req_day.split('-'))
+            return date(year, month, day=1)
+        return datetime.today()
+
+    def prev_month(self, d):
+        first = d.replace(day=1)
+        prev_month = first - timedelta(days=1)
+        month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+        return month
+
+    def next_month(self, d):
+        days_in_month = calendar.monthrange(d.year, d.month)[1]
+        last = d.replace(day=days_in_month)
+        next_month = last + timedelta(days=1)
+        month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+        return month
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        d = self.get_date(self.request.GET.get('month', None))
+        cal = Calendar(d.year, d.month)
+        html_cal = cal.formatmonth(withyear=True)
+        context['calendar'] = mark_safe(html_cal)
+        context['prev_month'] = self.prev_month(d)
+        context['next_month'] = self.next_month(d)
+
+        return context
 
 
 

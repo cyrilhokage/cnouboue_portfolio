@@ -166,3 +166,8 @@ class ViewProgram(models.Model):
 
     def get_absolute_url(self):
         return reverse("notebook:viewprogram-detail", kwargs={"pk": self.pk})
+
+    @property
+    def get_html_url(self):
+        url = reverse('notebook:viewprogram-edit', kwargs={"pk": self.pk})
+        return f'<p>{self.program.name}</p><a href="{url}">edit</a>'
