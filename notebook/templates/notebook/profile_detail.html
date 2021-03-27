@@ -7,6 +7,13 @@
     <p>{{profile_user.email}}</p>
     <p>{{profile_user.profile.bio}}</p>
     <br>
+    {% if user.is_authenticated and profile_user.id == user.id %}
+    <br>
+        <p> To edit YOUR profile : </p>
+        <a class="btn btn-outline-primary" href="{% url 'notebook:profile-edit' user.pk %}" role="button"> Edit </a> 
+        <a class="btn btn-outline-primary" href="{% url 'notebook:viewprogram-create' %}" role="button"> Add view </a> <br>
+        
+    {% endif %}
     
     <hr><h3>Watchlist : </h3>
     <ul>
@@ -34,15 +41,6 @@
         </li>
         {% endfor %}
     </ul>
-    
-
-    {% if user.is_authenticated %}
-    <br>
-        <p> To edit YOUR profile : </p>
-        <a class="btn btn-outline-primary" href="{% url 'notebook:profile-edit' user.pk %}" role="button"> Edit </a> 
-        <a class="btn btn-outline-primary" href="{% url 'notebook:viewprogram-create' %}" role="button"> Add view </a> <br>
-        
-    {% endif %}
     <br> 
 
     <!-- Calendar Block -->
@@ -51,6 +49,7 @@
         <a class="btn btn-info left" href="{% url 'notebook:calendar-public' profile_user.pk  profile_user.profile.slug %}?{{ prev_month }} "> Previous Month </a>
         <a class="btn btn-info right" href="{% url 'notebook:calendar-public' profile_user.pk  profile_user.profile.slug %}?{{ next_month }} "> Next Month </a>
     </div>
+    <br/>
     
     {{ calendar }}
 

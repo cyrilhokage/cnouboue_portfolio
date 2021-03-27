@@ -118,8 +118,8 @@ urlpatterns = [
     ### Calendar Url
     path(
         "calendar/",
-        views.profileUserView.as_view(),
-        # views.CalendarView.as_view(),
+        #views.profileUserView.as_view(),
+        views.CalendarView.as_view(),
         name='calendar'),
 
     path(

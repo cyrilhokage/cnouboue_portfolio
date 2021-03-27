@@ -21,7 +21,7 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.urls import reverse_lazy
-from django.utils.safestring import mark_safe
+from django.utils.html import mark_safe, format_html
 
 # CRUD views
 from .models import Program, Profile, ViewProgram
@@ -189,7 +189,8 @@ class CalendarView(ListView):
         d = self.get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
-        context['calendar'] = mark_safe(html_cal)
+        #context['calendar'] = format_html(mark_safe("<div><h1> Hello </h1></div>"))
+        context['calendar'] = html_cal
         context['prev_month'] = self.prev_month(d)
         context['next_month'] = self.next_month(d)
 

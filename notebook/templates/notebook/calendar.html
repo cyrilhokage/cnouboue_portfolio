@@ -9,6 +9,11 @@ Calendar - Notebook App
 	<a class="btn btn-info left" href="{% url 'notebook:calendar' %}?{{ prev_month }}"> Previous Month </a>
 	<a class="btn btn-info right" href="{% url 'notebook:calendar' %}?{{ next_month }}"> Next Month </a>
 </div>
+<br/>
 
-{{ calendar }}
+{{ calendar | safe }}
+
+<hr/>
+
+
 {% endblock %}

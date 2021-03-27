@@ -41,5 +41,6 @@ class Calendar(HTMLCalendar):
         cal += f'{self.formatweekheader()}\n'
         for week in self.monthdays2calendar(self.year, self.month):
             cal += f'{self.formatweek(week, viewProgram)}\n'
+        cal += f'</table>'
         
         return cal
