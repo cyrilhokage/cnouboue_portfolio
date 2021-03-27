@@ -85,6 +85,9 @@ urlpatterns = [
         views.programDeleteView.as_view(),
         name="program-delete",
     ),
+    path("programs/<int:pk>/<str:slug>/similars",
+         views.ProgramSimilarsView,
+         name="program-similars"),
     ### CRUD urls for views
     path(
         "view/<int:pk>",

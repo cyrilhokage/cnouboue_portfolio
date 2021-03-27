@@ -8,6 +8,8 @@ from slugify import slugify
 import urllib
 import datetime
 from django.urls import reverse
+import requests
+import json
 
 
 # Create your models here.
@@ -34,6 +36,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     slug = models.SlugField(default="default-slug-profile", max_length=70)
     bio = models.TextField()
+    following = models.ManyToManyField('self')
     pic = models.ImageField(
         default="profile_pics/default.png", upload_to="profile_pics"
     )
@@ -118,6 +121,7 @@ class Program(models.Model):
     last_air_date = models.DateTimeField(null=True)
     available_date = models.DateTimeField(null=True)
     origin_country = models.CharField(max_length=350, null=True)
+    similars = models.ManyToManyField('self')
     providers = models.ManyToManyField(Provider)
     poster_path = models.CharField(max_length=100, null=True)
     poster = models.ImageField(
@@ -137,6 +141,31 @@ class Program(models.Model):
             "notebook:program-detail", kwargs={"slug": self.slug, "pk": self.pk}
         )
 
+    """
+    Method to get programs similars programs
+    """
+
+    def addSimilarPrograms(self):
+
+        media_type = "tv" if self.format == 1 else "movie"
+
+        try :
+            params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1)
+            req_reco = requests.get(f"https://api.themoviedb.org/3/{media_type}/{self.tmdb_id}/recommendations", params)
+            if (req_reco.status_code == 200 ):
+                data_reco = json.loads(req_reco.content)
+            else : 
+                # print(f"Status code : {req_reco.status_code}")
+                raise KeyError
+        except KeyError:
+            pass
+
+        for program in data_reco["results"][:10]:
+            similar_program_querry = Program.objects.filter(tmdb_id=program['id'])
+            for similar_program in similar_program_querry:
+                self.similars.add(similar_program)
+
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
@@ -147,6 +176,7 @@ class Program(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.poster.path)
+        self.addSimilarPrograms()
 
 
 class ViewProgram(models.Model):
@@ -169,5 +199,5 @@ class ViewProgram(models.Model):
 
     @property
     def get_html_url(self):
-        url = reverse('notebook:viewprogram-edit', kwargs={"pk": self.pk})
+        url = reverse('notebook:viewprogram-detail', kwargs={"pk": self.pk})
         return f"<a href='{url}'>{self.program.name}</a>"

@@ -7,6 +7,7 @@ from .forms import UserUpdateForm, ProfileUpdateForm, ProgramUpdateForm, UserReg
 from django import forms
 from django.core.paginator import Paginator
 import calendar
+from django.db import IntegrityError
 
 # Authentication & validation imports
 from django.contrib.auth import login, authenticate
@@ -94,7 +95,7 @@ class profileDetailsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = self.get_date(self.request.GET.get('month', None))
-        cal = Calendar(d.year, d.month)
+        cal = Calendar(d.year, d.month, self.kwargs['pk'])
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = self.prev_month(d)
@@ -144,7 +145,7 @@ class profileUserView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = self.get_date(self.request.GET.get('month', None))
-        cal = Calendar(d.year, d.month)
+        cal = Calendar(d.year, d.month, self.request.user.id)
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = self.prev_month(d)
@@ -301,19 +302,24 @@ def ProgramNew(request, media_type, tmdb_id):
     list_providers, link = getProviders(tmdb_id=tmdb_id, media_type=media_type)
     program = getProgramData(tmdb_id=tmdb_id, media_type=media_type)
 
-    if program is not False:
-        program["watch_link"] = link
-        new_program = Program(**program)
-        new_program.save()
+    try:
+        if program is not False:
+            program["watch_link"] = link
+            new_program = Program(**program)
+            new_program.save()
 
-        if list_providers is not False:
-            for provider in list_providers:
-                new_program.providers.add(provider)
+            if list_providers is not False:
+                for provider in list_providers:
+                    new_program.providers.add(provider)
 
-        return redirect("notebook:program-detail", new_program.slug, new_program.pk)
+            return redirect("notebook:program-detail", new_program.slug, new_program.pk)
 
-    else:
-        return redirect("notebook:index")
+        else:
+            return redirect("notebook:index")
+
+    except IntegrityError :
+        e_program = get_object_or_404(Program, tmdb_id=program['tmdb_id'])
+        return redirect("notebook:program-detail", e_program.slug, e_program.pk) 
 
 
 def programListView(request):
@@ -457,3 +463,30 @@ def ViewSearch(request):
 
     else:
         return render(request, template)
+
+
+# View for program's similars programs
+def ProgramSimilarsView(request, pk, slug):
+
+    template = "notebook/programSimilars.html"
+    program = get_object_or_404(Program, id=pk)
+    media_type = "tv" if program.format == 1 else "movie"
+
+    try :
+        params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1)
+        req_reco = requests.get(f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations", params)
+        if (req_reco.status_code == 200 ):
+            data_reco = json.loads(req_reco.content)
+        else : 
+            # print(f"Status code : {req_reco.status_code}")
+            raise KeyError
+    except KeyError:
+        pass
+    
+    context = {"similarsPrograms": data_reco["results"][:5],
+                "media_type": media_type}
+
+    return render(request, template, context)
+
+    
+

@@ -5,9 +5,10 @@ from .models import ViewProgram
 
 class Calendar(HTMLCalendar):
     
-    def __init__(self, year=None, month=None):
+    def __init__(self, year=None, month=None, profile_pk=None):
         self.year = year
         self.month = month
+        self.profile_pk = profile_pk
         super(Calendar, self).__init__()
 
 
@@ -15,7 +16,9 @@ class Calendar(HTMLCalendar):
         viewProgram_per_day = viewProgram.filter(date__day=day)
         d = ''
         for view in viewProgram_per_day:
-            d += f'<li class="calendar_list"> {view.get_html_url} </li>'
+            # d += f"<li class='calendar_list'> {view.get_html_url} </li>"
+            if view.profile.user.id == self.profile_pk: 
+                d += f"<li class='calendar_list'> {view.get_html_url} </li>"
             
         if day != 0:
             return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"

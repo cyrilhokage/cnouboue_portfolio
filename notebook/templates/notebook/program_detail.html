@@ -9,6 +9,7 @@
     {% else %}
         <img src="{{ 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2'|add:program.poster_path }}" style="max-width:200px;width:100%" alt="{{program.name}}" > <br>
     {% endif %}
+    <hr />
 
     <div class="list_providers">
         <p> Disponible sur :</p>
@@ -20,20 +21,30 @@
             </div>
         {% endfor %}
     </div>
-    
-
-    {% if user.is_authenticated %}
-        <a class="btn btn-outline-primary" href="{% url 'notebook:program-edit' program.id %}" role="button"> Edit </a> <br>
-    {% endif %}
+    <hr />
 
     <div>
-        
         <p>{{program.tags}}</p>
         <p>{{program.synopsis}}</p>
 
         <div class="date">Released {{program.release_date | naturaltime}}</div>
         <div class="tags">
             <div class="tag">Source : {{program.source}}</div>
+        </div><br/>
+        {% if user.is_authenticated %}
+            <a class="btn btn-outline-primary" href="{% url 'notebook:program-edit' program.id %}" role="button"> Edit program</a> <br>
+        {% endif %}
+        <hr />
+
+        <div class="carroussel">
+            <p>Similar programs : </p>
+            <ul>
+                {% for similar in program.similars.all %}
+                    <a href="{% url 'notebook:program-detail' similar.slug similar.id %}"><li>{{similar.name}}</li></a>
+                {% endfor %}
+            </ul>
+            <hr />
+            <a class="btn btn-outline-primary" href="{% url 'notebook:program-similars' program.pk program.slug %}" role="button"> Search similars</a> <br>
         </div>
     </div><br>
 {% endblock %}

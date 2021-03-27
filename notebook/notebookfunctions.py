@@ -1,4 +1,4 @@
-from .models import Provider
+from .models import Provider, Program
 import requests
 import json
 
@@ -131,3 +131,31 @@ def getProviders(tmdb_id, media_type):
         # return False # Write specific message here in logs
 
     return list_providers, link
+
+
+"""
+Method to get programs similars programs
+"""
+
+def addSimilarPrograms(program):
+
+    media_type = "tv" if program.format == 1 else "movie"
+
+    try :
+        params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1)
+        req_reco = requests.get(f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations", params)
+        if (req_reco.status_code == 200 ):
+            data_reco = json.loads(req_reco.content)
+        else : 
+            # print(f"Status code : {req_reco.status_code}")
+            raise KeyError
+    except KeyError:
+        pass
+
+    for program in data_reco["results"][:10]:
+        similar_program_querry = Program.objects.filter(tmdb_id=program.id)
+        for similar_program in similar_program_querry:
+            program.similars.add(similar_program)
+
+    return True
+    
