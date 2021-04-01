@@ -292,7 +292,7 @@ def activate(request, uidb64, token):
         user.save()
         login(request, user)
 
-        return redirect("notebook:profile", user.pk)
+        return redirect("notebook:profile-user")
 
     else:
         # messages.error(request, "Oh oh ! Activation link is invalid :( ! ")
