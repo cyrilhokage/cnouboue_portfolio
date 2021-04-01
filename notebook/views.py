@@ -3,7 +3,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm, ProgramUpdateForm, UserRegistrationForm
+from .forms import (
+    UserUpdateForm,
+    ProfileUpdateForm,
+    ProgramUpdateForm,
+    UserRegistrationForm,
+)
 from django import forms
 from django.core.paginator import Paginator
 import calendar
@@ -69,133 +74,144 @@ def profileListView(request):
 class profileDetailsView(ListView):
     model = ViewProgram
     template_name = "notebook/profile_detail.html"
-    
+
     # template_name = 'notebook/calendar.html'
-    #success_url = reverse_lazy("notebook:calendar")
+    # success_url = reverse_lazy("notebook:calendar")
 
     def get_date(self, req_day):
         if req_day:
-            year, month = (int(x) for x in req_day.split('-'))
+            year, month = (int(x) for x in req_day.split("-"))
             return date(year, month, day=1)
         return datetime.today()
 
     def prev_month(self, d):
         first = d.replace(day=1)
         prev_month = first - timedelta(days=1)
-        month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+        month = "month=" + str(prev_month.year) + "-" + str(prev_month.month)
         return month
 
     def next_month(self, d):
         days_in_month = calendar.monthrange(d.year, d.month)[1]
         last = d.replace(day=days_in_month)
         next_month = last + timedelta(days=1)
-        month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+        month = "month=" + str(next_month.year) + "-" + str(next_month.month)
         return month
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        d = self.get_date(self.request.GET.get('month', None))
-        cal = Calendar(d.year, d.month, self.kwargs['pk'])
+        d = self.get_date(self.request.GET.get("month", None))
+        cal = Calendar(d.year, d.month, self.kwargs["pk"])
         html_cal = cal.formatmonth(withyear=True)
-        context['calendar'] = mark_safe(html_cal)
-        context['prev_month'] = self.prev_month(d)
-        context['next_month'] = self.next_month(d)
+        context["calendar"] = mark_safe(html_cal)
+        context["prev_month"] = self.prev_month(d)
+        context["next_month"] = self.next_month(d)
 
-        profile_user = get_object_or_404(User, id=self.kwargs['pk'])
-        context['profile_user'] = profile_user
+        profile_user = get_object_or_404(User, id=self.kwargs["pk"])
+        context["profile_user"] = profile_user
 
-        context['watchlist'] = ViewProgram.objects.filter(profile=profile_user.profile, status=0)
-        context['in_progress'] = ViewProgram.objects.filter(profile=profile_user.profile, status=1)
-        context['completed'] = ViewProgram.objects.filter(profile=profile_user.profile, status=2)
+        context["watchlist"] = ViewProgram.objects.filter(
+            profile=profile_user.profile, status=0
+        )
+        context["in_progress"] = ViewProgram.objects.filter(
+            profile=profile_user.profile, status=1
+        )
+        context["completed"] = ViewProgram.objects.filter(
+            profile=profile_user.profile, status=2
+        )
 
         return context
+
     # return render(request, template, context)
 
 
-#@login_required
-#def profileUserView(request):
+# @login_required
+# def profileUserView(request):
 class profileUserView(LoginRequiredMixin, ListView):
 
     model = ViewProgram
     template_name = "notebook/profile_user.html"
 
-    
     # template_name = 'notebook/calendar.html'
-    #success_url = reverse_lazy("notebook:calendar")
+    # success_url = reverse_lazy("notebook:calendar")
 
     def get_date(self, req_day):
         if req_day:
-            year, month = (int(x) for x in req_day.split('-'))
+            year, month = (int(x) for x in req_day.split("-"))
             return date(year, month, day=1)
         return datetime.today()
 
     def prev_month(self, d):
         first = d.replace(day=1)
         prev_month = first - timedelta(days=1)
-        month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+        month = "month=" + str(prev_month.year) + "-" + str(prev_month.month)
         return month
 
     def next_month(self, d):
         days_in_month = calendar.monthrange(d.year, d.month)[1]
         last = d.replace(day=days_in_month)
         next_month = last + timedelta(days=1)
-        month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+        month = "month=" + str(next_month.year) + "-" + str(next_month.month)
         return month
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        d = self.get_date(self.request.GET.get('month', None))
+        d = self.get_date(self.request.GET.get("month", None))
         cal = Calendar(d.year, d.month, self.request.user.id)
         html_cal = cal.formatmonth(withyear=True)
-        context['calendar'] = mark_safe(html_cal)
-        context['prev_month'] = self.prev_month(d)
-        context['next_month'] = self.next_month(d)
+        context["calendar"] = mark_safe(html_cal)
+        context["prev_month"] = self.prev_month(d)
+        context["next_month"] = self.next_month(d)
 
-        context['watchlist'] = ViewProgram.objects.filter(profile=self.request.user.profile, status=0)
-        context['in_progress'] = ViewProgram.objects.filter(profile=self.request.user.profile, status=1)
-        context['completed'] = ViewProgram.objects.filter(profile=self.request.user.profile, status=2)
+        context["watchlist"] = ViewProgram.objects.filter(
+            profile=self.request.user.profile, status=0
+        )
+        context["in_progress"] = ViewProgram.objects.filter(
+            profile=self.request.user.profile, status=1
+        )
+        context["completed"] = ViewProgram.objects.filter(
+            profile=self.request.user.profile, status=2
+        )
 
         return context
 
+    # return render(request, template, context)
 
-    #return render(request, template, context)
 
 class CalendarView(ListView):
     model = ViewProgram
-    template_name = 'notebook/calendar.html'
-    #success_url = reverse_lazy("notebook:calendar")
+    template_name = "notebook/calendar.html"
+    # success_url = reverse_lazy("notebook:calendar")
 
     def get_date(self, req_day):
         if req_day:
-            year, month = (int(x) for x in req_day.split('-'))
+            year, month = (int(x) for x in req_day.split("-"))
             return date(year, month, day=1)
         return datetime.today()
 
     def prev_month(self, d):
         first = d.replace(day=1)
         prev_month = first - timedelta(days=1)
-        month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+        month = "month=" + str(prev_month.year) + "-" + str(prev_month.month)
         return month
 
     def next_month(self, d):
         days_in_month = calendar.monthrange(d.year, d.month)[1]
         last = d.replace(day=days_in_month)
         next_month = last + timedelta(days=1)
-        month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+        month = "month=" + str(next_month.year) + "-" + str(next_month.month)
         return month
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        d = self.get_date(self.request.GET.get('month', None))
+        d = self.get_date(self.request.GET.get("month", None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
-        #context['calendar'] = format_html(mark_safe("<div><h1> Hello </h1></div>"))
-        context['calendar'] = html_cal
-        context['prev_month'] = self.prev_month(d)
-        context['next_month'] = self.next_month(d)
+        # context['calendar'] = format_html(mark_safe("<div><h1> Hello </h1></div>"))
+        context["calendar"] = html_cal
+        context["prev_month"] = self.prev_month(d)
+        context["next_month"] = self.next_month(d)
 
         return context
-
 
 
 @login_required
@@ -318,16 +334,16 @@ def ProgramNew(request, media_type, tmdb_id):
         else:
             return redirect("notebook:index")
 
-    except IntegrityError :
-        e_program = get_object_or_404(Program, tmdb_id=program['tmdb_id'])
-        return redirect("notebook:program-detail", e_program.slug, e_program.pk) 
+    except IntegrityError:
+        e_program = get_object_or_404(Program, tmdb_id=program["tmdb_id"])
+        return redirect("notebook:program-detail", e_program.slug, e_program.pk)
 
 
 def programListView(request):
     programs = Program.objects.all()
 
-    paginator = Paginator(programs, 5) # Show 25 contacts per page
-    page = request.GET.get('page')
+    paginator = Paginator(programs, 5)  # Show 25 contacts per page
+    page = request.GET.get("page")
 
     try:
         listPrograms = paginator.get_page(page)
@@ -338,9 +354,8 @@ def programListView(request):
 
     context = {"listPrograms": listPrograms}
     template = "notebook/programs_list.html"
-    
-    return render(request, template, context)
 
+    return render(request, template, context)
 
 
 @login_required
@@ -388,10 +403,16 @@ class ViewProgramCreateView(LoginRequiredMixin, CreateView):
     model = ViewProgram
     fields = ["program", "status", "date", "chapter", "comment"]
 
-
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        form.fields['date'].widget = forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'})
+        form.fields["date"].widget = forms.DateInput(
+            format=("%m/%d/%Y"),
+            attrs={
+                "class": "form-control",
+                "placeholder": "Select a date",
+                "type": "date",
+            },
+        )
         return form
 
     def form_valid(self, form):
@@ -405,7 +426,14 @@ class ViewProgramUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        form.fields['date'].widget = forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'})
+        form.fields["date"].widget = forms.DateInput(
+            format=("%m/%d/%Y"),
+            attrs={
+                "class": "form-control",
+                "placeholder": "Select a date",
+                "type": "date",
+            },
+        )
         return form
 
     def form_valid(self, form):
@@ -424,6 +452,7 @@ class ViewProgramDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
     def get_test_func(self):
         view = self.get_object()
         return self.request.user == view.profile.user
+
 
 ### Search program View
 
@@ -473,21 +502,22 @@ def ProgramSimilarsView(request, pk, slug):
     program = get_object_or_404(Program, id=pk)
     media_type = "tv" if program.format == 1 else "movie"
 
-    try :
-        params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1)
-        req_reco = requests.get(f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations", params)
-        if (req_reco.status_code == 200 ):
+    try:
+        params = dict(
+            api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1
+        )
+        req_reco = requests.get(
+            f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations",
+            params,
+        )
+        if req_reco.status_code == 200:
             data_reco = json.loads(req_reco.content)
-        else : 
+        else:
             # print(f"Status code : {req_reco.status_code}")
             raise KeyError
     except KeyError:
         pass
-    
-    context = {"similarsPrograms": data_reco["results"][:5],
-                "media_type": media_type}
+
+    context = {"similarsPrograms": data_reco["results"][:5], "media_type": media_type}
 
     return render(request, template, context)
-
-    
-

@@ -137,16 +137,22 @@ def getProviders(tmdb_id, media_type):
 Method to get programs similars programs
 """
 
+
 def addSimilarPrograms(program):
 
     media_type = "tv" if program.format == 1 else "movie"
 
-    try :
-        params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1)
-        req_reco = requests.get(f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations", params)
-        if (req_reco.status_code == 200 ):
+    try:
+        params = dict(
+            api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1
+        )
+        req_reco = requests.get(
+            f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations",
+            params,
+        )
+        if req_reco.status_code == 200:
             data_reco = json.loads(req_reco.content)
-        else : 
+        else:
             # print(f"Status code : {req_reco.status_code}")
             raise KeyError
     except KeyError:
@@ -158,4 +164,3 @@ def addSimilarPrograms(program):
             program.similars.add(similar_program)
 
     return True
-    

@@ -63,4 +63,3 @@ class ProgramCreationForm(UserCreationForm):
 class SearchForm(forms.Form):
     class Meta:
         fields = ["search"]
-
