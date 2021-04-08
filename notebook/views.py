@@ -427,7 +427,6 @@ class ViewProgramUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
         form.fields["date"].widget = forms.DateInput(
-            format=("%m/%d/%Y"),
             attrs={
                 "class": "form-control",
                 "placeholder": "Select a date",
