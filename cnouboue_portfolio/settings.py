@@ -40,8 +40,6 @@ else:
     SECRET_KEY = "9d28q_#wtk0q4pvgm*+=hkd*^42j_2a#*13x^&c*f=oos)fykf"
     SESSION_COOKIE_SECURE = False
 """
-    
-<<<<<<< HEAD
 
 # DEBUG = int(os.environ.get("DEBUG", default=0))
 
