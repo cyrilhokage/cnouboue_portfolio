@@ -41,6 +41,7 @@ else:
     SESSION_COOKIE_SECURE = False
 """
     
+<<<<<<< HEAD
 
 # DEBUG = int(os.environ.get("DEBUG", default=0))
 
