@@ -31,7 +31,7 @@ def update_posts_from_github(request, username):
         # print(repo.name)
         name_repo = repo.name.replace("_", " ").replace("-", " ").title()
         try:
-            post = Post.objects.get(title=name_repo)
+            post = Post.objects.get(slug=slugify(repo.name))
             post.updated_on = repo.pushed_at
             post.github_link = repo.svn_url
             post.summary = (
