@@ -24,3 +24,4 @@ pygithub
 python-slugify
 requests
 Pillow
+psycopg2-binary==2.8.5
