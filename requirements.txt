@@ -23,5 +23,5 @@ wrapt==1.12.1
 pygithub==1.53
 python-slugify==4.0.1
 requests==2.25.0
-Pillow>=8.1.1
+Pillow==8.1.1
 psycopg2-binary==2.8.5
