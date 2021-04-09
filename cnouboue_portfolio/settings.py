@@ -44,7 +44,7 @@ else:
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "default_key") 
+SECRET_KEY = os.environ.get("SECRET_KEY", "default_key")
 
 
 """
@@ -97,8 +97,8 @@ if os.environ.get("environement") == "PRODUCTION":
     # https://warehouse.python.org/project/whitenoise/
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     """
-    
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 ROOT_URLCONF = "cnouboue_portfolio.urls"
 
@@ -125,22 +125,24 @@ WSGI_APPLICATION = "cnouboue_portfolio.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-if os.getenv('GITHUB_WORKFLOW'):
+if os.getenv("GITHUB_WORKFLOW"):
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'github-actions',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': 'localhost',
-            'PORT': '5432'
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "github-actions",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "localhost",
+            "PORT": "5432",
         }
     }
 else:
     DATABASES = {
         "default": {
             "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-            "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+            "NAME": os.environ.get(
+                "SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")
+            ),
             "USER": os.environ.get("SQL_USER", "user"),
             "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
             "HOST": os.environ.get("SQL_HOST", "localhost"),

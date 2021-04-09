@@ -41,7 +41,7 @@ class Post(models.Model):
         return "/blog/" + self.slug
 
     # Overwrite save() method to send new sitemap to google when a post is updated
-    def save(self,  *args, **kwargs):
+    def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         try:
             ping_google()
@@ -49,5 +49,5 @@ class Post(models.Model):
             # Bare 'except' because we could get a variety
             # of HTTP-related exceptions.
             # Log an error message
-            logger.error('Ping google for sitemaps failed.')
+            logger.error("Ping google for sitemaps failed.")
             pass
