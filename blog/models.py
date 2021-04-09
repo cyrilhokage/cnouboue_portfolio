@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sitemaps import ping_google
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 # Create your models here.
 STATUS = ((0, "Draft"), (1, "Published"))
@@ -44,4 +48,6 @@ class Post(models.Model):
         except Exception:
             # Bare 'except' because we could get a variety
             # of HTTP-related exceptions.
+            # Log an error message
+            logger.error('Ping google for sitemaps failed.')
             pass
