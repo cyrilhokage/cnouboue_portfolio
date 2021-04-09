@@ -52,6 +52,7 @@ jobs:
       - name: Run Migrations # run migrations to create table in side car db container
         run: |
           python manage.py migrate
+          python manage.py collectstatic
       - name: Run Test # running tests
         run: | 
           python manage.py test
