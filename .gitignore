@@ -2,7 +2,7 @@
 .vscode/
 venv/
 ssl/
-media/
+
 
 cnouboue_portfolio/__pycache__
 blog/__pycache__/
