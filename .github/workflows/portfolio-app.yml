@@ -60,6 +60,7 @@ jobs:
     name: Build Docker Images
     runs-on: ubuntu-latest
     needs: health-check-job
+    if: github.ref == 'refs/heads/master'
     env:
       WEB_IMAGE: docker.pkg.github.com/cyrilhokage/cnouboue_portfolio/web
       SQL_ENGINE: django.db.backends.postgresql
@@ -70,8 +71,6 @@ jobs:
       SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
       SQL_HOST: ${{ secrets.SQL_HOST }}
       SQL_PORT: ${{ secrets.SQL_PORT }}
-
-    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout master
         uses: actions/checkout@v2
