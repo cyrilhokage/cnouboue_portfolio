@@ -46,10 +46,10 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "default_key")
 
-
+"""
 ADMINS = [('cyrilhokage', 'cyrillenouboue@gmail.com')]
 MANAGERS = ADMINS
-
+"""
 
 SESSION_COOKIE_SECURE = False
 
