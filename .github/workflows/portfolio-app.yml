@@ -111,6 +111,6 @@ jobs:
           scp -o StrictHostKeyChecking=no -r ./.env.prod ./.env.prod.db ./docker-compose.prod.yml pi@$94.238.7.106:/home/pi/prod/portfolio_app/
           ssh -o StrictHostKeyChecking=no pi@94.238.7.106 << 'ENDSSH'
               cd prod/portfolio_app/
-              docker login docker.pkg.github.com -u cyrilhokage -p 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
+              docker login docker.pkg.github.com -u cyrilhokage -p ${{ secrets.GIT_TOKEN }}
               docker-compose -f docker-compose.prod.yml up -d
           ENDSSH
