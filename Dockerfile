@@ -30,6 +30,12 @@ WORKDIR /opt/app/cnouboue_portfolio
 RUN pip install -r requirements.txt --cache-dir /opt/app/cnouboue_portfolio/pip_cache
 RUN chown -R www-data:www-data /opt/app/cnouboue_portfolio
 
+RUN mkdir -p /opt/app/cnouboue_portfolio/media
+RUN mkdir -p /opt/app/cnouboue_portfolio/ssl
+
+VOLUME media_data:/opt/app/cnouboue_portfolio/media/
+VOLUME ssl:/opt/app/cnouboue_portfolio/ssl
+
 # start server
 EXPOSE 8020 80 443
 STOPSIGNAL SIGTERM

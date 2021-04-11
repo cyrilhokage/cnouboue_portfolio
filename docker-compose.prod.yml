@@ -2,14 +2,13 @@ version: '3.7'
 
 services:
   web:
-    build: .
+    image: docker.pkg.github.com/cyrilhokage/cnouboue_portfolio/web:latest
     ports:
       - "8020:8020"
       - "80:80"
       - "443:443"
     volumes:
       - media_data:/opt/app/cnouboue_portfolio/media/
-      # - ssl:/opt/app/cnouboue_portfolio/ssl
     env_file:
       - ./.env.prod
     depends_on:
@@ -25,5 +24,4 @@ services:
 
 volumes:
   media_data:
-  # ssl:
   postgres_data:
