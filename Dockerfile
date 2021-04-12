@@ -1,5 +1,6 @@
 # Dockerfile
-FROM python:3.7-buster
+FROM arm64v8/python:3.9-buster
+
 
 # install nginx
 RUN apt-get update && apt-get install nginx curl vim systemd \
