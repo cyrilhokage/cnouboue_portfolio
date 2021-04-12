@@ -107,5 +107,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no pi@94.238.7.106 << 'ENDSSH'
               cd prod/portfolio_app/
               docker login docker.pkg.github.com -u cyrilhokage -p ${{ secrets.GIT_TOKEN }}
-              docker-compose -f docker-compose.prod.yml up -d
+              sudo docker-compose -f docker-compose.prod.yml up -d
           ENDSSH
