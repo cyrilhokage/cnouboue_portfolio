@@ -33,6 +33,8 @@ RUN chown -R www-data:www-data /opt/app/cnouboue_portfolio
 RUN mkdir -p /opt/app/cnouboue_portfolio/media
 RUN mkdir -p /opt/app/cnouboue_portfolio/ssl
 
+RUN chmod +x /opt/app/cnouboue_portfolio/start-server.sh
+
 # start server
 EXPOSE 8020 80 443
 STOPSIGNAL SIGTERM
