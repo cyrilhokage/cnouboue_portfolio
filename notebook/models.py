@@ -133,7 +133,7 @@ class Program(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-        return str(self.name)
+        return str(self.name) if self.name else ''
 
     def get_absolute_url(self):
         return reverse(
@@ -195,7 +195,7 @@ class ViewProgram(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
 
     def __str__(self):
-        return self.program.__str__
+        return str(f"{self.program.__str__()}'s view from {self.profile.user.username}  ")
 
     def get_absolute_url(self):
         return reverse("notebook:viewprogram-detail", kwargs={"pk": self.pk})
