@@ -83,6 +83,7 @@ jobs:
             repository: ${{ github.repository }}/portfolio-image
             pull: true
             push: true
+            tags: user/app:latest
 
   deploy:
     name: Production deployment
