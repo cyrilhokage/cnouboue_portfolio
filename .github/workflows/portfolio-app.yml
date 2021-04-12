@@ -82,6 +82,7 @@ jobs:
             registry: docker.pkg.github.com
             repository: ${{ github.repository }}/portfolio-image
             pull: true
+            push: true
 
   deploy:
     name: Production deployment
