@@ -1,5 +1,5 @@
 # Dockerfile
-FROM arm64v8/python:3.9-buster
+FROM --platform=linux/arm/v7 python:3.7-buster
 
 
 # install nginx
