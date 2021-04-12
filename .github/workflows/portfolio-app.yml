@@ -77,7 +77,7 @@ jobs:
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
-          image: ${{ github.repository }}/portfolio-image
+          image: cnouboue_portfolio/portfolio-image
           registry: docker.pkg.github.com
           username: ${{ github.actor }}
           password: ${{ secrets.GIT_TOKEN }}
