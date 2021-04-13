@@ -1,7 +1,6 @@
 .portfolioEnv/
 .vscode/
 venv/
-ssl/
 
 
 cnouboue_portfolio/__pycache__

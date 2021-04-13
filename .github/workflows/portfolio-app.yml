@@ -81,3 +81,30 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ github.actor }}
           password: ${{ secrets.GIT_TOKEN }}
+
+          
+  deploy:
+    name: Production deployment
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+      - name: Add the private SSH key to the ssh-agent
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p ~/.ssh
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh-add - <<< "${{ secrets.PRIVATE_KEY }}" 
+      - name: Deploy images
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          ssh -o StrictHostKeyChecking=no pi@94.238.7.106 << 'ENDSSH'
+              cd prod/portfolio_app/
+              docker login docker.pkg.github.com -u cyrilhokage -p ${{ secrets.GIT_TOKEN }}
+              sudo docker-compose -f docker-compose.prod.yml up -d
+          ENDSSH
