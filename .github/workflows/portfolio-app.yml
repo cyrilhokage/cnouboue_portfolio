@@ -75,12 +75,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build & push Docker image
-        uses: docker/build-push-action@v1
+        uses: mr-smithers-excellent/docker-build-push@v5
         with:
+          image: cnouboue_portfolio/portfolio-image
+          registry: docker.pkg.github.com
           username: ${{ github.actor }}
           password: ${{ secrets.GIT_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: ${{ github.repository }}/portfolio-web-image
-          tag_with_sha: true
-          tag_with_ref: true
-          buildArgs : --platform=linux/arm/v7
