@@ -57,7 +57,7 @@ jobs:
           python manage.py test --noinput 
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: health-check-job
     if: github.ref == 'refs/heads/master'
     env:
