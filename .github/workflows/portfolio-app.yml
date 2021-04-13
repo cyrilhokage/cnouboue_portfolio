@@ -83,4 +83,4 @@ jobs:
           repository: ${{ github.repository }}/portfolio-web-image
           tag_with_sha: true
           tag_with_ref: true
-          buildArgs : [--platform=linux/arm/v7]
+          buildArgs : --platform=linux/arm/v7
