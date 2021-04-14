@@ -1,5 +1,5 @@
 # Dockerfile
-FROM --platform=linux/arm/v7 python:3.7-buster
+FROM python:3.7-buster
 
 
 # install nginx
@@ -30,9 +30,6 @@ WORKDIR /opt/app/cnouboue_portfolio
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt --cache-dir /opt/app/cnouboue_portfolio/pip_cache
 RUN chown -R www-data:www-data /opt/app/cnouboue_portfolio
-
-RUN mkdir -p /opt/app/cnouboue_portfolio/media
-RUN mkdir -p /opt/app/cnouboue_portfolio/ssl
 
 RUN chmod +x /opt/app/cnouboue_portfolio/start-server.sh
 
