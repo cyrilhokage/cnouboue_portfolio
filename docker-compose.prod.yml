@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   web:
-    image: docker.pkg.github.com/cyrilhokage/cnouboue_portfolio/portfolio-image:master-85e8461
+    image: cyrilhokage/cnouboue_portfolio:latest
     ports:
       - "8020:8020"
       - "80:80"
