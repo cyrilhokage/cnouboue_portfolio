@@ -12,3 +12,4 @@ notebook/migrations/__pycache__/
 
 *.crt
 *.key
+*.pem
