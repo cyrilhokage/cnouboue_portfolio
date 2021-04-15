@@ -520,3 +520,33 @@ def ProgramSimilarsView(request, pk, slug):
     context = {"similarsPrograms": data_reco["results"][:5], "media_type": media_type}
 
     return render(request, template, context)
+
+
+###################################################################
+##                                                               ##
+##                       ERROR PAGES                             ## 
+##                                                               ##
+###################################################################                                 
+
+def error_400(request, exception):
+        data = {}
+        return render(request,'400.html', data)
+
+def error_403(request,  exception):
+        data = {}
+        return render(request,'403.html', data)
+
+def error_404(request, exception):
+    import random
+    n = random.randint(0,22)
+    if (n%2)==0:
+        template = '404_1.html'
+    else:
+        template = '404_2.html'
+
+    
+    return render(request, template, status=404)
+
+def error_500(request):
+        data = {}
+        return render(request,'500.html', data)

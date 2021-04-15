@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings  # new
 from django.conf.urls.static import static  # new
-from blog import views
+from blog import views as blog_views
+from notebook import views as notebook_views
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import GenericSitemap
 from blog.models import Post
@@ -35,7 +36,7 @@ sitemaps = {
 
 
 urlpatterns = [
-    path("", views.home, name="main_home"),
+    path("", blog_views.home, name="main_home"),
     path("", include("django.contrib.auth.urls")),  # Authentication urls
     path("admin/", admin.site.urls),  # Admin urls
     path("blog/", include("blog.urls"), name="blog"),
@@ -55,3 +56,9 @@ if settings.DEBUG:  # new
 """
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler400 = notebook_views.error_400
+handler403 = notebook_views.error_403
+handler404 = notebook_views.error_404
+handler500 = notebook_views.error_500
+
