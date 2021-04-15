@@ -1,12 +1,14 @@
 from .models import Provider, Program
 import requests
 import json
+import os
 
+API_KEY = os.environ.get("TMDB_TOKEN", "test")
 
 # Function to create program in one click
 def getProgramData(tmdb_id, media_type):
 
-    params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR")
+    params = dict(api_key=API_KEY, language="fr-FR")
 
     if media_type == "tv":
         req = requests.get("https://api.themoviedb.org/3/tv/{}".format(tmdb_id), params)
@@ -92,7 +94,7 @@ def getProviders(tmdb_id, media_type):
 
     list_providers = []
 
-    params = dict(api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR")
+    params = dict(api_key=API_KEY, language="fr-FR")
     req = requests.get(
         f"https://api.themoviedb.org/3/{media_type}/{tmdb_id}/watch/providers", params
     )
@@ -144,7 +146,7 @@ def addSimilarPrograms(program):
 
     try:
         params = dict(
-            api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1
+            api_key=API_KEY, language="fr-FR", page=1
         )
         req_reco = requests.get(
             f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations",

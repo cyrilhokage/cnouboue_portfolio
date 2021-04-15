@@ -45,7 +45,10 @@ import requests
 import json
 from datetime import datetime, timedelta, date
 from .notebookfunctions import getProgramData, getProviders
+import os
 
+
+API_KEY = os.environ.get("TMDB_TOKEN", "test")
 
 # Create your views here.
 
@@ -467,7 +470,7 @@ def ViewSearch(request):
         if query is not None:
             # lookups= Q(title__icontains=query) | Q(content__icontains=query)
             params = dict(
-                api_key="69cce8dbf435199baf4ab9dfcb63616d",
+                api_key=API_KEY,
                 include_adult="false",
                 language="fr-FR",
                 query=query,
@@ -503,7 +506,7 @@ def ProgramSimilarsView(request, pk, slug):
 
     try:
         params = dict(
-            api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1
+            api_key=API_KEY, language="fr-FR", page=1
         )
         req_reco = requests.get(
             f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations",
