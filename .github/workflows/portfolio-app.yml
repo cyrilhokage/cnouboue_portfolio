@@ -84,7 +84,7 @@ jobs:
           context: .
           platforms: linux/arm/v7
           push: true
-          tags:  cyrilhokage/cnouboue_portfolio:latest
+          tags:  cyrilhokage/cnouboue_portfolio
 
   deploy:
     name: Production deployment
