@@ -1,6 +1,12 @@
 {%extends 'notebook/base.html'%}
 {% load crispy_forms_tags %}
 
+{% block title %}
+
+    {{profile_user.username}} · Notebook App 
+
+{%endblock%} 
+
 {%block content%}
     <img src="{{profile_user.profile.pic.url}}">
     <h2>{{profile_user.username}}</h2>
@@ -19,7 +25,7 @@
     <ul>
         {% for view in watchlist %}
         <li>
-            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }}</a>
+            <a href="{% url 'notebook:viewprogram-detail' view.id %}"> {{ view.program.name }} | {{ view.chapter }} </a>
         </li>
         {% endfor %}
     </ul>
@@ -28,7 +34,7 @@
     <ul>
         {% for view in in_progress %}
         <li>
-            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }}</a>
+            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }} | {{ view.chapter }} </a>
         </li>
         {% endfor %}
     </ul>
@@ -37,7 +43,7 @@
     <ul>
         {% for view in completed %}
         <li>
-            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }}</a>
+            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }} | {{ view.chapter }} </a>
         </li>
         {% endfor %}
     </ul>

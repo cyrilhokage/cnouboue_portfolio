@@ -160,7 +160,7 @@ def addSimilarPrograms(program):
     except KeyError:
         pass
 
-    for program in data_reco["results"][:10]:
+    for program in data_reco["results"][:15]:
         similar_program_querry = Program.objects.filter(tmdb_id=program.id)
         for similar_program in similar_program_querry:
             program.similars.add(similar_program)

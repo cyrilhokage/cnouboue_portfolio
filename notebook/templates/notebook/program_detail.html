@@ -2,6 +2,12 @@
 {% load crispy_forms_tags %}
 {% load humanize %}
 
+{% block title %}
+
+    {{program.name}} · Notebook App
+
+{%endblock%} 
+
 {% block content %}
 <h3>{{program.name}}</h3>
     {% if program.poster.url != "/media/program_posters/poster_default.png" %}
@@ -32,6 +38,7 @@
             <div class="tag">Source : {{program.source}}</div>
         </div><br/>
         {% if user.is_authenticated %}
+            <a class="btn btn-outline-primary" href="{% url 'notebook:viewprogram-create' %}" role="button"> Add program view </a>
             <a class="btn btn-outline-primary" href="{% url 'notebook:program-edit' program.id %}" role="button"> Edit program</a> <br>
         {% endif %}
         <hr />
@@ -58,9 +65,6 @@
         padding: 2px 2px 2px 2px;
       }
 
-
   </style>
-
-
 
 {% endblock %}

@@ -2,6 +2,12 @@
 {% load crispy_forms_tags %}
 {% load humanize %}
 
+{% block title %}
+
+    {{program.name}} update· Notebook App
+
+{%endblock%} 
+
 {% block content %}
 <img src="{{program.poster.url}}"> <br>
 <div>

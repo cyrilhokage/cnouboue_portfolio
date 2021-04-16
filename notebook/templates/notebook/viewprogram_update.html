@@ -2,6 +2,12 @@
 {% load crispy_forms_tags %}
 {% load humanize %}
 
+{% block title %}
+
+    {{ view.program.name }} Upadte · Notebook App
+
+{%endblock%} 
+
 {% block content %}
 <img src="{{view.program.poster.url}}"> <br>
 <div>

@@ -1,6 +1,12 @@
 {%extends 'notebook/base.html'%}
 {% load crispy_forms_tags %}
 
+{% block title %}
+
+    {{ user.username }} update · Notebook App 
+
+{%endblock%} 
+
 {%block content%}
     <img src="{{user.profile.pic.url}}">
     <h2>{{user.username}}</h2>
