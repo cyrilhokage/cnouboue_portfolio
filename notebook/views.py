@@ -64,7 +64,13 @@ class HomeView(ListView):
     ordering = ["-release_date"]
 
 
-#######            Profile Views    ###################
+
+###################################################################
+##                                                               ##
+##                     PROFILE VIEWS                             ## 
+##                                                               ##
+###################################################################
+
 
 
 def profileListView(request):
@@ -217,6 +223,7 @@ class CalendarView(ListView):
         return context
 
 
+
 @login_required
 def profileUpdateView(request, pk):
 
@@ -302,7 +309,11 @@ def activate(request, uidb64, token):
         return HttpResponse("Activation link is invalid!")
 
 
-##########        CRUD views for programs      #######################
+###################################################################
+##                                                               ##
+##                       PROGRAM VIEWS                           ## 
+##                                                               ##
+###################################################################
 
 
 class ProgramDetailView(DetailView):
@@ -392,7 +403,11 @@ class programDeleteView(LoginRequiredMixin, DeleteView):
         return True
 
 
-###### View programs CRUD #######
+###################################################################
+##                                                               ##
+##                    VIEW PROGRAM VIEWS                         ## 
+##                                                               ##
+###################################################################
 
 
 class ViewProgramDetailView(DetailView):
@@ -456,7 +471,12 @@ class ViewProgramDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
         return self.request.user == view.profile.user
 
 
-### Search program View
+
+###################################################################
+##                                                               ##
+##                       OTHER VIEWS                             ## 
+##                                                               ##
+###################################################################
 
 
 def ViewSearch(request):
