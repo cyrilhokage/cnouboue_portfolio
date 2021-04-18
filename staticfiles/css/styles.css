@@ -554,7 +554,9 @@ font-size: 20px;
 
 .card-text{
   display:block;
-  
+  max-height: 125px;
+  overflow: hidden;
+  padding-bottom: 5px;
 }
 
 
