@@ -1,26 +1,37 @@
 
 
 {% block navbar %} 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <h3 class="masthead-title">
-    <div id="navbar">
-      <div id="navbarContent">
+    <div class="navbar">
+
+        <span class="hidden clode-toggle" id="js-navbar-toggle-close" >
+            <i class="fa fa-times"></i>
+        </span>
+
+      <span class="navbar-toggle" id="js-navbar-toggle">
+          <i class="fa fa-bars"></i>
+      </span>
+
+
+      <div class="navbarContent" id="nav-menu" >
       
       
             <a href="{% url 'main_home' %}"  title="Home">Cyrille NOUBOUE</a>
 
             <!--- Display the About, Archive, etc. pages in the header --->
 
-                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:about' %}">A propos</a></small>
+                &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'blog:about' %}">A propos</a></small>
 
-                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:home' %}">Projets</a></small>
+                &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'blog:home' %}">Projets</a></small>
                     
                 {% load static %}
-                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:resume' %}">CV</a></small>
+                &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'blog:resume' %}">CV</a></small>
 
-                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:resume' %}">Contact</a></small>
+                &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'blog:resume' %}">Contact</a></small>
 
-                &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:index' %}">Notebook App</a></small>
+                &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'notebook:index' %}">Notebook App</a></small>
             
         </div>
 

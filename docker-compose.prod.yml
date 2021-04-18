@@ -7,8 +7,6 @@ services:
       - "8020:8020"
       - "80:80"
       - "443:443"
-    volumes:
-      - ./media:/opt/app/cnouboue_portfolio/media/
     env_file:
       - ./.env.prod
     depends_on:

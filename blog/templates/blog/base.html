@@ -24,29 +24,90 @@
      <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png"> -->
       <link rel="shortcut icon" href="{% static 'img/fav-icon.png' %}">
 
-        <style type="text/css">
+      <style type="text/css">
 
-              /* Style the navbar */ 
-              #navbar {
-                overflow: hidden;
-                background-color:#fff;
-                position: fixed;
-                top:0;
-                width: 100%;
-                z-index:4;
-                height: 55px;
-                line-height: 55px; /* centrage vertical */
-              }
+            /* Style the navbar */ 
+            .navbar {
+              display: block;
+              background-color:#fff;
+              position: fixed;
+              top:0;
+              width: 100%;
+              z-index:4;
+              /*height: 55px;*/
+              line-height: 35px; /* centrage vertical */
+            }
 
-            #navbarContent {
+            .navbarContent {
+              display: none ;
               max-width:38rem;
               padding-left:1.5rem;
               padding-right:1.5rem;
               margin-left:auto;
               margin-right:auto;
+              flex-direction:column; 
             }
 
-        </style>
+            .navbar-toggle {
+                  position: absolute;
+                  top: 10px;
+                  left: 20px;
+                  cursor: pointer;
+                  color: black;
+                  font-size: 24px;
+              }
+
+              .clode-toggle{
+                position: absolute;
+                  top: 10px;
+                  left: 20px;
+                  cursor: pointer;
+                  color: black;
+                  font-size: 24px;
+              }
+
+            .hidden{
+                display: none;
+            }
+
+            .active {
+                display: flex; 
+            }
+
+            @media screen and (min-width: 768px) {
+              .navbar {
+                display: block;
+                background-color:#fff;
+                position: fixed;
+                top:0;
+                width: 100%;
+                z-index:4;
+                /*height: 55px;*/
+                line-height: 35px; /* centrage vertical */
+              }
+
+              .navbarContent {
+                display: flex ;
+                max-width:38rem;
+                padding-left:1.5rem;
+                padding-right:1.5rem;
+                margin-left:auto;
+                margin-right:auto;
+                flex-direction:row; 
+              }
+
+              .navbar-toggle {
+                  display: none; 
+              }
+
+              .clode-toggle
+                {
+                    display: none; 
+                }
+            }
+
+
+      </style>
 
 
 </head>
@@ -177,6 +238,27 @@
     }
   };
 </script>
+<script type="text/javascript">
+
+  let mainNav = document.getElementById('nav-menu');
+  let navBarToggle = document.getElementById('js-navbar-toggle');
+  let closeToggle = document.getElementById('js-navbar-toggle-close');
+  
+  navBarToggle.addEventListener('click', function () {
+      
+      mainNav.classList.toggle('active');
+      closeToggle.classList.remove('hidden');
+      this.classList.add('hidden')
+  });
+
+  closeToggle.addEventListener('click', function () {
+      
+      mainNav.classList.toggle('active');
+      navBarToggle.classList.remove('hidden');
+      this.classList.add('hidden')
+  });
+  
+  </script>
 
 
 

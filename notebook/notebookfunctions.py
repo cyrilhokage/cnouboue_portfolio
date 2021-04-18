@@ -145,9 +145,7 @@ def addSimilarPrograms(program):
     media_type = "tv" if program.format == 1 else "movie"
 
     try:
-        params = dict(
-            api_key=API_KEY, language="fr-FR", page=1
-        )
+        params = dict(api_key=API_KEY, language="fr-FR", page=1)
         req_reco = requests.get(
             f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations",
             params,

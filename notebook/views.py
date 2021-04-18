@@ -64,13 +64,11 @@ class HomeView(ListView):
     ordering = ["-release_date"]
 
 
-
 ###################################################################
 ##                                                               ##
-##                     PROFILE VIEWS                             ## 
+##                     PROFILE VIEWS                             ##
 ##                                                               ##
 ###################################################################
-
 
 
 def profileListView(request):
@@ -223,7 +221,6 @@ class CalendarView(ListView):
         return context
 
 
-
 @login_required
 def profileUpdateView(request, pk):
 
@@ -311,7 +308,7 @@ def activate(request, uidb64, token):
 
 ###################################################################
 ##                                                               ##
-##                       PROGRAM VIEWS                           ## 
+##                       PROGRAM VIEWS                           ##
 ##                                                               ##
 ###################################################################
 
@@ -405,7 +402,7 @@ class programDeleteView(LoginRequiredMixin, DeleteView):
 
 ###################################################################
 ##                                                               ##
-##                    VIEW PROGRAM VIEWS                         ## 
+##                    VIEW PROGRAM VIEWS                         ##
 ##                                                               ##
 ###################################################################
 
@@ -471,10 +468,9 @@ class ViewProgramDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
         return self.request.user == view.profile.user
 
 
-
 ###################################################################
 ##                                                               ##
-##                       OTHER VIEWS                             ## 
+##                       OTHER VIEWS                             ##
 ##                                                               ##
 ###################################################################
 
@@ -525,9 +521,7 @@ def ProgramSimilarsView(request, pk, slug):
     media_type = "tv" if program.format == 1 else "movie"
 
     try:
-        params = dict(
-            api_key=API_KEY, language="fr-FR", page=1
-        )
+        params = dict(api_key=API_KEY, language="fr-FR", page=1)
         req_reco = requests.get(
             f"https://api.themoviedb.org/3/{media_type}/{program.tmdb_id}/recommendations",
             params,
@@ -547,29 +541,33 @@ def ProgramSimilarsView(request, pk, slug):
 
 ###################################################################
 ##                                                               ##
-##                       ERROR PAGES                             ## 
+##                       ERROR PAGES                             ##
 ##                                                               ##
-###################################################################                                 
+###################################################################
+
 
 def error_400(request, exception):
-        data = {}
-        return render(request,'400.html', data)
+    data = {}
+    return render(request, "400.html", data)
 
-def error_403(request,  exception):
-        data = {}
-        return render(request,'403.html', data)
+
+def error_403(request, exception):
+    data = {}
+    return render(request, "403.html", data)
+
 
 def error_404(request, exception):
     import random
-    n = random.randint(0,22)
-    if (n%2)==0:
-        template = '404_1.html'
-    else:
-        template = '404_2.html'
 
-    
+    n = random.randint(0, 22)
+    if (n % 2) == 0:
+        template = "404_1.html"
+    else:
+        template = "404_2.html"
+
     return render(request, template, status=404)
 
+
 def error_500(request):
-        data = {}
-        return render(request,'500.html', data)
+    data = {}
+    return render(request, "500.html", data)

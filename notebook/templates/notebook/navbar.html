@@ -2,29 +2,38 @@
 
 {% block navbar %} 
 {% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <h3 class="masthead-title">
-    <div id="navbar">
-      <div id="navbarContent">
+    <div class="navbar">
+
+        <span class="hidden clode-toggle" id="js-navbar-toggle-close" >
+            <i class="fa fa-times"></i>
+        </span>
+
+        <span class="navbar-toggle" id="js-navbar-toggle">
+            <i class="fa fa-bars"></i>
+        </span>
+        
+      <div class="navbarContent" id="nav-menu">
       
-      
-            <a href="{% url 'notebook:index' %}"  title="Home">Notebook APP</a>
+        <a href="{% url 'notebook:index' %}" title="Home">Notebook APP</a>
 
             <!--- Display the About, Archive, etc. pages in the header --->
-            &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:program-list' %}"> Programs </a></small>
-            &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:profile-list' %}"> Profiles </a></small>
+            &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'notebook:program-list' %}"> Programs </a></small>
+            &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'notebook:profile-list' %}"> Profiles </a></small>
 
                 {% if user.is_authenticated %}
-                    &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:profile-user' %}">My profile</a></small>
-                    &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:logout' %}">Log out</a></small>
+                    &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'notebook:profile-user' %}">My profile</a></small>
+                    &nbsp;&nbsp;&nbsp;<small><a  class="nav-links" href="{% url 'notebook:logout' %}">Log out</a></small>
                    
                 {% else %}
-                    &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:login' %}">Log In</a></small>
-                    &nbsp;&nbsp;&nbsp;<small><a href="{% url 'notebook:register' %}">Register</a></small>
+                    &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'notebook:login' %}">Log In</a></small>
+                    &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'notebook:register' %}">Register</a></small>
                    
                 {% endif %}
             
-            &nbsp;&nbsp;&nbsp;<small><a href="{% url 'blog:home' %}">Blog</a></small>
+            &nbsp;&nbsp;&nbsp;<small><a class="nav-links" href="{% url 'blog:home' %}">Blog</a></small>
         
         </div>
 
@@ -35,6 +44,4 @@
              <small>Machine Learning Tutorials and Insights</small>
         </h3>
         ----->
-
-
 {% endblock navbar %}

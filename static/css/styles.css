@@ -283,14 +283,17 @@ padding-bottom:1rem;
 margin-bottom:3rem} 
 .masthead-title{ 
 margin-top:0; 
-margin-bottom:0; 
-color:#515151} 
+margin-bottom:0;
+overflow: hidden;
+width: 100%;
+position: relative;
+color:#515151;} 
 .masthead-title a{ 
-color:inherit} 
+color:inherit}
 .masthead-title small{ 
 font-size:75%; 
 font-weight:400; 
-opacity:.5} 
+opacity:.5}
 .page,.post{ 
 margin-bottom:4em;
 text-align: justify;
@@ -361,10 +364,14 @@ padding:1rem;
 color:#717171; 
 background-color:#f9f9f9} 
 
+
+
 a {
-    color:inherit;
-    text-decoration: none;
-  }
+  color:inherit;
+  text-decoration: none
+}
+
+
 
  
 

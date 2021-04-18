@@ -61,4 +61,3 @@ handler400 = notebook_views.error_400
 handler403 = notebook_views.error_403
 handler404 = notebook_views.error_404
 handler500 = notebook_views.error_500
-
