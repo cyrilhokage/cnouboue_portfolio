@@ -8,6 +8,7 @@
 {%endblock%} 
 
 {%block content%}
+
     <img src="{{profile_user.profile.pic.url}}">
     <h2>{{profile_user.username}}</h2>
     <p>{{profile_user.email}}</p>
@@ -22,31 +23,77 @@
     {% endif %}
     
     <hr><h3>Watchlist : </h3>
-    <ul>
-        {% for view in watchlist %}
-        <li>
-            <a href="{% url 'notebook:viewprogram-detail' view.id %}"> {{ view.program.name }} | {{ view.chapter }} </a>
-        </li>
-        {% endfor %}
-    </ul>
+        <div class="wrapper">
+            <div class="cards-slider owl-carousel">
+                {% for view in watchlist %}
+                <div class="card card-1">
+                    <a href="{% url 'notebook:viewprogram-detail' view.id %}"> 
+                        
+                            <img class="card-img" src="{{view.program.poster.url}}" alt="{{view.program.name}}">
+                            <div class="card-corpus">
+                            <div class="card-text">
+                                <div class="card-title">{{view.program.name}}</div>
+                                <p class="text-gray-700 text-base">
+                                    {{view.comment|slice:":25"}} ...
+                                </p>
+                            </div>
+                            </div>
+                    </a>
+                </div>        
+                {% endfor %}
+            </div>
+        </div>
+
+        
+
 
     <hr><h3>In progress : </h3>
-    <ul>
-        {% for view in in_progress %}
-        <li>
-            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }} | {{ view.chapter }} </a>
-        </li>
-        {% endfor %}
-    </ul>
 
-    <hr><h3> Completed : </h3>
-    <ul>
-        {% for view in completed %}
-        <li>
-            <a href="{% url 'notebook:viewprogram-detail' view.id %}">{{ view.program.name }} | {{ view.chapter }} </a>
-        </li>
-        {% endfor %}
-    </ul>
+        <div class="wrapper">
+            <div class="cards-slider owl-carousel">
+                {% for view in in_progress %}
+                <div class="card card-1">
+                        <a href="{% url 'notebook:viewprogram-detail' view.id %}"> 
+                            <img class="card-img" src="{{view.program.poster.url}}" alt="{{view.program.name}}">
+                            <div class="card-corpus">
+                            <div class="card-text">
+                                <div class="card-title">{{view.program.name}} </div>
+                                <p class="text-gray-700 text-base">
+                                    {{view.comment|slice:":25"}} ...
+                                </p>
+                            </div>
+                            </div>
+                        
+                        </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    <hr><h3> Finished : </h3>
+
+        <div class="wrapper">
+            <div class="cards-slider owl-carousel">
+            {% for view in completed %}
+                <div class="card card-1">
+                    <a href="{% url 'notebook:viewprogram-detail' view.id %}"> 
+                        <img class="card-img" src="{{view.program.poster.url}}" alt="{{view.program.name}}">
+                        <div class="card-corpus">
+                        <div class="card-text">
+                            <div class="card-title">{{view.program.name}} </div>
+                            <p class="text-gray-700 text-base">
+                                {{view.comment|slice:":25"}} ...
+                            </p>
+                        </div>
+                        </div>
+                    </a>
+                </div>
+                
+            {% endfor %}
+            </div>
+        </div>
+ 
     <br> 
 
     <!-- Calendar Block -->
@@ -62,3 +109,35 @@
 
 {%endblock%}
 
+{% block additional_js %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+
+<script>
+
+    // then trigger owl Carousel
+    $(".cards-slider").owlCarousel({
+      loop: false,
+      autoplay: false,
+      autoplayTimeout: 2000,
+      autoplayHoverPause: true,
+      responsive: {
+        0:{
+          items:1,
+          nav:false
+        },
+        600:{
+          items:3,
+          nav:false
+        },
+        1000:{
+          items:3,
+          nav:false
+        }
+      }
+    });
+  </script>
+
+
+{%endblock%}

@@ -169,6 +169,15 @@ class Program(models.Model):
             for similar_program in similar_program_querry:
                 self.similars.add(similar_program)
 
+    def get_remote_image(self):
+        if self.poster_path and self.poster == "program_posters/poster_default.png":
+            result = urllib.request.urlretrieve(
+                f"https://www.themoviedb.org/t/p/original{self.poster_path}"
+            )
+            self.poster.save(
+                os.path.basename(self.poster_path), File(open(result[0], "rb"))
+            )
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)

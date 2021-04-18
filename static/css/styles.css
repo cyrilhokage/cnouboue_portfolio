@@ -370,6 +370,213 @@ a {
   color:inherit;
   text-decoration: none
 }
+/*###########################################################
+Nav bar Style
+##########################################################*/
+            /* Style the navbar */ 
+            .navbar {
+              display: block;
+              background-color:#fff;
+              position: fixed;
+              top:0;
+              width: 100%;
+              z-index:4;
+              /*height: 55px;*/
+              line-height: 35px; /* centrage vertical */
+            }
+
+            .navbarContent {
+              display: none ;
+              max-width:38rem;
+              padding-left:1.5rem;
+              padding-right:1.5rem;
+              margin-left:auto;
+              margin-right:auto;
+              flex-direction:column; 
+            }
+
+            .navbar-toggle {
+                position: absolute;
+                top: 10px;
+                left: 20px;
+                cursor: pointer;
+                color: black;
+                font-size: 24px;
+            }
+
+            .clode-toggle{
+              position: absolute;
+                top: 10px;
+                left: 20px;
+                cursor: pointer;
+                color: black;
+                font-size: 24px;
+            }
+
+            .hidden{
+              display: none;
+            }
+
+            .active {
+                display: flex; 
+            }
+
+            @media screen and (min-width: 768px) {
+              .navbar {
+                display: block;
+                background-color:#fff;
+                position: fixed;
+                top:0;
+                width: 100%;
+                z-index:4;
+                /*height: 55px;*/
+                line-height: 35px; /* centrage vertical */
+              }
+
+              .navbarContent {
+                display: flex ;
+                max-width:38rem;
+                padding-left:1.5rem;
+                padding-right:1.5rem;
+                margin-left:auto;
+                margin-right:auto;
+                flex-direction:row; 
+              }
+
+              .navbar-toggle {
+                  display: none; 
+              }
+
+              .clode-toggle
+              {
+                  display: none; 
+              }
+            }
+
+
+/* 
+#############################################################
+CSS card style
+#############################################################*/
+
+.wrapper{
+  width: 100%;
+  }
+
+  .carousel{
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 30px;
+  }
+
+  .owl-dots{
+  text-align: center;
+  margin-top: 40px;
+  }
+  .owl-dot{
+  height: 15px;
+  width: 45px;
+  margin: 0 5px;
+  outline: none;
+  border-radius: 14px;
+  border: 2px solid #0072bc!important;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  }
+  .owl-dot.active,
+  .owl-dot:hover{
+  background: #0072bc!important;
+  }
+
+  .owl-item{
+      margin:0px;
+      padding: 6px;
+  }
+
+
+.card{
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+/*padding-top: 1px;*/
+/*padding: 0px 15px 0px 15px;*/
+margin-bottom: 5px;
+cursor: pointer;
+/*width:35%;*/
+/*height: 105px; */
+}
+
+.cards-slider{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.card-corpus {
+  margin : 2px;
+  padding: 2px;
+}
+
+.card-text p{
+  font-size: medium;
+}
+
+.card-title{
+font-weight: 600;
+font-size: 20px;
+}
+
+.card-img {
+  border-radius: 8px 8px 0px 0px ; 
+  margin: 0 0 4px;
+  max-height: 120px;
+}
+
+.card-text{
+  display:block;
+  
+}
+
+
+.card-1{
+    background-repeat: no-repeat;
+  background-position: right;
+  /*margin-right:auto;*/
+  /*background-size: 80px;*/
+}
+
+
+.card-2{
+ background-image: url(https://ionicframework.com/img/getting-started/components-card.png);
+    background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+.card-3{
+ background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
+    background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+@media(max-width: 500px){
+.card{
+  /*margin: 20px;*/
+}
+}
+
+
+        
+        
+        
+        
 
 
 
