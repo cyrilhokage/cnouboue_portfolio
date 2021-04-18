@@ -28,8 +28,9 @@
                 {% for view in watchlist %}
                 <div class="card card-1">
                     <a href="{% url 'notebook:viewprogram-detail' view.id %}"> 
-                        
+                        <div class="card-poster">
                             <img class="card-img" src="{{view.program.poster.url}}" alt="{{view.program.name}}">
+                        </div>
                             <div class="card-corpus">
                             <div class="card-text">
                                 <div class="card-title">{{view.program.name}}</div>
@@ -54,7 +55,9 @@
                 {% for view in in_progress %}
                 <div class="card card-1">
                         <a href="{% url 'notebook:viewprogram-detail' view.id %}"> 
-                            <img class="card-img" src="{{view.program.poster.url}}" alt="{{view.program.name}}">
+                            <div class="card-poster">
+                                <img class="card-img" src="{{view.program.poster.url}}" alt="{{view.program.name}}">
+                            </div>
                             <div class="card-corpus">
                             <div class="card-text">
                                 <div class="card-title">{{view.program.name}} </div>
@@ -78,7 +81,9 @@
             {% for view in completed %}
                 <div class="card card-1">
                     <a href="{% url 'notebook:viewprogram-detail' view.id %}"> 
-                        <img class="card-img" src="{{view.program.poster.url}}" alt="{{view.program.name}}">
+                        <div class="card-poster">
+                            <img class="card-img" src="{{view.program.poster.url}}" alt="{{view.program.name}}">
+                        </div>
                         <div class="card-corpus">
                         <div class="card-text">
                             <div class="card-title">{{view.program.name}} </div>
