@@ -472,6 +472,7 @@ CSS card style
   .owl-dots{
   text-align: center;
   margin-top: 40px;
+  display:none;
   }
   .owl-dot{
   height: 15px;
@@ -499,12 +500,13 @@ CSS card style
   background: #fff;
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-/*padding-top: 1px;*/
-/*padding: 0px 15px 0px 15px;*/
-margin-bottom: 5px;
-cursor: pointer;
-/*width:35%;*/
-/*height: 105px; */
+  /*padding-top: 1px;*/
+  /*padding: 0px 15px 0px 15px;*/
+  margin-bottom: 5px;
+  cursor: pointer;
+  width:95%;
+  /*height: 105px; */
+  padding-bottom: 15px;
 }
 
 .cards-slider{

@@ -189,6 +189,7 @@ class Program(models.Model):
             img.thumbnail(output_size)
             img.save(self.poster.path)
         self.addSimilarPrograms()
+        self.get_remote_image()
 
 
 class ViewProgram(models.Model):

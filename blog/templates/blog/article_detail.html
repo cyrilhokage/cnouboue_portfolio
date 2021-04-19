@@ -14,10 +14,6 @@
       <article class="post">
               <h1 class="post-title">{{ post.title }}</h1>
               <time datetime="2019-09-19T08:00:00-07:00" class="post-date">{{ post.updated_on }}</time>
-
-
-             <a href="#" class="fa fa-github"></a>
-
              
              <img src="{{ post.main_image.url }}" alt="{{ post.title }}" width="100%" height="auto">
           
@@ -31,7 +27,8 @@
             </p>
           </br>
           
-          <p> GitHub link : <a href="{{post.github_link}}">click here</a></p>
+          
+          <p><a href="#" class="fa fa-github"></a>  GitHub link : <a href="{{post.github_link}}">click here</a></p>
 
           {% if post.html_content is not null %}
                   {{post.html_content | safe }}
@@ -44,29 +41,13 @@
     <aside class="related">
 
         <div class="row">
-            <h3>Related posts</h3>
+            <h3>Most recents posts :</h3>
         </div>
+        <br/>
         <div class="row">
-            <ul class="related-posts">
-              
-                {% for recomended in recomended_posts %}
-
-                  <li>
-                    <a href="{% url 'blog:detail' recomended.slug %}">
-                      {{ recomended.title }}
-                      <small><time datetime="{{ recomended.created_on }}" > {{ recomended.created_on }} </time></small>
-                    </a>
-                  </li>
-
-                {% endfor %}  
-              
-            </ul>
-
-            <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,900" rel="stylesheet">
 
             <div class="container">
                   
-
                     {% for recomended in recomended_posts %} 
 
                         <a href="{% url 'blog:detail' recomended.slug %}" style="text-decoration: none;">

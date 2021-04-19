@@ -104,8 +104,8 @@
     <!-- Calendar Block -->
 
     <div class="clearfix">
-        <a class="btn btn-info left" href="{% url 'notebook:calendar-public' profile_user.pk  profile_user.profile.slug %}?{{ prev_month }} "> Previous Month </a>
-        <a class="btn btn-info right" href="{% url 'notebook:calendar-public' profile_user.pk  profile_user.profile.slug %}?{{ next_month }} "> Next Month </a>
+        <a class="btn btn-info left" href="{% url 'notebook:profile' profile_user.pk  profile_user.profile.slug %}?{{ prev_month }} "> Previous Month </a>
+        <a class="btn btn-info right" href="{% url 'notebook:profile' profile_user.pk  profile_user.profile.slug %}?{{ next_month }} "> Next Month </a>
     </div>
     <br/>
     
@@ -126,7 +126,7 @@
       loop: false,
       autoplay: false,
       autoplayTimeout: 2000,
-      autoplayHoverPause: true,
+      autoplayHoverPause: false,
       responsive: {
         0:{
           items:1,

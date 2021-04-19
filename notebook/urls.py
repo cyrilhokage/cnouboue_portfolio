@@ -25,13 +25,13 @@ urlpatterns = [
         name="logout",
     ),
     # Profile
-    path("profile/", views.profileUserView.as_view(), name="profile-user"),
+    path("profile/", views.profileUserView.as_view(), name="profile-user"), #Url for authenticated user
     path("profiles/", views.profileListView, name="profile-list"),
     path(
         "profiles/<int:pk>/<str:slug>",
         views.profileDetailsView.as_view(),
         name="profile",
-    ),  # actual user profile page
+    ),  # Public user url
     path(
         "profiles/edit/<int:pk>", views.profileUpdateView, name="profile-edit"
     ),  # edit user page
