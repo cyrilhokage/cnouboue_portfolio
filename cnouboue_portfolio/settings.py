@@ -41,8 +41,8 @@ else:
     SESSION_COOKIE_SECURE = False
 """
 
-DEBUG = int(os.environ.get("DEBUG", default=0))
-
+# DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = False
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "default_key")
 
@@ -177,44 +177,40 @@ AUTH_PASSWORD_VALIDATORS = [
 # Looging configuration
 
 
-"""
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            "datefmt": "%d/%b/%Y %H:%M:%S",
         },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
+        "simple": {"format": "%(levelname)s %(message)s"},
+    },
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "django.log"),
+            "formatter": "verbose",
         },
     },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'cnouboue_portfolio.log',
-            'formatter': 'verbose'
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "propagate": True,
+            "level": "DEBUG",
+        },
+        "blog": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+        },
+        "notebook": {
+            "handlers": ["file"],
+            "level": "DEBUG",
         },
     },
-    'loggers': {
-        'django': {
-            'handlers':['file'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
-        'blog': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-        },
-        'notebook': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-        },
-    }
 }
-"""
 
 
 # Internationalization
@@ -276,8 +272,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-# EMAIL_HOST_USER = os.environ.get('EMAIL_NAME')
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
-
-EMAIL_HOST_USER = "notebookapp20@gmail.com"
-EMAIL_HOST_PASSWORD = "MyNotebookApp2021"
+EMAIL_HOST_USER = os.environ.get("EMAIL_APP_ID", "notebookapp20@gmail.com")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")

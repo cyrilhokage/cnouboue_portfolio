@@ -110,6 +110,6 @@ jobs:
               cd prod/portfolio_app/
               docker login docker.pkg.github.com -u cyrilhokage -p ${{ secrets.GIT_TOKEN }}
               sudo docker-compose -f docker-compose.prod.yml pull web
-              sudo docker-compose -f docker-compose.prod.yml up -d
+              sudo docker-compose -f ~/prod/portfolio_app/docker-compose.prod.yml up -d
           ENDSSH
 

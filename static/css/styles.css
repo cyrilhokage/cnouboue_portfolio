@@ -506,7 +506,7 @@ CSS card style
   cursor: pointer;
   width:95%;
   /*height: 105px; */
-  padding-bottom: 15px;
+  padding-bottom: 0px;
 }
 
 .cards-slider{

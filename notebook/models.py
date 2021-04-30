@@ -56,8 +56,8 @@ class Profile(models.Model):
         img = Image.open(self.pic.path)
         if img.mode in ("RGBA", "P"):
             img = img.convert("RGB")
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
+        if img.height > 700 or img.width > 700:
+            output_size = (700, 700)
             img.thumbnail(output_size)
             img.save(self.pic.path)
 
@@ -69,7 +69,7 @@ class Provider(models.Model):
     provider_type = models.CharField(max_length=10, null=True)
     logo_url = models.CharField(max_length=100, null=True)
     logo_path = models.ImageField(
-        default="program_posters/poster_default.png",
+        default="program_posters/poster_default.jpg",
         upload_to="providers_posters",
         null=True,
     )
@@ -84,7 +84,7 @@ class Provider(models.Model):
         return reverse("notebook:provider", kwargs={"pk": self.pk})
 
     def get_remote_image(self):
-        if self.logo_url and self.logo_path == "program_posters/poster_default.png":
+        if self.logo_url and self.logo_path == "program_posters/poster_default.jpg":
             result = urllib.request.urlretrieve(
                 f"https://www.themoviedb.org/t/p/original{self.logo_url}"
             )
@@ -98,8 +98,8 @@ class Provider(models.Model):
         img = Image.open(self.logo_path.path)
         if img.mode in ("RGBA", "P"):
             img = img.convert("RGB")
-        if img.height > 150 or img.width > 150:
-            output_size = (150, 150)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.logo_path.path)
         self.get_remote_image()
@@ -124,7 +124,7 @@ class Program(models.Model):
     providers = models.ManyToManyField(Provider)
     poster_path = models.CharField(max_length=100, null=True)
     poster = models.ImageField(
-        default="program_posters/poster_default.png",
+        default="program_posters/poster_default.jpg",
         upload_to="program_posters",
         null=True,
     )
@@ -170,7 +170,7 @@ class Program(models.Model):
                 self.similars.add(similar_program)
 
     def get_remote_image(self):
-        if self.poster_path and self.poster == "program_posters/poster_default.png":
+        if self.poster_path and self.poster == "program_posters/poster_default.jpg":
             result = urllib.request.urlretrieve(
                 f"https://www.themoviedb.org/t/p/original{self.poster_path}"
             )

@@ -25,7 +25,9 @@ urlpatterns = [
         name="logout",
     ),
     # Profile
-    path("profile/", views.profileUserView.as_view(), name="profile-user"), #Url for authenticated user
+    path(
+        "profile/", views.profileUserView.as_view(), name="profile-user"
+    ),  # Url for authenticated user
     path("profiles/", views.profileListView, name="profile-list"),
     path(
         "profiles/<int:pk>/<str:slug>",
