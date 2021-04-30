@@ -24,6 +24,10 @@ from django.contrib.sitemaps import GenericSitemap
 from blog.models import Post
 from blog.sitemaps import Static_Sitemap
 
+from django.views.static import serve
+from django.conf.urls import url
+
+
 info_dict = {
     "queryset": Post.objects.filter(status=1),
     "date_field": "updated_on",
@@ -48,14 +52,19 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
-]  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # For media files
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 """
 if settings.DEBUG:  # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 """
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler400 = notebook_views.error_400
 handler403 = notebook_views.error_403

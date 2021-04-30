@@ -41,8 +41,7 @@ else:
     SESSION_COOKIE_SECURE = False
 """
 
-# DEBUG = int(os.environ.get("DEBUG", default=0))
-DEBUG = False
+DEBUG = int(os.environ.get("DEBUG", default=1))
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "default_key")
 
