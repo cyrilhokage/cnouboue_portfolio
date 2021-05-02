@@ -185,7 +185,7 @@ class Program(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        self.addSimilarPrograms()
+        #self.addSimilarPrograms()
         super().save(*args, **kwargs)
         img = Image.open(self.poster.path)
         if img.mode in ("RGBA", "P"):
