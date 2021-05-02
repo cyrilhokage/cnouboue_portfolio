@@ -31,6 +31,8 @@ FORMATS = (
     (5, "Game"),
 )
 
+API_KEY = os.environ.get("TMDB_TOKEN", "test")
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -150,7 +152,7 @@ class Program(models.Model):
 
         try:
             params = dict(
-                api_key="69cce8dbf435199baf4ab9dfcb63616d", language="fr-FR", page=1
+                api_key=API_KEY, language="fr-FR", page=1
             )
             req_reco = requests.get(
                 f"https://api.themoviedb.org/3/{media_type}/{self.tmdb_id}/recommendations",
@@ -163,11 +165,14 @@ class Program(models.Model):
                 raise KeyError
         except KeyError:
             pass
+        
 
         for program in data_reco["results"][:10]:
             similar_program_querry = Program.objects.filter(tmdb_id=program["id"])
-            for similar_program in similar_program_querry:
-                self.similars.add(similar_program)
+            if (len(similar_program_querry)>0):
+                for similar_program in similar_program_querry:
+                    self.similars.add(similar_program)
+
 
     def get_remote_image(self):
         if self.poster_path and self.poster == "program_posters/default-poster.jpg":
@@ -180,6 +185,7 @@ class Program(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        self.addSimilarPrograms()
         super().save(*args, **kwargs)
         img = Image.open(self.poster.path)
         if img.mode in ("RGBA", "P"):
@@ -188,8 +194,8 @@ class Program(models.Model):
             output_size = (700, 700)
             img.thumbnail(output_size)
             img.save(self.poster.path)
-        self.addSimilarPrograms()
         self.get_remote_image()
+
 
 
 class ViewProgram(models.Model):
