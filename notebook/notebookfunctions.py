@@ -77,7 +77,7 @@ def getProgramData(tmdb_id, media_type):
         name=name,
         format=program_format,
         homepage_link=data["homepage"],
-        source=", ".join(list_networks),
+        source=", ".join(list_networks)[0:200],
         origin_country=", ".join(origins),
         original_name=original_name,
         synopsis=data["overview"],
