@@ -45,6 +45,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),  # Admin urls
     path("blog/", include("blog.urls"), name="blog"),
     path("notebook/", include("notebook.urls")),
+    path("accounts/", include("allauth.urls")),
     # the sitemap
     path(
         "sitemap.xml",
