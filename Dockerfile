@@ -20,7 +20,7 @@ ENV enviroment=$enviroment_var
 # copy source and install dependencies
 RUN mkdir -p /opt/app/cnouboue_portfolio
 
-COPY requirements.txt start-server.sh /opt/app/
+COPY requierements.txt start-server.sh /opt/app/
 COPY .pip_cache /opt/app/pip_cache/
 COPY . /opt/app/cnouboue_portfolio/
 
@@ -28,7 +28,7 @@ COPY . /opt/app/cnouboue_portfolio/
 WORKDIR /opt/app/cnouboue_portfolio
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt --cache-dir /opt/app/cnouboue_portfolio/pip_cache
+RUN pip install -r requierements.txt --cache-dir /opt/app/cnouboue_portfolio/pip_cache
 RUN chown -R www-data:www-data /opt/app/cnouboue_portfolio
 
 RUN chmod +x /opt/app/cnouboue_portfolio/start-server.sh
