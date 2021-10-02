@@ -168,6 +168,7 @@ class Program(models.Model):
             similar_program_querry = Program.objects.filter(tmdb_id=program["id"])
             if len(similar_program_querry) > 0:
                 for similar_program in similar_program_querry:
+                    similar_program.save()
                     self.similars.add(similar_program)
 
     def get_remote_image(self):
@@ -181,7 +182,7 @@ class Program(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        self.addSimilarPrograms()
+        # self.addSimilarPrograms()
         super().save(*args, **kwargs)
         img = Image.open(self.poster.path)
         if img.mode in ("RGBA", "P"):

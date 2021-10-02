@@ -134,4 +134,14 @@ urlpatterns = [
         # views.CalendarView.as_view(),
         name="calendar-public",
     ),
+    path(
+        "graph/",
+        views.graph,
+        name="graph",
+    ),
+    path(
+        "api/programs_by_provider/",
+        views.programs_count_by_provider,
+        name="programs-by-provider"
+    ),
 ]

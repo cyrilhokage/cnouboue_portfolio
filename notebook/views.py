@@ -47,6 +47,10 @@ from datetime import datetime, timedelta, date
 from .notebookfunctions import getProgramData, getProviders
 import os
 
+#Import other views
+from .graphViews import graph, programs_count_by_provider
+
+
 
 API_KEY = os.environ.get("TMDB_TOKEN", "test")
 
